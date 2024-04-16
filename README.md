@@ -16,7 +16,7 @@
 * 应用框架基于[vue](https://cn.vuejs.org/guide/introduction.html)。
 * 前端组件采用[element-ui](https://www.uihtm.com/element/#/zh-CN)，全端兼容的高性能UI框架。
 * [Echarts](https://echarts.apache.org/zh/index.html)展示多种多种图表。
-* 基于百度地图API二次开发，实现为救援车辆开放绿色通道功能。
+* 基于[百度地图API](https://lbsyun.baidu.com/index.php?title=jspopularGL)二次开发，实现为救援车辆开放绿色通道功能。
 
 
 
