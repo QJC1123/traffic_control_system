@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>控制台</title>
+		
+		
+		<script src="js/v3.2.8/vue.global.prod.js" type="text/javascript" charset="utf-8"></script>
+		<!-- 		<script src="js/jquery-1.7.2.min.js"></script>
+				<script src="js/highcharts.js"></script>
+				<script src="js/chart-nowcar.js"></script> -->
+				
+				<!--设置是否为缩放模式 -->
+				<meta name="viewport" content="width=device-width, initial-scale=1">
+				<!-- 新 Bootstrap 核心 CSS 文件 --> 
+				<link rel="stylesheet" type="text/css" href="https://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.css">
+				<!-- jQuery文件。务必在bootstrap.min.js 之前引入 --> 
+				<script src="js/jquery.min.js"></script>
+				<!-- 最新的 Bootstrap 核心 JavaScript 文件 --> 
+				<script src="js/bootstrap.min.js"></script>
+				<!--echarts JS-->
+				<script src="js/echarts.min.js"></script>
+				<!-- 轮播swiper文件 -->
+				<link rel="stylesheet" type="text/css" href="css/swiper.min.css">
+				<script src="js/swiper.min.js"></script>
+				<!--界面样式-->
+				<link rel="stylesheet" type="text/css" href="css/visual.css">
+				<script src="js/visual.js"></script>
+				<!-- 地图文件 -->
+<!-- 				<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=5ieMMexWmzB9jivTq6oCRX9j&callback"></script>
+				<script src="js/map.js"></script>
+				<script src="js/ybiao1.js"></script> -->
+				<!-- 轮播 -->
+				<link href="js/scroll/css/liMarquee.css" rel="stylesheet" type="text/css">
+				<script type="text/javascript" src="js/scroll/js/jquery.liMarquee.js"></script>
+				
+				<link href="css/Security_operation.css" rel="stylesheet" type="text/css" />
+				<script src="js/index.js"></script>
+				
+				<script src="js/Bubble.js"></script>
+				<script src="js/highcharts.js"></script>
+		
+				
+	</head>
+	<style type="text/css">
+	
+		.add-police-person1,.add-police-person2,.add-police-person3,.add-police-person4,.add-police-person5,.add-police-person6,.add-police-person7,.add-police-person8,.add-police-person9,.add-police-person10{
+			cursor: pointer;
+			/* font-weight: 600; */
+		}
+		/*选择单位和警员外层盒子*/
+		.checked-company-person-box{
+			width: 100%;
+			height: 200px;
+			box-sizing: border-box;
+			padding: 0 15px 10px 15px;
+		}
+		
+		.checked-company-person-box>div{
+			position: relative;
+			float: left;
+			width: 48%;
+			height: 100%;
+			border: 1px solid #bababa;
+		}
+		
+		.checked-person-box{
+			margin-right: 15px;
+		}
+		
+		.checked-title{
+			height: 36px;
+			width: 100%;
+			background: #d0d0e0;
+			line-height: 36px;
+			text-align: center;
+			font-size: 15px;
+			font-weight: bolder;
+		}
+		
+		.checked-name-box{
+			position: absolute;
+			top: 36px;
+			right: 0;
+			bottom: 0;
+			left: 0;
+		}
+		
+		.checked-name-inner-box{
+			width: 100%;
+			height: 100%;
+			overflow-y: auto;
+			box-sizing: border-box;
+			padding: 5px;
+		}
+		
+		.name-cell{
+			position: relative;
+			float: left;
+			padding: 6px 10px;
+			background: #82c3c3;
+			border: 1px solid  #82c3c3;
+			border-radius: 3px;
+			margin: 5px;
+		}
+		
+		.remove-checked{
+			position: absolute;
+			top: -6px;
+			right: -6px;
+			width: 14px;
+			height: 14px;
+			border-radius: 7px;
+			background: #fff;
+			border: 1px solid #dcdcdc;
+			text-align: center;
+			line-height: 12px;
+			color: #999;
+			font-size: 16px;
+		}
+		
+		
+		
+		
+		
+		
+		
+		.checked-name-inner-box{
+			width: 100%;
+			height: 100%;
+			overflow-y: auto;
+			box-sizing: border-box;
+			padding: 5px;
+		}
+		
+	</style>
+	
+	
+	<body>
+		<div class="wpbox" style="display: flex;flex-direction: column;">
+			<!-- 顶部 -->
+			<div class="bnt">
+			  <div class="topbnt_left fl">
+			   <ul>
+				   <li class=""><a href="home.html">&nbsp;</a></li>
+				  <li ><a href="Juburode.html">&nbsp;</a></li>
+				  <li><a href="vemap.html">&nbsp;</a></li>
+			   </ul>
+			  </div>
+			  <h1 class="tith1 fl" style="text-shadow: 0 0 0.3rem #00d8ff;">智能指挥中心</h1>
+			  <div class=" fr topbnt_right  " style="display: flex;flex-direction: row;float:right; padding-left: 40px;">
+				   <div class="topbnt_left fl">
+				   <ul>
+					  <li><a href="history.html"style="padding-bottom: 20px;">&nbsp;</a></li>
+				   </ul>
+			  </div>
+<!-- 				<div class="weather " style="width: 50%;height: 45px;float: left;padding-top: 20px;">
+					  <p id="dateTime" style="font-size: 16px;float: right;" ></p>
+				</div> -->
+			   </div>
+			</div>
+			<div class="kuang" style="width: 100%;height: 90%;display: flex;flex-direction:column;">
+				<div class="kuang" style="width: 100%;height: 50%;display: flex;flex-direction:row;">
+					<div  class="kuang" style="width: 33.3%;height: 100%;">
+						<div class="" style="height: 10%;width: 100%;">
+							<div class="l1_bot1_title" style="padding-left: 10px;">
+								<span style="font-size: 17px;">紧急任务发布</span>
+								<img src="img/ksh33.png" />
+							</div>
+						</div>
+						<div class="kuang" style="height: 90%;width: 100%;padding-top: 35px;padding-left:90px;">
+							<p style="font-size: 18px;">事件类型：<input type="text" id='msg1'  style="color: #000000;"></p><br />
+							<p style="font-size: 18px;">事发时间：<input type="text" id='msg2'  style="color: #000000;"></p><br />
+							<p style="font-size: 18px;">事件地点：<input type="text" id='msg3'  style="color: #000000;"></p><br />
+							<p style="font-size: 18px;">处理状态：<input type="text" id='msg4'  style="color: #000000;"></p><br />
+							<p style="font-size: 18px;">感知来源：<input type="text" id='msg5'  style="color: #000000;"></p><br />
+							<div style="padding-left: 215px;"><button id="send" style="font-size: 18px;width: 80px;color: #000000;">发布</button></div>     <!-- 点击发送按钮触发send事件 -->
+							<script>
+							      send.onclick=function(){
+							            if(msg1.value.trim()!=='' && msg2.value.trim()!==''){  //如果msg1和msg2的内容不是空的，执行if语句
+							                  localStorage.setItem( 'msg1',msg1.value )      //将输入框msg1中的值，设置到localStorage中，并起名为msg1
+							                  localStorage.setItem( 'msg2',msg2.value )      //将输入框msg2中的值，设置到localStorage中，并起名为msg2 
+											  localStorage.setItem( 'msg3',msg3.value )      //将输入框msg1中的值，设置到localStorage中，并起名为msg1
+											  localStorage.setItem( 'msg4',msg4.value )      //将输入框msg2中的值，设置到localStorage中，并起名为msg2 
+											  localStorage.setItem( 'msg5',msg5.value )      //将输入框msg1中的值，设置到localStorage中，并起名为msg1
+							            }                                                   
+							      }
+							</script>
+						</div>
+					</div>
+					<div  class="kuang" style="width: 33.3%;height: 100%; ">
+						<div class="" style="height: 10%;width: 100%;">
+							<div class="l1_bot1_title" style="padding-left: 10px;">
+								<span style="font-size: 17px;">限行报告发布</span>
+								<img src="img/ksh33.png" />
+							</div>
+						</div>
+						<div class="kuang" style="height: 90%;width: 100%;padding-left: 20px;padding-top: 20px;padding-top: 20px;padding-left:90px;padding-top:50px">
+							<!-- <p style="font-size: 18px;">事件类型：<input type="text" id='msg6'  style="color: #000000;"></p><br />
+							
+							<div style="padding-left: 215px;"><button id="send2" style="font-size: 18px;width: 80px;color: #000000;">发布</button></div>     <!-- 点击发送按钮触发send事件 -->
+							<!-- <script>
+							      send2.onclick=function(){
+							            if(msg6.value.trim()!==''){  //如果msg1和msg2的内容不是空的，执行if语句
+							                  localStorage.setItem( 'msg6',msg6.value )      //将输入框msg1中的值，设置到localStorage中，并起名为msg1
+							                  
+							            }                                                   
+							      }
+							</script> -->
+							<p style="font-size: 18px;">限行尾号：<input type="text" id='msg6'  style="color: #000000;"></p><br />
+							<p style="font-size: 18px;">限行时间：<input type="text" id='msg7'  style="color: #000000;"></p><br />
+							<p style="font-size: 18px;">限行范围：<input type="text" id='msg8'  style="color: #000000;"></p><br />
+							<div style="padding-left: 215px;"><button id="send2" style="font-size: 18px;width: 80px;color: #000000;">发布</button></div>    
+							<script>
+							      send2.onclick=function(){
+							            if(msg6.value.trim()!=='' && msg7.value.trim()!==''){  //如果msg1和msg2的内容不是空的，执行if语句
+							                  localStorage.setItem( 'msg6',msg6.value )      //将输入框msg1中的值，设置到localStorage中，并起名为msg1
+							                  localStorage.setItem( 'msg7',msg7.value )      //将输入框msg2中的值，设置到localStorage中，并起名为msg2 
+											  localStorage.setItem( 'msg8',msg8.value )      //将输入框msg1中的值，设置到localStorage中，并起名为msg1
+							            }                                                   
+							      }
+							</script>
+						</div>
+					</div>
+					
+					<div  class="kuang" style="width: 33.3%;height: 100%;">
+						<div class="kuang" style="width: 100%;height: 100%;display: flex;flex-direction:column;">
+							<div class="" style="height: 10%;width: 100%;">
+								<div class="l1_bot1_title" style="padding-left: 10px;">
+									<span style="font-size: 17px;">天气预警发布</span>
+									<img src="img/ksh33.png" />
+								</div>
+							</div>
+							<div class="kuang" style="height: 90%;width: 100%;padding-left: 20px;padding-top: 20px;padding-left:90px;padding-top:50px">
+								<p style="font-size: 18px;">预警种类：<input type="text" id='msg9'  style="color: #000000;"></p><br />
+								<p style="font-size: 18px;">预警等级：<input type="text" id='msg10'  style="color: #000000;"></p><br />
+								<p style="font-size: 18px;">预警地区：<input type="text" id='msg11'  style="color: #000000;"></p><br />
+								<div style="padding-left: 215px;"><button id="send3" style="font-size: 18px;width: 80px;color: #000000;">发布</button></div>    
+								<script>
+									  send3.onclick=function(){
+											if(msg9.value.trim()!=='' && msg10.value.trim()!==''){  //如果msg1和msg2的内容不是空的，执行if语句
+												  localStorage.setItem( 'msg9',msg9.value )      //将输入框msg1中的值，设置到localStorage中，并起名为msg1
+												  localStorage.setItem( 'msg10',msg10.value )      //将输入框msg2中的值，设置到localStorage中，并起名为msg2 
+												  localStorage.setItem( 'msg11',msg11.value )      //将输入框msg1中的值，设置到localStorage中，并起名为msg1
+											}                                                   
+									  }
+								</script>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="kuang" style="height:50%;width:100%;display: flex;flex-direction: row;"> 
+					<div class="kuang" style="width: 50%;height: 100%;display: flex;flex-direction: column;">
+						<div class="kuang" style="height:10%;width:100%">
+							<div class="l1_bot1_title" style="padding-left: 10px;">
+								<span style="font-size: 17px;">派遣警员</span>
+								<img src="img/line1.png" style="width: 20%;"/><img src="img/line2.png" style="width: 97%;padding-left: 17%;"/>
+							</div>
+						</div>
+						<div class="kuang" style="height:90%;width:100%">
+							<div class="alert-table-box">
+								<div class="table_p" style="width: 95%;height: 100%; padding-left:10px;">
+									<table>
+										<thead>
+											<tr style="">
+												<th style="width:;padding: 0 0 0 0 ;padding-top: 10px;text-align:center;font-size:15px">姓名</th>
+												<th style="width: %;padding: 0 0 0 0 ;padding-top: 10px;text-align:center;font-size:15px">电话</th>
+												<th style="width: %;padding: 0 0 0 0 ;padding-top: 10px;text-align:center;font-size:15px">单位</th>
+												<th style="width: %;padding: 0 0 0 0 ;padding-top: 10px;text-align:center;font-size:15px">操作</th>
+											</tr>
+										</thead>
+										<tbody class="message_scroll_bos">
+											<tr>
+												<td></td>
+												<td></td>
+												<td></td>
+											</tr>
+											<tr class="message_scrols" style="background: rgba(255,255,255,0.08);height:30px;font-size:15px">
+												<td>张1</td>
+												<td>12345643567</td>
+												<td>不知名派出所</td>
+												<td>
+													<span class="add-police-person1 " style="color:#05ff2e">派遣</span>
+												</td>
+											</tr>
+											<script type="text/javascript">
+												$(".alert-table-box").on("click", ".add-police-person1", function() {
+							
+													if ($(this).text() == "派遣") 
+													{
+														$(this).text("已派遣");
+														$(this).css("color", "#999");
+							
+														var person_name = $(this).parents("tr").children("td").eq(0).text();
+														var phone_num = $(this).parents("tr").children("td").eq(1).text();
+														localStorage.setItem('msg12', person_name);
+														localStorage.setItem('msg13', phone_num);
+											
+													} else {
+														alert("该警员已派遣");
+													}
+							
+												});
+											</script>
+											<tr class="message_scrols" style="height:30px;font-size:15px">
+												<td>张2</td>
+												<td>12345643567</td>
+												<td>不知名派出所</td>
+												<td>
+													<span class="add-police-person2 " style="color:#05ff2e">派遣</span>
+												</td>
+											</tr>
+											<script type="text/javascript">
+												$(".alert-table-box").on("click", ".add-police-person2", function() {
+																			
+													if ($(this).text() == "派遣") 
+													{
+														$(this).text("已派遣");
+														$(this).css("color", "#999");
+																			
+														var person_name = $(this).parents("tr").children("td").eq(0).text();
+														var phone_num = $(this).parents("tr").children("td").eq(1).text();
+														localStorage.setItem('msg14', person_name) //将输入框msg1中的值，设置到localStorage中，并起名为msg1
+														localStorage.setItem('msg15', phone_num)
+														// $(".checked-person-name").append(
+														// 	"<div class='name-cell'><div class='remove-checked'>×</div><span>" + person_name +
+														// 	"</span><span>&nbsp;" + phone_num + "</span></div>");
+													} else {
+														alert("该警员已派遣");
+													}
+																			
+												});
+											</script>
+											
+											<tr class="message_scrols" style="background: rgba(255,255,255,0.08);height:30px;font-size:15px">
+												<td>张3</td>
+												<td>12345643567</td>
+												<td>不知名派出所</td>
+												<td>
+													<span class="add-police-person3 " style="color:#05ff2e">派遣</span>
+												</td>
+											</tr>
+											<script type="text/javascript">
+												$(".alert-table-box").on("click", ".add-police-person3", function() {
+																			
+													if ($(this).text() == "派遣") 
+													{
+														$(this).text("已派遣");
+														$(this).css("color", "#999");
+																			
+														var person_name = $(this).parents("tr").children("td").eq(0).text();
+														var phone_num = $(this).parents("tr").children("td").eq(1).text();
+														localStorage.setItem('msg16', person_name) //将输入框msg1中的值，设置到localStorage中，并起名为msg1
+														localStorage.setItem('msg17', phone_num)
+														// $(".checked-person-name").append(
+														// 	"<div class='name-cell'><div class='remove-checked'>×</div><span>" + person_name +
+														// 	"</span><span>&nbsp;" + phone_num + "</span></div>");
+													} else {
+														alert("该警员已派遣");
+													}
+																			
+												});
+											</script>
+											
+											<tr class="message_scrols" style="height:32px;font-size:15px;">
+												<td>张4</td>
+												<td>12345643567</td>
+												<td>不知名派出所</td>
+												<td>
+													<span class="add-police-person4 " style="color:#05ff2e">派遣</span>
+												</td>
+											</tr>
+											<script type="text/javascript">
+												$(".alert-table-box").on("click", ".add-police-person4", function() {
+																			
+													if ($(this).text() == "派遣") 
+													{
+														$(this).text("已派遣");
+														$(this).css("color", "#999");
+																			
+														var person_name = $(this).parents("tr").children("td").eq(0).text();
+														var phone_num = $(this).parents("tr").children("td").eq(1).text();
+														localStorage.setItem('msg18', person_name) //将输入框msg1中的值，设置到localStorage中，并起名为msg1
+														localStorage.setItem('msg19', phone_num)
+														// $(".checked-person-name").append(
+														// 	"<div class='name-cell'><div class='remove-checked'>×</div><span>" + person_name +
+														// 	"</span><span>&nbsp;" + phone_num + "</span></div>");
+													} else {
+														alert("该警员已派遣");
+													}
+																			
+												});
+											</script>
+											
+											<tr class="message_scrols" style="height:32px;font-size:15px;background: rgba(255,255,255,0.08);">
+												<td>张5</td>
+												<td>12345643567</td>
+												<td>不知名派出所</td>
+												<td>
+													<span class="add-police-person5 " style="color:#05ff2e">派遣</span>
+												</td>
+											</tr>
+											<script type="text/javascript">
+												$(".alert-table-box").on("click", ".add-police-person5", function() {
+																			
+													if ($(this).text() == "派遣") 
+													{
+														$(this).text("已派遣");
+														$(this).css("color", "#999");
+																			
+														var person_name = $(this).parents("tr").children("td").eq(0).text();
+														var phone_num = $(this).parents("tr").children("td").eq(1).text();
+														localStorage.setItem('msg20', person_name) //将输入框msg1中的值，设置到localStorage中，并起名为msg1
+														localStorage.setItem('msg21', phone_num)
+														// $(".checked-person-name").append(
+														// 	"<div class='name-cell'><div class='remove-checked'>×</div><span>" + person_name +
+														// 	"</span><span>&nbsp;" + phone_num + "</span></div>");
+													} else {
+														alert("该警员已派遣");
+													}
+																			
+												});
+											</script>
+											
+											<tr class="message_scrols" style="height:32px;font-size:15px;">
+												<td>张6</td>
+												<td>12345643567</td>
+												<td>不知名派出所</td>
+												<td>
+													<span class="add-police-person6 " style="color:#05ff2e">派遣</span>
+												</td>
+											</tr>
+											<script type="text/javascript">
+												$(".alert-table-box").on("click", ".add-police-person6", function() {
+																			
+													if ($(this).text() == "派遣") 
+													{
+														$(this).text("已派遣");
+														$(this).css("color", "#999");
+																			
+														var person_name = $(this).parents("tr").children("td").eq(0).text();
+														var phone_num = $(this).parents("tr").children("td").eq(1).text();
+														localStorage.setItem('msg22', person_name) //将输入框msg1中的值，设置到localStorage中，并起名为msg1
+														localStorage.setItem('msg23', phone_num)
+														// $(".checked-person-name").append(
+														// 	"<div class='name-cell'><div class='remove-checked'>×</div><span>" + person_name +
+														// 	"</span><span>&nbsp;" + phone_num + "</span></div>");
+													} else {
+														alert("该警员已派遣");
+													}
+																			
+												});
+											</script>
+											
+											<tr class="message_scrols" style="height:32px;font-size:15px;background: rgba(255,255,255,0.08);">
+												<td>张7</td>
+												<td>12345643567</td>
+												<td>不知名派出所</td>
+												<td>
+													<span class="add-police-person7 " style="color:#05ff2e">派遣</span>
+												</td>
+											</tr>
+											<script type="text/javascript">
+												$(".alert-table-box").on("click", ".add-police-person7", function() {
+																			
+													if ($(this).text() == "派遣") 
+													{
+														$(this).text("已派遣");
+														$(this).css("color", "#999");
+																			
+														var person_name = $(this).parents("tr").children("td").eq(0).text();
+														var phone_num = $(this).parents("tr").children("td").eq(1).text();
+														localStorage.setItem('msg24', person_name) //将输入框msg1中的值，设置到localStorage中，并起名为msg1
+														localStorage.setItem('msg25', phone_num)
+														// $(".checked-person-name").append(
+														// 	"<div class='name-cell'><div class='remove-checked'>×</div><span>" + person_name +
+														// 	"</span><span>&nbsp;" + phone_num + "</span></div>");
+													} else {
+														alert("该警员已派遣");
+													}
+																			
+												});
+											</script>
+											
+											<tr class="message_scrols" style="height:32px;font-size:15px;">
+												<td>张8</td>
+												<td>12345643567</td>
+												<td>不知名派出所</td>
+												<td>
+													<span class="add-police-person8 " style="color:#05ff2e">派遣</span>
+												</td>
+											</tr>
+											<script type="text/javascript">
+												$(".alert-table-box").on("click", ".add-police-person8", function() {
+																			
+													if ($(this).text() == "派遣") 
+													{
+														$(this).text("已派遣");
+														$(this).css("color", "#999");
+																			
+														var person_name = $(this).parents("tr").children("td").eq(0).text();
+														var phone_num = $(this).parents("tr").children("td").eq(1).text();
+														localStorage.setItem('msg26', person_name) //将输入框msg1中的值，设置到localStorage中，并起名为msg1
+														localStorage.setItem('msg27', phone_num)
+														// $(".checked-person-name").append(
+														// 	"<div class='name-cell'><div class='remove-checked'>×</div><span>" + person_name +
+														// 	"</span><span>&nbsp;" + phone_num + "</span></div>");
+													} else {
+														alert("该警员已派遣");
+													}
+																			
+												});
+											</script>
+											
+											<tr class="message_scrols" style="height:32px;font-size:15px;background: rgba(255,255,255,0.08);">
+												<td>张9</td>
+												<td>12345643567</td>
+												<td>不知名派出所</td>
+												<td>
+													<span class="add-police-person9 " style="color:#05ff2e">派遣</span>
+												</td>
+											</tr>
+											<script type="text/javascript">
+												$(".alert-table-box").on("click", ".add-police-person9", function() {
+																			
+													if ($(this).text() == "派遣") 
+													{
+														$(this).text("已派遣);
+														$(this).css("color", "#999");
+																			
+														var person_name = $(this).parents("tr").children("td").eq(0).text();
+														var phone_num = $(this).parents("tr").children("td").eq(1).text();
+														localStorage.setItem('msg28', person_name);
+														localStorage.setItem('msg29', phone_num);
+														
+													} 
+													else {
+														alert("该警员已派遣");
+													}
+																			
+												});
+											</script>
+											
+											<tr class="message_scrols" style="height:30px;font-size:15px;">
+												<td>张10</td>
+												<td>12345643567</td>
+												<td>不知名派出所</td>
+												<td>
+													<span class="add-police-person10 " style="color:#05ff2e">派遣</span>
+												</td>
+											</tr>
+											<script type="text/javascript">
+												$(".alert-table-box").on("click", ".add-police-person10", function() {
+																			
+													if ($(this).text() == "派遣") 
+													{
+														$(this).text("已派遣");
+														$(this).css("color", "#999");
+																			
+														var person_name = $(this).parents("tr").children("td").eq(0).text();
+														var phone_num = $(this).parents("tr").children("td").eq(1).text();
+														localStorage.setItem('msg30', person_name) //将输入框msg1中的值，设置到localStorage中，并起名为msg1
+														localStorage.setItem('msg31', phone_num)
+														// $(".checked-person-name").append(
+														// 	"<div class='name-cell'><div class='remove-checked'>×</div><span>" + person_name +
+														// 	"</span><span>&nbsp;" + phone_num + "</span></div>");
+													} else {
+														alert("该警员已派遣");
+													}
+																			
+												});
+											</script>
+										
+											
+										</tbody>
+									</table>
+								</div>
+								
+							</div>
+						</div>
+					</div>
+					
+					<div class="kuang" style="width: 50%;height: 100%;display: flex;flex-direction: column;">
+						<div class="kuang" style="height:10%;width100%">
+							<div class="l1_bot1_title" style="padding-left: 10px;">
+								<span style="font-size: 17px;">派遣车辆</span>
+								<img src="img/line1.png" style="width: 20%;"/><img src="img/line2.png" style="width: 97%;padding-left: 17%;"/>
+							</div>
+						</div>
+						<div class="kuang" style="height:90%;width100%">
+							<div class="alert-table-box">
+								<div class="table_p" style="width: 95%;height: 100%; padding-left:10px;">
+									<table>
+										<thead>
+											<tr style="">
+												<th style="width:;padding: 0 0 0 0 ;padding-top: 10px;text-align:center;font-size:15px">车牌号</th>
+												<th style="width: %;padding: 0 0 0 0 ;padding-top: 10px;text-align:center;font-size:15px">车辆种类</th>
+												<th style="width: %;padding: 0 0 0 0 ;padding-top: 10px;text-align:center;font-size:15px">单位</th>
+												<th style="width: %;padding: 0 0 0 0 ;padding-top: 10px;text-align:center;font-size:15px">操作</th>
+											</tr>
+										</thead>
+										<tbody class="message_scroll_bos">
+											<tr>
+												<td></td>
+												<td></td>
+												<td></td>
+											</tr>
+											<tr class="message_scrols" style="background: rgba(255,255,255,0.08);height:30px;font-size:15px">
+												<td>京A123</td>
+												<td>警车</td>
+												<td>不知名派出所</td>
+												<td>
+													<span class="add-police-person21 " style="color:#05ff2e">派遣</span>
+												</td>
+											</tr>
+											<script type="text/javascript">
+												$(".alert-table-box").on("click", ".add-police-person21", function() {
+							
+													if ($(this).text() == "派遣") 
+													{
+														$(this).text("已派遣");
+														$(this).css("color", "#999");
+							
+														var person_name = $(this).parents("tr").children("td").eq(0).text();
+														var phone_num = $(this).parents("tr").children("td").eq(1).text();
+														localStorage.setItem('msg40', person_name);
+														localStorage.setItem('msg41', phone_num);
+											
+													} else {
+														alert("该车辆已派遣");
+													}
+							
+												});
+											</script>
+											<tr class="message_scrols" style="height:30px;font-size:15px">
+												<td>京A123</td>
+												<td>警车</td>
+												<td>不知名派出所</td>
+												<td>
+													<span class="add-police-person22 " style="color:#05ff2e">派遣</span>
+												</td>
+											</tr>
+											<script type="text/javascript">
+												$(".alert-table-box").on("click", ".add-police-person22", function() {
+																			
+													if ($(this).text() == "派遣") 
+													{
+														$(this).text("已派遣");
+														$(this).css("color", "#999");
+																			
+														var person_name = $(this).parents("tr").children("td").eq(0).text();
+														var phone_num = $(this).parents("tr").children("td").eq(1).text();
+														localStorage.setItem('msg42', person_name) //将输入框msg1中的值，设置到localStorage中，并起名为msg1
+														localStorage.setItem('msg43', phone_num)
+														// $(".checked-person-name").append(
+														// 	"<div class='name-cell'><div class='remove-checked'>×</div><span>" + person_name +
+														// 	"</span><span>&nbsp;" + phone_num + "</span></div>");
+													} else {
+														alert("该车辆已派遣");
+													}
+																			
+												});
+											</script>
+											
+											<tr class="message_scrols" style="background: rgba(255,255,255,0.08);height:30px;font-size:15px">
+												<td>京A123</td>
+												<td>警车</td>
+												<td>不知名派出所</td>
+												<td>
+													<span class="add-police-person23 " style="color:#05ff2e">派遣</span>
+												</td>
+											</tr>
+											<script type="text/javascript">
+												$(".alert-table-box").on("click", ".add-police-person23", function() {
+																			
+													if ($(this).text() == "派遣") 
+													{
+														$(this).text("已派遣");
+														$(this).css("color", "#999");
+																			
+														var person_name = $(this).parents("tr").children("td").eq(0).text();
+														var phone_num = $(this).parents("tr").children("td").eq(1).text();
+														localStorage.setItem('msg44', person_name) //将输入框msg1中的值，设置到localStorage中，并起名为msg1
+														localStorage.setItem('msg45', phone_num)
+														// $(".checked-person-name").append(
+														// 	"<div class='name-cell'><div class='remove-checked'>×</div><span>" + person_name +
+														// 	"</span><span>&nbsp;" + phone_num + "</span></div>");
+													} else {
+														alert("该车辆已派遣");
+													}
+																			
+												});
+											</script>
+											
+											<tr class="message_scrols" style="height:32px;font-size:15px;">
+												<td>京A123</td>
+												<td>警车</td>
+												<td>不知名派出所</td>
+												<td>
+													<span class="add-police-person24 " style="color:#05ff2e">派遣</span>
+												</td>
+											</tr>
+											<script type="text/javascript">
+												$(".alert-table-box").on("click", ".add-police-person24", function() {
+																			
+													if ($(this).text() == "派遣") 
+													{
+														$(this).text("已派遣");
+														$(this).css("color", "#999");
+																			
+														var person_name = $(this).parents("tr").children("td").eq(0).text();
+														var phone_num = $(this).parents("tr").children("td").eq(1).text();
+														localStorage.setItem('msg46', person_name) //将输入框msg1中的值，设置到localStorage中，并起名为msg1
+														localStorage.setItem('msg47', phone_num)
+														// $(".checked-person-name").append(
+														// 	"<div class='name-cell'><div class='remove-checked'>×</div><span>" + person_name +
+														// 	"</span><span>&nbsp;" + phone_num + "</span></div>");
+													} else {
+														alert("该车辆已派遣;
+													}
+																			
+												});
+											</script>
+											
+											<tr class="message_scrols" style="height:32px;font-size:15px;background: rgba(255,255,255,0.08);">
+												<td>京A123</td>
+												<td>警车</td>
+												<td>不知名派出所</td>
+												<td>
+													<span class="add-police-person25 " style="color:#05ff2e">派遣</span>
+												</td>
+											</tr>
+											<script type="text/javascript">
+												$(".alert-table-box").on("click", ".add-police-person25", function() {
+																			
+													if ($(this).text() == "派遣") 
+													{
+														$(this).text("已派遣");
+														$(this).css("color", "#999");
+																			
+														var person_name = $(this).parents("tr").children("td").eq(0).text();
+														var phone_num = $(this).parents("tr").children("td").eq(1).text();
+														localStorage.setItem('msg48', person_name) //将输入框msg1中的值，设置到localStorage中，并起名为msg1
+														localStorage.setItem('msg49', phone_num)
+														// $(".checked-person-name").append(
+														// 	"<div class='name-cell'><div class='remove-checked'>×</div><span>" + person_name +
+														// 	"</span><span>&nbsp;" + phone_num + "</span></div>");
+													} else {
+														alert("该车辆已派遣");
+													}
+																			
+												});
+											</script>
+											
+											<tr class="message_scrols" style="height:32px;font-size:15px;">
+												<td>京A123</td>
+												<td>警车</td>
+												<td>不知名派出所</td>
+												<td>
+													<span class="add-police-person26 " style="color:#05ff2e">派遣</span>
+												</td>
+											</tr>
+											<script type="text/javascript">
+												$(".alert-table-box").on("click", ".add-police-person26", function() {
+																			
+													if ($(this).text() == "派遣") 
+													{
+														$(this).text("已派遣");
+														$(this).css("color", "#999");
+																			
+														var person_name = $(this).parents("tr").children("td").eq(0).text();
+														var phone_num = $(this).parents("tr").children("td").eq(1).text();
+														localStorage.setItem('msg50', person_name) //将输入框msg1中的值，设置到localStorage中，并起名为msg1
+														localStorage.setItem('msg51', phone_num)
+														// $(".checked-person-name").append(
+														// 	"<div class='name-cell'><div class='remove-checked'>×</div><span>" + person_name +
+														// 	"</span><span>&nbsp;" + phone_num + "</span></div>");
+													} else {
+														alert("该车辆已派遣");
+													}
+																			
+												});
+											</script>
+											
+											<tr class="message_scrols" style="height:32px;font-size:15px;background: rgba(255,255,255,0.08);">
+												<td>京A123</td>
+												<td>警车</td>
+												<td>不知名派出所</td>
+												<td>
+													<span class="add-police-person27 " style="color:#05ff2e">派遣</span>
+												</td>
+											</tr>
+											<script type="text/javascript">
+												$(".alert-table-box").on("click", ".add-police-person27", function() {
+																			
+													if ($(this).text() == "派遣") 
+													{
+														$(this).text("已派遣");
+														$(this).css("color", "#999");
+																			
+														var person_name = $(this).parents("tr").children("td").eq(0).text();
+														var phone_num = $(this).parents("tr").children("td").eq(1).text();
+														localStorage.setItem('msg52', person_name) //将输入框msg1中的值，设置到localStorage中，并起名为msg1
+														localStorage.setItem('msg53', phone_num)
+														// $(".checked-person-name").append(
+														// 	"<div class='name-cell'><div class='remove-checked'>×</div><span>" + person_name +
+														// 	"</span><span>&nbsp;" + phone_num + "</span></div>");
+													} else {
+														alert("该车辆已派遣");
+													}
+																			
+												});
+											</script>
+											
+											<tr class="message_scrols" style="height:32px;font-size:15px;">
+												<td>京A123</td>
+												<td>救护车</td>
+												<td>不知名派出所</td>
+												<td>
+													<span class="add-police-person28 " style="color:#05ff2e">派遣</span>
+												</td>
+											</tr>
+											<script type="text/javascript">
+												$(".alert-table-box").on("click", ".add-police-person28", function() {
+																			
+													if ($(this).text() == "派遣") 
+													{
+														$(this).text("已派遣");
+														$(this).css("color", "#999");
+																			
+														var person_name = $(this).parents("tr").children("td").eq(0).text();
+														var phone_num = $(this).parents("tr").children("td").eq(1).text();
+														localStorage.setItem('msg54', person_name) //将输入框msg1中的值，设置到localStorage中，并起名为msg1
+														localStorage.setItem('msg55', phone_num)
+														// $(".checked-person-name").append(
+														// 	"<div class='name-cell'><div class='remove-checked'>×</div><span>" + person_name +
+														// 	"</span><span>&nbsp;" + phone_num + "</span></div>");
+													} else {
+														alert("该警员已派遣");
+													}
+																			
+												});
+											</script>
+											
+											<tr class="message_scrols" style="height:32px;font-size:15px;background: rgba(255,255,255,0.08);">
+												<td>京A123</td>
+												<td>消防车</td>
+												<td>不知名派出所</td>
+												<td>
+													<span class="add-police-person29 " style="color:#05ff2e">派遣</span>
+												</td>
+											</tr>
+											<script type="text/javascript">
+												$(".alert-table-box").on("click", ".add-police-person29", function() {
+																			
+													if ($(this).text() == "派遣") 
+													{
+														$(this).text("已派遣);
+														$(this).css("color", "#999");
+																			
+														var person_name = $(this).parents("tr").children("td").eq(0).text();
+														var phone_num = $(this).parents("tr").children("td").eq(1).text();
+														localStorage.setItem('msg56', person_name) //将输入框msg1中的值，设置到localStorage中，并起名为msg1
+														localStorage.setItem('msg57', phone_num)
+														// $(".checked-person-name").append(
+														// 	"<div class='name-cell'><div class='remove-checked'>×</div><span>" + person_name +
+														// 	"</span><span>&nbsp;" + phone_num + "</span></div>");
+													} else {
+														alert("该警员已派遣");
+													}
+																			
+												});
+											</script>
+											
+											<tr class="message_scrols" style="height:30px;font-size:15px;">
+												<td>京A123</td>
+												<td>救护车</td>
+												<td>不知名派出所</td>
+												<td>
+													<span class="add-police-person30 " style="color:#05ff2e">派遣</span>
+												</td>
+											</tr>
+											<script type="text/javascript">
+												$(".alert-table-box").on("click", ".add-police-person30", function() {
+																			
+													if ($(this).text() == "派遣") 
+													{
+														$(this).text("已派遣");
+														$(this).css("color", "#999");
+																			
+														var person_name = $(this).parents("tr").children("td").eq(0).text();
+														var phone_num = $(this).parents("tr").children("td").eq(1).text();
+														localStorage.setItem('msg58', person_name) //将输入框msg1中的值，设置到localStorage中，并起名为msg1
+														localStorage.setItem('msg59', phone_num)
+														// $(".checked-person-name").append(
+														// 	"<div class='name-cell'><div class='remove-checked'>×</div><span>" + person_name +
+														// 	"</span><span>&nbsp;" + phone_num + "</span></div>");
+													} else {
+														alert("该警员已派遣");
+													}
+																			
+												});
+											</script>
+										
+											
+										</tbody>
+									</table>
+								</div>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				
+				
+			</div>
+		</div>
+		
+	</body>
+
+
+</html>

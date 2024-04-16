@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+
+		<title>监控</title>
+		<!-- <script src="https://unpkg.com/vue@next"></script> -->
+		<script src="js/v3.2.8/vue.global.prod.js" type="text/javascript" charset="utf-8"></script>
+		<!--设置是否为缩放模式 -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- 新 Bootstrap 核心 CSS 文件 --> 
+		<link rel="stylesheet" type="text/css" href="https://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.css">
+		<!-- jQuery文件。务必在bootstrap.min.js 之前引入 --> 
+		<script src="js/jquery.min.js"></script>
+		<!-- 最新的 Bootstrap 核心 JavaScript 文件 --> 
+		<script src="js/bootstrap.min.js"></script>
+		<!--echarts JS-->
+		<script src="js/echarts.min.js"></script>
+		<!-- 轮播swiper文件 -->
+		<link rel="stylesheet" type="text/css" href="css/swiper.min.css">
+		<script src="js/swiper.min.js"></script>
+		<!--界面样式-->
+		<link rel="stylesheet" type="text/css" href="css/visual.css">
+		<script src="js/visual.js"></script>
+		<!-- 地图文件 -->
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=5ieMMexWmzB9jivTq6oCRX9j&callback"></script>
+		<script src="js/map.js"></script>
+		<script src="js/Bubble.js"></script>
+		<script src="js/highcharts.js"></script>
+		<!-- 轮播 -->
+		<link href="js/scroll/css/liMarquee.css" rel="stylesheet" type="text/css">
+		<script type="text/javascript" src="js/scroll/js/jquery.liMarquee.js"></script>
+		
+		<script src="js/index.js"></script>
+		
+		
+		<!-- <link rel="stylesheet" type="text/css" href="css/scanboardLogin.css" /> -->
+
+		
+		<style type="text/css">
+		/*resize*/
+		.breathe-zct{ position:relative; width:20px; height:20px; top:2px;float:left;  border:1px solid #008000; border-radius:20px; color:#fff; font-size:10px; cursor:pointer; box-shadow:0 1px 2px rgba(0,0,0,.3); overflow:hidden; 
+				background-image: -webkit-gradient(linear, left top, left bottom, from(#00FF00), to(#00FF00));
+				background-image: -moz-linear-gradient(#00FF00,#00FF00);
+		}
+		
+		.breathe-yct{ position:relative; width:20px; height:20px; top:2px;float:left;   border:1px solid #008000; border-radius:20px; color:#fff; font-size:20px;  cursor:pointer; box-shadow:0 1px 2px rgba(0,0,0,.3); overflow:hidden; 
+				background-image: -webkit-gradient(linear, left top, left bottom, from(#FF0000), to(#FF0000));
+				background-image: -moz-linear-gradient(#FF0000,#FF0000);
+		}
+		
+		.breathe-zc{ position:relative; width:25px; height:25px; margin:10px auto; line-height:40px; border:1px solid #008000; border-radius:20px; color:#fff; font-size:20px; text-align:center; cursor:pointer; box-shadow:0 1px 2px rgba(0,0,0,.3); overflow:hidden; 
+				background-image: -webkit-gradient(linear, left top, left bottom, from(#00FF00), to(#00FF00));
+				background-image: -moz-linear-gradient(#00FF00,#00FF00);
+		    -webkit-animation-timing-function: ease-in-out;
+		    -webkit-animation-name: breathe;
+		    -webkit-animation-duration: 500ms;
+		    -webkit-animation-iteration-count: infinite;
+		    -webkit-animation-direction: alternate;
+				animation:ease-in-out breathe 500ms infinite alternate; 
+		}
+		@keyframes breathe{
+			0% { opacity: .2; box-shadow:0 1px 2px rgba(255,255,255,0.1);}
+		    100% { opacity: 1; border:1px solid rgba(59,235,235,1); box-shadow:0 1px 30px rgba(59,255,255,1);}
+		}
+		@-webkit-keyframes breathe {
+		    0% { opacity: .2; box-shadow:0 1px 2px rgba(255,255,255,0.1);}
+		    100% { opacity: 1; border:1px solid rgba(59,235,235,1); box-shadow:0 1px 30px rgba(59,255,255,1);}
+		}
+		
+		.breathe-yc{ position:relative; width:25px; height:25px; margin:10px auto; line-height:40px; border:1px solid #008000; border-radius:20px; color:#fff; font-size:20px; text-align:center; cursor:pointer; box-shadow:0 1px 2px rgba(0,0,0,.3); overflow:hidden; 
+				background-image: -webkit-gradient(linear, left top, left bottom, from(#FF0000), to(#FF0000));
+				background-image: -moz-linear-gradient(#FF0000,#FF0000);
+		    -webkit-animation-timing-function: ease-in-out;
+		    -webkit-animation-name: breathe;
+		    -webkit-animation-duration: 1000ms;
+		    -webkit-animation-iteration-count: infinite;
+		    -webkit-animation-direction: alternate;
+				animation:ease-in-out breathe 100ms infinite alternate; 
+		}
+		@keyframes breathe{
+			0% { opacity: .2; box-shadow:0 1px 2px rgba(255,255,255,0.1);}
+		    100% { opacity: 1; border:1px solid rgba(59,235,235,1); box-shadow:0 1px 30px rgba(59,255,255,1);}
+		}
+		@-webkit-keyframes breathe {
+		    0% { opacity: .2; box-shadow:0 1px 2px rgba(255,255,255,0.1);}
+		    100% { opacity: 1; border:1px solid rgba(59,235,235,1); box-shadow:0 1px 30px rgba(59,255,255,1);}
+		}
+		
+		
+
+		</style>
+	</head>
+	<body>
+
+		<!-- 顶部 -->
+		<div class="bnt">
+		  <div class="topbnt_left fl">
+		   <ul>
+			   <li ><a href="home.html">数据概览</a></li>
+			  <li class="active"><a href="Juburode.html">局部路段</a></li>
+			  <li><a href="vemap.html">应急指挥</a></li>
+		   </ul>
+		  </div>
+		  <h1 class="tith1 fl" style="text-shadow: 0 0 0.3rem #00d8ff;">智能指挥中心</h1>
+		  <div class=" fr topbnt_right  " style="display: flex;flex-direction: row;float:right; padding-left: 40px;">
+			   <div class="topbnt_left fl">
+			   <ul>
+				  <li><a href="history.html"style="padding-bottom: 20px;">历史数据</a></li>
+			   </ul>
+		  </div>
+			<div class="weather " style="width: 50%;height: 45px;float: left;padding-top: 20px;">
+				  <p id="dateTime" style="font-size: 16px;float: right;" ></p>
+			</div>
+		   </div>
+		</div>
+		
+		
+		
+		<!-- 左栏 -->
+		<div class="lft2 ">
+			<div class="lft2_top1">
+				<div class="big_title" style="font-size: 20px;float:left;">
+					<span style="text-shadow: .3rem 0 0.3rem #00d8ff;">路口监控</span>
+				</div>
+				<div class="lft2_top1_1 kuang">
+					<div class="l_vedio ">
+						<div class="vedio_box_1 " style="padding-left: 4%;padding-top: 5%;">
+							<div class="vedio_1 kuang">
+								<video autoplay="autoplay" width="98%" height="100%" style="padding-left: 2%;">
+									<source src="webm/CAMERAV.webm" type="video/mp4"></source>
+								</video>
+							</div>
+							<div class="sm_title" style="font-size: 5px;float:left;padding-left: 2%;">
+								<span>路口1</span>
+							</div>
+						</div>
+						<div class="vedio_box_1 " style="padding-left: 4%">
+							<div class="vedio_1 kuang">
+								<video autoplay="autoplay" width="98%" height="100%" style="padding-left: 2%;">
+									<source src="webm/CAMERAV.webm" type="video/mp4"></source>
+								</video>
+							</div>
+							<div class="sm_title" style="font-size: 5px;float:left;padding-left: 2%;">
+								<span>路口2</span>
+							</div>
+						</div>
+						<div class="vedio_box_1 " style="padding-left: 4%;">
+							<div class="vedio_1 kuang">
+								<video autoplay="autoplay" width="98%" height="100%" style="padding-left: 2%;">
+									<source src="webm/CAMERAV.webm" type="video/mp4"></source>
+								</video>
+							</div>
+							<div class="sm_title" style="font-size: 5px;float:left;padding-left: 2%;">
+								<span>路口3</span>
+							</div>
+						</div>
+					</div>
+					<div class="m_vedio ">
+						<div class="vedio_box_2" >
+							<div class="vedio_2 kuang">
+								<video autoplay="autoplay" width="98%" height="100%" style="padding-left: 2%;">
+									<source src="webm/CAMERAV.webm" type="video/mp4"></source>
+								</video>
+							</div>
+							<div class="sm_title" style="font-size: 5px;float:left;padding-left: 2%;">
+								<span>主路口9</span>
+							</div>
+						</div>
+						<div class="vedio_box_3 ">
+							<div class="vedio_1 kuang">
+								<video autoplay="autoplay" width="98%" height="100%" style="padding-left: 2%;">
+									<source src="webm/CAMERAV.webm" type="video/mp4"></source>
+								</video>
+							</div>
+							<div class="sm_title" style="font-size: 5px;float:left;padding-left: 2%;">
+								<span>路口4</span>
+							</div>
+						</div>
+						<div class="vedio_box_3 ">
+							<div class="vedio_1 kuang">
+								<video autoplay="autoplay" width="98%" height="100%" style="padding-left: 2%;">
+									<source src="webm/CAMERAV.webm" type="video/mp4"></source>
+								</video>
+							</div>
+							<div class="sm_title" style="font-size: 5px;float:left;padding-left: 2%;">
+								<span>路口5</span>
+							</div>
+						</div>
+					</div>
+					<div class="l_vedio ">
+						<div class="vedio_box_1 " style="padding-right: 4%;padding-top: 5%;">
+							<div class="vedio_1 kuang">
+								<video autoplay="autoplay" width="98%" height="100%" style="padding-left: 2%;">
+									<source src="webm/CAMERAV.webm" type="video/mp4"></source>
+								</video>
+							</div>
+							<div class="sm_title" style="font-size: 5px;float:left;padding-left: 2%;">
+								<span>路口6</span>
+							</div>
+						</div>
+						<div class="vedio_box_1 " style="padding-right: 4%">
+							<div class="vedio_1 kuang">
+								<video autoplay="autoplay" width="98%" height="100%" style="padding-left: 2%;">
+									<source src="webm/CAMERAV.webm" type="video/mp4"></source>
+								</video>
+							</div>
+							<div class="sm_title" style="font-size: 5px;float:left;padding-left: 2%;">
+								<span>路口7</span>
+							</div>
+						</div>
+						<div class="vedio_box_1 " style="padding-right: 4%;">
+							<div class="vedio_1 kuang">
+								<video autoplay="autoplay" width="98%" height="100%" style="padding-left: 2%;">
+									<source src="webm/CAMERAV.webm" type="video/mp4"></source>
+								</video>
+							</div>
+							<div class="sm_title" style="font-size: 5px;float:left;padding-left: 2%;">
+								<span>路口8</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="lft2_bot1 ">
+				<div class="big_title" style="font-size: 20px;float:left;">
+					<span style="text-shadow: .3rem 0 0.3rem #00d8ff;">车辆事件</span>
+				</div>
+				<div class="lft2_bot1_1 kuang">
+					<div class="lf2_bot1_1 kuang" > 
+						<!-- Swiper -->
+						
+						  <div class="swiper-container gallery-top">
+							<div class="mapnav">
+							</div>
+						    <div class="swiper-wrapper">
+								<div class="swiper-slide" style="background-image:url(img/1.png)"></div>
+								<div class="swiper-slide" style="background-image:url(img/1.png)"></div>
+								<div class="swiper-slide" style="background-image:url(img/1.png)"></div>
+								<div class="swiper-slide" style="background-image:url(img/1.png)"></div>
+								<div class="swiper-slide" style="background-image:url(img/1.png)"></div>
+<!-- 								<div class="swiper-slide" style="background-image:url(images/1.jpg)"></div>	 -->
+						    </div>
+						    <!-- Add Arrows -->
+						    <div class="swiper-button-next swiper-button-white"></div>
+						    <div class="swiper-button-prev swiper-button-white"></div>
+						  </div>
+						
+						  <div class="swiper-container gallery-thumbs">
+						    <div class="swiper-wrapper">
+						<div class="swiper-slide" style="background-image:url(img/1.png)"></div>
+						<div class="swiper-slide" style="background-image:url(img/1.png)"></div>
+						<div class="swiper-slide" style="background-image:url(img/1.png)"></div>
+						<div class="swiper-slide" style="background-image:url(img/1.png)"></div>
+						<div class="swiper-slide" style="background-image:url(img/1.png)"></div>
+<!-- 						<div class="swiper-slide" style="background-image:url(images/1.jpg)"></div>
+ -->						    </div>
+						  </div>
+					</div>
+					<script>
+					var galleryThumbs = new Swiper('.gallery-thumbs', {
+						spaceBetween: 0,
+						slidesPerView: 5,
+						freeMode: true,
+						watchSlidesVisibility: true,
+						watchSlidesProgress: true,
+					});
+					var galleryTop = new Swiper('.gallery-top', {
+						spaceBetween: 10,
+						navigation: {
+							nextEl: '.swiper-button-next',
+							prevEl: '.swiper-button-prev',
+						},
+						thumbs: {
+							swiper: galleryThumbs
+						}
+					});
+					
+					  </script>	
+					  
+					<div class="lf2_bot1_2 kuang">
+						<div class="bcontent">
+							  <ul>
+									<li class="leftrt" style="font-size: 20px;">车牌号：</li>
+									<li class="rightrt" style="font-size: 20px;">京G053AG</li>
+									<li class="leftrt"style="font-size: 20px;">车辆种类：</li>
+									<li class="rightrt"style="font-size: 20px;">货车</li>
+									<li class="leftrt"style="font-size: 20px;">事件等级：</li>
+									<li class="rightrt"style="font-size: 20px;">普通</li>
+									<li class="leftrt"style="font-size: 20px;">事件类型：</li>
+									<li class="rightrt"style="font-size: 20px;">超速</li>
+									<li class="leftrt"style="font-size: 20px;">事发时间：</li>
+									<li class="rightrt"style="font-size: 20px;">2022-3-19 2:49:00</li>
+									<li class="leftrt"style="font-size: 20px;">所属路口：</li>
+									<li class="rightrt"style="font-size: 20px;">文华路北延与定泗路交叉路口</li>
+<!-- 									<li class="leftrt">所属区域：</li>
+									<li class="rightrt">滨江区</li>
+									<li class="leftrt">车速(km/h)：</li>
+									<li class="rightrt">100</li>
+ -->
+								</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="mr2 ">
+			<div class="big_title" style="font-size: 20px;float:right;">
+				<span>&nbsp;</span>
+			</div>
+			<div class="mr2_top1 kuang" style="display: flex;flex-direction: row;">
+				<div class="l1_top1_1 ">
+					<h3 style="font-size: 25px;padding-top: 10%;padding-left: 20px;" >当前路段</h3>
+					<p style="font-size: 20px;padding-left: 20px;padding-top: 20px;">京深路</p>
+				</div>
+				<div class="l1_top1_1" style="padding-top: 10px;padding-bottom: 10px;">
+					<div class="quyu_stastic">
+						<h3 style="font-size: 20px;" >道路交通指数</h3>
+						<p style="font-size: 25px;">2.123</p>
+						<div class="conTop_smil_1">
+							<a class="" style="font-size: 20px;">&nbsp;&nbsp;畅通</a>
+						</div>
+					</div>
+				</div>
+				<div class="l1_top1_1 ">  
+					<div id="chart_555" class="" style="width:100%;height: 100%;"></div>
+				</div>
+			</div>
+			<div class="mr2_mid1">
+				<div class="big_title" style="font-size: 20px;text-align: center;">
+					<span style="text-shadow: .3rem 0 0.3rem #00d8ff;">实时地图</span>
+				</div>
+				<div class="mr2_mid1_1 kuang">
+					<div class="map2">
+						<div id="map_div"></div>
+					</div>
+				</div>
+			</div>
+			<div class="mr2_bot1 ">
+				<div class="big_title" style="font-size: 20px;text-align: center;">
+					<span style="text-shadow: .3rem 0 0.3rem #00d8ff;">信息公告</span>
+				</div>
+				<div class="mr2_bot1_1 kuang" style="height: 80%;overflow: hidden;">
+					<div class="left_con3">
+					    <div class="ul_top"><span>等级</span><span>名称</span><span>案情</span><span>时间</span></div>
+					    <div style="width: 96%;height: 98%;background: transparent;margin-top: 2%;overflow: hidden;" id="div01" class="str_wrap str_vertical str_down" >
+							<ul class="ul_con" style="overflow: hidden;" >
+							   <li><a ><span style="color: red">严重</span><span>安立路</span><span>救护车经过</span><span>13:00:02</span></a></li>
+							   <li><a><span style="color: greenyellow">普通</span><span>大羊坊路</span><span>非法车辆</span><span>13:10:33</span></a> </li>
+							  <li><a ><span style="color: greenyellow">普通</span><span>京原路</span><span>拥堵</span><span>14:03:02</span></a> </li>
+							   <li><a ><span style="color: orange">重要</span><span>小红门路</span><span>追尾</span><span>14:10:12</span></a> </li>
+							  <li><a><span style="color:  orange">重要</span><span>永定门东街</span><span>逆行</span><span>14:22:32</span></a> </li> 
+							  <li><a ><span style="color:  orange">重要</span><span>高碑店路</span><span>违停</span><span>14:50:34</span></a> </li>
+							   <li><a><span style="color: red">严重</span><span>玉渊潭南路</span><span>消防车经过</span><span>15:00:42</span></a> </li>
+							   <li><a ><span style="color: red">严重</span><span>圆明园西路</span><span>救护车经过</span><span>15:20:56</span></a> </li>
+							   <li><a ><span style="color: red">严重</span><span>阜石路辅路</span><span>碰撞</span><span>16:22:50</span></a> </li>
+							   <li><a ><span style="color: red">严重</span><span>香山路</span><span>警车经过</span><span>16:34:26</span></a> </li>
+							   <li><a><span style="color: red">严重</span><span>黑龙潭路</span><span>救护车经过</span><span>16:50:16</span></a> </li>
+							   <li><a><span style="color: red">严重</span><span>香山南路</span><span>翻车</span><span>16:55:56</span></a> </li>
+							   <li><a ><span style="color: red">严重</span><span>中东路</span><span>闯红灯</span><span>17:02:36</span></a> </li>
+							</ul>
+					    </div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="rgt2">
+		<div class="rgt2_top1 " style="height: 110%;">
+				<div class="big_title" style="font-size: 20px;float:right;">
+					<span style="text-shadow: .3rem 0 0.3rem #00d8ff;">交通态势</span>
+				</div>
+				<div class="rgt2_top1_1 kuang" style="display: flex;flex-direction: column;">
+					<div class="rgt2_top1_box1 " style="padding-top: 7px;height: 25%;"">
+						<div class="l1_bot1_title" style="height: 30px;">
+							<span style="font-size: 15px; padding-left: 2%;">交通流量</span>
+							<img src="img/ksh33.png" />
+						</div>
+						<div class="l1_bot1_chart_box " style="padding-bottom: 0px;">
+							<div class="l1_bot1_chart " id="main1" style="height: 105%;">
+							</div>
+						</div>
+						<div class="l1_bot1_chart_box " style=" height: 0px;width: 0; padding-bottom: 0px;">
+							<div class="" style="height: 0px;width: 0;" id="char2"></div>
+						</div> 
+					</div>
+					<div class="rgt2_top1_box2 "style="height: 20%;">
+						<div class="l1_bot1_title">
+							<span style="font-size: 15px; padding-left: 2%;">平均车速</span>
+							<img src="img/ksh33.png" />
+						</div>
+						<div class="rgt2_chart_box1 " style="height: 100%;">
+							<div class="l1_bot1_chart" id="main2">
+							</div>
+						</div>
+					</div>
+					<div class="rgt2_top1_box2 "style="padding-top: 35px;height: 25%;">
+						<div class="l1_bot1_title">
+							<span style="font-size: 15px; padding-left: 2%;">违法原因</span>
+							<img src="img/ksh33.png" />
+						</div>
+						<div class="rgt2_chart_box1 " style="height: 100%;">
+							<div class="mr1_r1_chart" id="main3">
+							</div>
+						</div>
+					</div>
+					<!-- rgt2_top1_box2 -->
+					<div class=" "style="height: 20%;padding-top:16px">
+						<div class="l1_bot1_title" >
+							<span style="font-size: 15px; padding-left: 2%;">设备分析</span>
+							<img src="img/ksh33.png" />
+						</div>
+						<div class="" style="height: 90%;width: 100%;">
+							<div id="puleftboxtbott1" class="" style="height: 120%;width: 100%;"></div>
+							<!-- <div id="chart_300" class="" style="width:100%;height:150px"></div> -->
+						</div>
+							
+						</div>
+					</div>
+					
+					
+				</div>
+				
+				
+				
+			</div> 
+			
+			
+			<div class="rgt2_bot1" style="height: 200px;">
+				<div class="big_title" style="font-size: 20px;float:right;">
+					<span style="text-shadow: .3rem 0 0.3rem #00d8ff;">警情分析</span>
+				</div>
+				<div class="rgt2_bot1_1 kuang">
+					<div class="rgt2_bot1_box1 ">
+						<div class="l1_bot1_title">
+							<span style="font-size: 15px; padding-left: 2%">违法检测统计</span>
+							<img src="img/ksh33.png" />
+						</div>
+						<div class="rgt2_chart2_box1 ">
+							 <div class="datashow-chart" id="chart-nowcar"></div> 
+						</div>
+					</div>
+					<div class="rgt2_bot1_box2 ">
+						<div class="l1_bot1_title">
+							<span style="font-size: 15px; padding-left: 2%">非法车辆统计</span>
+							<img src="img/ksh33.png" />
+						</div>
+						<div class="rgt2_chart2_box2 ">
+							<div style="height: 200px; float: left; width: 40%; padding: 0 5px;">
+								<div class="tit02 text-b">数据统计</div>
+									<div class="huati">
+										<ul>
+										<li>报废车辆  <span class="text-s">↑21</span></li>
+										<li>套牌车辆   <span class="text-s">↑67</span></li>
+										<li>漏检车辆   <span class="text-d">↓16</span></li>
+										</ul>
+									</div>
+								</div>
+								<div class="tagcloud " style="width: 60%;height: 100%;">
+									<a class="b01 co01" href="#">漏检</a>
+									<a class="b02 co02" href="#">套牌</a>
+									<a class="b03 co05" href="#">报废</a>
+									<a class="b04 co02" href="#">大数据</a>
+									<a class="b03 co05" href="#">大数据</a> 
+								</div>
+							</div> 
+							<script type="text/javascript">
+							    /*3D标签云*/
+							    tagcloud({
+							        selector: ".tagcloud",  //元素选择器
+							        fontsize: 6,       //基本字体大小, 单位px
+							        radius: 33,         //滚动半径, 单位px 页面宽度和高度的五分之一
+							        mspeed: "slow",   //滚动最大速度, 取值: slow, normal(默认), fast
+							        ispeed: "slow",   //滚动初速度, 取值: slow, normal(默认), fast
+							        direction: 0,     //初始滚动方向, 取值角度(顺时针360): 0对应top, 90对应left, 135对应right-bottom(默认)...
+							        keep: false          //鼠标移出组件后是否继续随鼠标滚动, 取值: false, true(默认) 对应 减速至初速度滚动, 随鼠标滚动
+							    });
+							</script>
+						</div>
+ 					<div class="rgt2_bot1_box3 ">
+						<div class="l1_bot1_title">
+							<span style="font-size: 15px; padding-left: 2%">警报处理统计</span>
+							<img src="img/ksh33.png" />
+						</div>
+						<div class="rgt2_chart2_box3 ">
+							<div class="data_con" id="container4"></div>
+						</div>
+					</div> 
+				</div>
+			</div>-->
+		</div>
+		
+
+		
+
+		
+		
+		<script>
+			var myChartthree = echarts.init(document.getElementById("container4"));
+			var app = {};
+			// Generate data
+			var category = [];
+			var dottedBase = +new Date();
+			dottedBase-=3600 * 24 * 1000*20;
+			var lineData = [200,400,500,600,800,300,200,550,499,300,300,400,500,600,800,300,200,550,499,300];
+			var barData = [300,400,500,600,800,300,200,550,499,300,300,400,500,600,800,300,200,550,499,300];
+
+			for (var i = 0; i < 20; i++) 
+			{
+				var date = new Date(dottedBase += 3600 * 24 * 1000);
+				category.push([
+					date.getFullYear(),
+					date.getMonth() + 1,
+					date.getDate()
+				].join('-'));
+				// var b = vm.msgCnt[i].msg;
+				// var d = vm.msgCnt[i].alm;
+				// barData.push(b)
+				// lineData.push(d + b);
+			};
+			// var category = ["1","2","3","4"];
+			// var barData = [];
+			// var lineData = [];
+
+			// option
+			var option22 = {
+				tooltip: {
+					trigger: 'axis',
+					axisPointer: {
+						type: 'shadow'
+					}
+				},
+				grid:{
+					top:'20%',//距上边距
+		
+					left:'15%',//距离左边距
+		
+					 right:'15%',//距离右边距
+		
+					 bottom:'20%',//距离下边距
+				
+				},
+				legend: {
+					data: ['已处理', '未处理'],
+					textStyle: {
+						color: '#ccc'
+					}
+				},
+				xAxis: {
+					data: category,
+					axisLine: {
+						lineStyle: {
+							color: '#ccc'
+						}
+					}
+				},
+				yAxis: {
+					splitLine: {show: false},
+					axisLine: {
+						lineStyle: {
+							color: '#ccc'
+						}
+					}
+				},
+				series: [{
+					name: '总数',
+					type: 'line',
+					smooth: true,
+					showAllSymbol: true,
+					symbol: 'emptyCircle',
+					symbolSize: 5,
+					data: lineData
+				}, {
+					name: '未处理',
+					type: 'bar',
+					barWidth: 5,
+					itemStyle: {
+						normal: {
+							barBorderRadius: 5,
+							color: new echarts.graphic.LinearGradient(
+								0, 0, 0, 1,
+								[
+									{offset: 0, color: '#14c8d4'},
+									{offset: 1, color: '#43eec6'}
+								]
+							)
+						}
+					},
+					data: barData
+				}, {
+					name: '已处理',
+					type: 'bar',
+					barGap: '-100%',
+					barWidth: 10,
+					itemStyle: {
+						normal: {
+							color: new echarts.graphic.LinearGradient(
+								0, 0, 0, 1,
+								[
+									{offset: 0, color: 'rgba(20,200,212,0.5)'},
+									{offset: 0.2, color: 'rgba(20,200,212,0.2)'},
+									{offset: 1, color: 'rgba(20,200,212,0)'}
+								]
+							)
+						}
+					},
+					z: -12,
+					data: lineData
+				}, {
+					name: '',
+					type: 'pictorialBar',
+					symbol: 'rect',
+					itemStyle: {
+						normal: {
+							color: '#0f375f'
+						}
+					},
+					symbolRepeat: true,
+					symbolSize: [12, 4],
+					symbolMargin: 1,
+					z: -10,
+					data: lineData
+				}]
+			};
+			myChartthree.setOption(option22, true);
+
+		</script>
+		
+		<script>
+			$('document').ready(function () {
+				//设置渠道状态
+				qdzt();
+			})
+			
+			//设置渠道状态
+			function qdzt(){
+				//breathe-zc 绿灯；breathe-yc 红灯
+				$("#dx").removeClass("breathe-yc");
+				$("#dx").addClass("breathe-zc");
+
+				$("#cz").removeClass("breathe-zc");
+				$("#cz").addClass("breathe-yc");
+
+				$("#dmt").removeClass("breathe-yc");
+				$("#dmt").addClass("breathe-zc");
+			}
+		</script>
+		<script src="js/chart-nowcar.js"></script>
+		<script>
+		    $(function(){
+		        $('#div01').liMarquee({
+		            direction: 'down',
+		            scrollamount: 30
+		        });
+		    });
+		</script>
+		<script>
+			//交通流量
+			var myChart1 = echarts.init(document.getElementById('main1'));
+			myChart1.setOption(option1);
+			//交通工具流量
+			var myChart2 = echarts.init(document.getElementById('main2'));
+			myChart2.setOption(option2);
+			var myChart3 = echarts.init(document.getElementById('main3'));
+			myChart3.setOption(option3);
+			var myChart31 = echarts.init(document.getElementById('main31'));
+			myChart31.setOption(option31);
+		</script>
+		
+		<script>
+			// 基于准备好的dom，初始化echarts实例
+			var myChartyibiaopan = echarts.init(document.getElementById('chart_555'));
+			var option55 = {
+			    tooltip : {
+			        formatter: "{a} <br/>{b} : {c}"
+			    },
+			    // toolbox: {
+			    //     show : true,
+			    //     feature : {
+			    //         mark : {show: true},
+			    //         restore : {show: true},
+			    //         saveAsImage : {show: true}
+			    //     }
+			    // },
+			    series : [
+			        {
+			            name:'指标',
+			            type:'gauge',                
+			            min:0,
+			            max:1000,            
+			            splitNumber: 10,       // 分割段数，默认为5
+			            radius: '68%',
+			            center: ["50%", "50%"], // 仪表位置
+			            axisLine: {            // 坐标轴线
+			                lineStyle: {       // 属性lineStyle控制线条样式
+			                    color: [[0.2, '#228b22'],[0.8, '#48b'],[1, '#ff4500']], 
+			                    width: 2, //仪表盘外围圆宽度
+			                    shadowColor : '#fff', //默认透明
+			                    shadowBlur: 10
+			                }
+			            },
+			            axisTick: {            // 坐标轴小标记
+			                splitNumber: 5,   // 每份split细分多少段
+			                length :6,        // 属性length控制线长
+			                lineStyle: {       // 属性lineStyle控制线条样式
+			                    color: 'auto'
+			                }
+			            },
+			            axisLabel: {
+			                show:false
+			            },
+			            splitLine: {           // 分隔线
+			                show: true,        // 默认显示，属性show控制显示与否
+			                length :2,         // 属性length控制线长
+			                lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+			                    width:2,
+			                    color: '#fff',
+			                    shadowColor : '#fff', //默认透明
+			                    shadowBlur: 10
+			                }
+			            },
+			            pointer : {
+			                width : 2
+			            },
+			            title : {
+			                show : true,
+			                offsetCenter: [0, '100%'],       // x, y，单位px
+			                textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+			                    // fontWeight: 'bolder',
+			                    fontSize: 20,
+			                    color: '#fff',
+			                }
+			            },
+			            detail : {
+			                formatter:'{value}',
+			                offsetCenter: [0, '30%'],       // x, y，单位px
+			                textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+			                    fontWeight: 'bolder',
+			                    fontSize: 19,
+			                    color: '#fff'
+			                }
+			            },
+			            data:[{value: 80, name: '车速'}]
+			        }
+			    ]
+			};
+			
+			// 为echarts对象加载数据 
+			myChartyibiaopan.setOption(option55);
+			
+			// setInterval(function (){
+			//     option.series[0].data[0].value = (Math.random()*20).toFixed(2) - 0;
+			//     myChart.setOption(option,true);
+			// },2000);
+			data= [600,580,620,670,550,560,600,670,700,750,610,670,723,590,780,770,790,820,870,890,920,990];
+			index=0;
+			    setInterval(function(){//将自己的值赋予 option.series[ 0 ].data[ 0 ].value
+			        // option.series[0].data[0].value = data[index++%data.length];
+					option55.series[0].data[0].value=80;
+			        myChartyibiaopan.setOption(option55, true);
+			    }, 2000);
+		</script>
+		
+		<!-- <div id="particles-js"></div> -->
+	</body>
+	
+<!-- 	<script src="js/particles.min.js"></script> -->
+<!-- 	<script src="js/app.js"></script> -->
+</html>
+
+<script>
+Date.prototype.format = function (fmt) {
+	var o = {
+		"y+": this.getFullYear, //年
+		"M+": this.getMonth() + 1, //月份
+		"d+": this.getDate(), //日
+		"h+": this.getHours(), //小时
+		"m+": this.getMinutes(), //分
+		"s+": this.getSeconds() //秒
+	};
+	if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+	for (var k in o)
+		if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+	return fmt;
+}
+setInterval("document.getElementById('dateTime').innerHTML = (new Date()).format('hh:mm:ss<br>yyyy-MM-dd');", 1000);
+</script>
+
+<script type="text/javascript">
+                    var myChart = echarts.init(document.getElementById('puleftboxtbott1'));
+                    var data = [
+                        [[28604,77,17099,'Australia',1990],[31163,77.4,2440,'Canada',1990],[1516,68,1605773,'China',1990],[13670,74.7,10082,'Cuba',1990],[28599,75,49805,'Finland',1990],[29476,77.1,569499,'France',1990],[31476,75.4,789237,'Germany',1990],[28666,78.1,254830,'Iceland',1990],[1777,57.7,870776,'India',1990],[29550,79.1,129285,'Japan',1990],[2076,67.9,201954,'North Korea',1990],[12087,72,42954,'South Korea',1990],[24021,75.4,33934,'New Zealand',1990],[43296,76.8,4240375,'Norway',1990],[10088,70.8,381958,'Poland',1990],[19349,69.6,1475652,'Russia',1990],[10670,67.3,53905,'Turkey',1990],[26424,75.7,57117,'United Kingdom',1990],[37062,75.4,252810,'United States',1990]],
+                        [[44056,81.8,23973,'Australia',2015],[43294,81.7,35927,'Canada',2015],[13334,76.9,1376043,'China',2015],[21291,78.5,11562,'Cuba',2015],[38923,80.8,55057,'Finland',2015],[37599,81.9,64345,'France',2015],[44053,81.1,80545,'Germany',2015],[42182,82.8,329425,'Iceland',2015],[5903,66.8,1311027,'India',2015],[36162,83.5,126571,'Japan',2015],[1390,71.4,251317,'North Korea',2015],[34644,80.7,503439,'South Korea',2015],[34186,80.6,4528526,'New Zealand',2015],[64304,81.6,5210967,'Norway',2015],[24787,77.3,386194,'Poland',2015],[23038,73.13,143918,'Russia',2015],[19360,76.5,78630,'Turkey',2015],[38225,81.4,64715810,'United Kingdom',2015],[53354,79.1,321771,'United States',2015]]
+                    ];
+
+                    option = {
+                        // backgroundColor: 'rgba(1,202,217,.2)',
+                        grid: {
+								left:30,
+								right:20,
+								top:40,
+								bottom:20
+            										},
+                        title: {
+                          top: 5,
+                          left:2,
+                            textStyle:{
+                              fontSize:12,
+                              color:'#ffffff'
+														  },
+                            text: '环比类型：日环比'
+                        },
+                        legend: {
+                            right: 5,
+                            top: 5,
+                            textStyle:{
+                              fontSize:12,
+                              color:'#ffffff'
+                            },
+                            data: ['昨天', '今天']
+                        },
+                        xAxis: {
+                          axisLine:{
+                            lineStyle:{
+                              color:'rgba(255,255,255,.2)'
+                            }
+                          },
+                          splitLine:{
+                            lineStyle:{
+                              color:'rgba(255,255,255,.1)'
+                            }
+                          },
+                          axisLabel:{
+                              color:"rgba(255,255,255,.7)"
+                          }
+                        },
+                        yAxis: {
+                          axisLine:{
+                            lineStyle:{
+                              color:'rgba(255,255,255,.2)'
+                            }
+                          },
+                          splitLine:{
+                            lineStyle:{
+                              color:'rgba(255,255,255,.1)'
+                            }
+                          },
+                          axisLabel:{
+                              color:"rgba(255,255,255,.7)"
+                          },
+
+                            scale: true
+                        },
+                        series: [{
+                            name: '昨天',
+                            data: data[0],
+                            type: 'scatter',
+							symbolSize:10,
+                            // symbolSize: function (data) {
+                            //     return Math.sqrt(data[2]) / 5e2;
+                            // },
+                            label: {
+                                emphasis: {
+                                    show: true,
+                                    formatter: function (param) {
+                                        return param.data[3];
+                                    },
+                                    position: 'top'
+                                }
+                            },
+                            itemStyle: {
+                                normal: {
+                                    shadowBlur: 10,
+                                    shadowColor: 'rgba(120, 36, 50, 0.5)',
+                                    shadowOffsetY: 5,
+                                    color: new echarts.graphic.RadialGradient(0.4, 0.3, 1, [{
+                                        offset: 0,
+                                        color: 'rgb(251, 118, 123)'
+                                    }, {
+                                        offset: 1,
+                                        color: 'rgb(204, 46, 72)'
+                                    }])
+                                }
+                            }
+                        }, {
+                            name: '今天',
+                            data: data[1],
+                            type: 'scatter',
+							symbolSize:10,
+                            // symbolSize: function (data) {
+                            //     return Math.sqrt(data[2]) / 5e2;
+                            // },
+                            label: {
+                                emphasis: {
+                                    show: true,
+                                    formatter: function (param) {
+                                        return param.data[3];
+                                    },
+                                    position: 'top'
+                                }
+                            },
+                            itemStyle: {
+                                normal: {
+                                    shadowBlur: 10,
+                                    shadowColor: 'rgba(25, 100, 150, 0.5)',
+                                    shadowOffsetY: 5,
+                                    color: new echarts.graphic.RadialGradient(0.4, 0.3, 1, [{
+                                        offset: 0,
+                                        color: 'rgb(129, 227, 238)'
+                                    }, {
+                                        offset: 1,
+                                        color: 'rgb(25, 183, 207)'
+                                    }])
+                                }
+                            }
+                        }]
+                    };
+                    myChart.setOption(option);
+                </script>
+<script>
+// 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('chart_300'));
+        myChart.clear();
+        //5.	压力容器总数据量的检验结论统计
+        // var data = [  
+        //     {name: '在线', value: 5031},
+        //     {name: '离线', value: 20530},
+        //     {name: '故障', value: 21337},
+        //     {name: '维修中', value: 654},
+        // ];
+		var data = [
+		    {name: '在线', value: 300},
+		    {name: '离线', value: 300},
+		    {name: '故障', value: 300},
+		    {name: '维修中', value: 300},
+		];
+        var xData_106_ = [],
+            yData_106_ = [];
+        var min = 0;
+        data.map(function(a, b) {
+            xData_106_.push(a.name);
+            if (a.value === 0) {
+                yData_106_.push(a.value + min);
+            } else {
+                yData_106_.push(a.value);
+            }
+        });
+        option106 = {
+            // backgroundColor:"#111c4e",
+            color: ['#3398DB'],
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'line',
+                    lineStyle: {
+                        opacity: 0
+                    }
+                },
+                formatter: function(prams) {
+                    if (prams[0].data === min) {
+                        return "：0%"
+                    } else {
+                        // return "合格率：" + prams[0].data + "%"
+                        // return prams[0].name+"<br>数量：" + prams[0].data
+                        var sum = 0;
+                        for(var x=0;x<data.length;x++){
+                            sum = sum + data[x].value
+                        }
+                        // console.log(sum)
+                        return prams[0].name+"<br>数量：" + prams[0].data+ '<br>' + '占比：' + (prams[0].data / sum * 100).toFixed(2) + '%,总数:'+sum;
+                    }
+                }
+            },
+            legend: {
+                data: ['直接访问', '背景'],
+                show: false
+            },
+            grid: {
+                left: 0,
+                right: 20,
+                bottom: 2,
+                top: 9,
+                // height: '100%',
+                containLabel: true,
+                z: 22
+            },
+            xAxis: [{
+                type: 'category',
+                gridIndex: 0,
+                data: xData_106_,
+                axisTick: {
+                    alignWithLabel: true
+                },
+                axisLine: {
+                    lineStyle: {
+                        color: '#0c3b71'
+                    }
+                },
+                axisLabel: {
+                    show: true,
+                    // color: 'rgb(170,170,170)',
+                    // fontSize:16,
+                    textStyle: {
+                        color: '#fff',
+                        fontSize: '8'
+                    },
+					interval:0,
+                    rotate:0,
+                }
+            }],
+            yAxis: [{
+                type: 'value',
+                gridIndex: 0,
+                splitLine: {
+                    show: false
+                },
+                axisTick: {
+                    show: false
+                },
+                min: min,
+                max: 1200,
+                axisLine: {
+                    lineStyle: {
+                        color: '#0c3b71'
+                    }
+                },
+                axisLabel: {
+                    // color: 'rgb(170,170,170)',
+                    formatter: '{value} ',
+                    textStyle: {
+                        color: '#fff',
+                        fontSize: '12'
+                    },
+                }
+            },
+                {
+                    type: 'value',
+                    gridIndex: 0,
+                    min: min,
+                    max: 1200,
+                    splitNumber: 8,
+                    splitLine: {
+                        show: false
+                    },
+                    axisLine: {
+                        show: false
+                    },
+                    axisTick: {
+                        show: false
+                    },
+                    axisLabel: {
+                        show: false
+                    },
+                    splitArea: {
+                        show: true,
+                        areaStyle: {
+                            color: ['rgba(250,250,250,0.0)', 'rgba(250,250,250,0.05)']
+                        }
+                    }
+                }
+            ],
+            series: [{
+                name: ' ',
+                type: 'bar',
+                barWidth: '30%',
+                xAxisIndex: 0,
+                yAxisIndex: 0,
+                label: {
+                    normal: {
+                        show: true,
+                        "position": "top",
+                        "textStyle": {
+                            "color": "#fff"
+                        },
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        barBorderRadius: 30,
+                        color: new echarts.graphic.LinearGradient(
+                            0, 0, 0, 1, [{
+                                offset: 0,
+                                color: '#00feff'
+                            },
+                                {
+                                    offset: 0.5,
+                                    color: '#027eff'
+                                },
+                                {
+                                    offset: 1,
+                                    color: '#0286ff'
+                                }
+                            ]
+                        )
+                    }
+                },
+                data: yData_106_,
+                zlevel: 11
+
+            },
+                {
+                    name: '背景',
+                    type: 'bar',
+                    barWidth: '50%',
+                    xAxisIndex: 0,
+                    yAxisIndex: 1,
+                    barGap: '-135%',
+                    data: [1200, 1200, 1200, 1200],
+                    itemStyle: {
+                        normal: {
+                            color: 'rgba(255,255,255,0.1)'
+                        }
+                    },
+                    zlevel: 9
+                },
+
+            ]
+        };
+
+
+        myChart.setOption(option106);
+</script>

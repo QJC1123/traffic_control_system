@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+		<title>首页</title>
+		
+
+		<script src="js/v3.2.8/vue.global.prod.js" type="text/javascript" charset="utf-8"></script>
+<!-- 		<script src="js/jquery-1.7.2.min.js"></script>
+		<script src="js/highcharts.js"></script>
+		<script src="js/chart-nowcar.js"></script> -->
+		
+		<!--设置是否为缩放模式 -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- 新 Bootstrap 核心 CSS 文件 --> 
+		<link rel="stylesheet" type="text/css" href="https://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.css">
+		<!-- jQuery文件。务必在bootstrap.min.js 之前引入 --> 
+		<script src="js/jquery.min.js"></script>
+		<!-- 最新的 Bootstrap 核心 JavaScript 文件 --> 
+		<script src="js/bootstrap.min.js"></script>
+		<!--echarts JS-->
+		<script src="js/echarts.min.js"></script>
+		<!-- 轮播swiper文件 -->
+		<link rel="stylesheet" type="text/css" href="css/swiper.min.css">
+		<script src="js/swiper.min.js"></script>
+		<!--界面样式-->
+		<link rel="stylesheet" type="text/css" href="css/visual.css">
+		<script src="js/visual.js"></script>
+		<!-- 地图文件 -->
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=5ieMMexWmzB9jivTq6oCRX9j&callback"></script>
+		<script src="js/map.js"></script>
+		<script src="js/ybiao1.js"></script>
+		<!-- 轮播 -->
+		<link href="js/scroll/css/liMarquee.css" rel="stylesheet" type="text/css">
+		<script type="text/javascript" src="js/scroll/js/jquery.liMarquee.js"></script>
+		
+		<link href="css/Security_operation.css" rel="stylesheet" type="text/css" />
+		<script src="js/index.js"></script>
+		
+		<script src="js/Bubble.js"></script>
+		<script src="js/highcharts.js"></script>
+
+		
+	</head>
+	
+	<style>
+
+	
+	.dialog {
+		display: none;
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		overflow: auto;
+		background-color: rgba(195, 55, 13, 0.4);
+		
+	}
+	
+	.content {
+		width: 500px;
+		height: 300px;
+		margin: 100px auto;
+		background-color: #400000;
+		border-radius: 10px;
+		box-shadow: 0 0 5px 5px darkred;
+		/* box-shadow: 0 0 5px 5px darkgray; */
+	}
+	.aclose{
+		width: 500px;
+		height: 60px;
+		text-align: center;
+	}
+	.aclose span{
+		line-height: 70px;
+		font-size: 26px;
+		font-weight: 700;
+	}
+	.contain{
+		width: 500px;
+		height: 230px;
+		font-size: 20px;
+		margin-top: 10px;
+		text-align: center;
+	}
+	
+	.close {
+		color: #000000;
+		/* float: right; */
+		/* margin-right: 15px; */
+		/* font-size: 40px; */
+		/* font-weight: bold; */
+		/* text-decoration: none; */
+	}
+	
+	</style>
+	<style type="text/css">
+	/*resize*/
+	.breathe-zct{ position:relative; width:20px; height:20px; top:2px;float:left;  border:1px solid #008000; border-radius:20px; color:#fff; font-size:10px; cursor:pointer; box-shadow:0 1px 2px rgba(0,0,0,.3); overflow:hidden; 
+			background-image: -webkit-gradient(linear, left top, left bottom, from(#00FF00), to(#00FF00));
+			background-image: -moz-linear-gradient(#00FF00,#00FF00);
+	}
+	
+	.breathe-yct{ position:relative; width:20px; height:20px; top:2px;float:left;   border:1px solid #008000; border-radius:20px; color:#fff; font-size:20px;  cursor:pointer; box-shadow:0 1px 2px rgba(0,0,0,.3); overflow:hidden; 
+			background-image: -webkit-gradient(linear, left top, left bottom, from(#FF0000), to(#FF0000));
+			background-image: -moz-linear-gradient(#FF0000,#FF0000);
+	}
+	
+	.breathe-zc{ position:relative; width:25px; height:25px; margin:10px auto; line-height:40px; border:1px solid #008000; border-radius:20px; color:#fff; font-size:20px; text-align:center; cursor:pointer; box-shadow:0 1px 2px rgba(0,0,0,.3); overflow:hidden; 
+			background-image: -webkit-gradient(linear, left top, left bottom, from(#00FF00), to(#00FF00));
+			background-image: -moz-linear-gradient(#00FF00,#00FF00);
+	    -webkit-animation-timing-function: ease-in-out;
+	    -webkit-animation-name: breathe;
+	    -webkit-animation-duration: 500ms;
+	    -webkit-animation-iteration-count: infinite;
+	    -webkit-animation-direction: alternate;
+			animation:ease-in-out breathe 500ms infinite alternate; 
+	}
+	@keyframes breathe{
+		0% { opacity: .2; box-shadow:0 1px 2px rgba(255,255,255,0.1);}
+	    100% { opacity: 1; border:1px solid rgba(59,235,235,1); box-shadow:0 1px 30px rgba(59,255,255,1);}
+	}
+	@-webkit-keyframes breathe {
+	    0% { opacity: .2; box-shadow:0 1px 2px rgba(255,255,255,0.1);}
+	    100% { opacity: 1; border:1px solid rgba(59,235,235,1); box-shadow:0 1px 30px rgba(59,255,255,1);}
+	}
+	
+	.breathe-yc{ position:relative; width:25px; height:25px; margin:10px auto; line-height:40px; border:1px solid #008000; border-radius:20px; color:#fff; font-size:20px; text-align:center; cursor:pointer; box-shadow:0 1px 2px rgba(0,0,0,.3); overflow:hidden; 
+			background-image: -webkit-gradient(linear, left top, left bottom, from(#FF0000), to(#FF0000));
+			background-image: -moz-linear-gradient(#FF0000,#FF0000);
+	    -webkit-animation-timing-function: ease-in-out;
+	    -webkit-animation-name: breathe;
+	    -webkit-animation-duration: 1000ms;
+	    -webkit-animation-iteration-count: infinite;
+	    -webkit-animation-direction: alternate;
+			animation:ease-in-out breathe 100ms infinite alternate; 
+	}
+	@keyframes breathe{
+		0% { opacity: .2; box-shadow:0 1px 2px rgba(255,255,255,0.1);}
+	    100% { opacity: 1; border:1px solid rgba(59,235,235,1); box-shadow:0 1px 30px rgba(59,255,255,1);}
+	}
+	@-webkit-keyframes breathe {
+	    0% { opacity: .2; box-shadow:0 1px 2px rgba(255,255,255,0.1);}
+	    100% { opacity: 1; border:1px solid rgba(59,235,235,1); box-shadow:0 1px 30px rgba(59,255,255,1);}
+	}
+	
+	
+	
+	</style>
+		
+	<body  ondblclick="show()">
+		<!-- <button class="btn32" style="font-size: 1px;height: 0px;width: 0px;color:black">1</button> -->
+			<div class="dialog"  style="z-index:999;" style="color:white;">
+			  <div class="content" >
+				<div class="aclose">
+					<span style="color:white;">警告</span>
+					<div class="contain" style="">
+						白马路与木燕路交叉路口监测到有特种车辆经过！<br><br>
+						请问是否处理？<br><br>
+						<a href="vemap.html" style="color:white" style="width:60px">是</a> 
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<a href="javascript:close();" style="color:white" style="width:60px">否</a>
+					</div>
+					<!-- <a class="close" href="javascript:close();">&times;</a> -->
+				</div>
+				
+				
+			  </div>
+			</div>
+			<script type="text/javascript">
+				function show(){
+					var show = $(".dialog").css("display");
+					$(".dialog").css("display",show =="none"?"block":"none");
+				}
+				function close(){
+					
+					// var show = $(".dialog").css("display");
+					// $(".dialog").css("display",show =="none"?"block":"none");
+				}
+			</script>
+		
+		
+		<div class="wpbox">
+			<!-- 顶部 -->
+			<div class="bnt">
+			  <div class="topbnt_left fl">
+			   <ul>
+				   <li class="active"><a href="home.html">数据概览</a></li>
+				  <li ><a href="Juburode.html">局部路段</a></li>
+				  <li><a href="vemap.html">应急指挥</a></li>
+			   </ul>
+			  </div>
+			  <h1 class="tith1 fl" style="text-shadow: 0 0 0.3rem #00d8ff;">智能指挥中心</h1>
+			  <div class=" fr topbnt_right  " style="display: flex;flex-direction: row;float:right; padding-left: 40px;">
+				   <div class="topbnt_left fl">
+				   <ul>
+					  <li><a href="history.html"style="padding-bottom: 20px;">历史数据</a></li>
+				   </ul>
+			  </div>
+				<div class="weather " style="width: 50%;height: 45px;float: left;padding-top: 20px;">
+					  <p id="dateTime" style="font-size: 16px;float: right;" ></p>
+				</div>
+				
+			   </div>
+			</div>
+			
+			<!-- 左栏 -->
+			<div class="left1 ">
+				<div class="left1_top1 ">
+					<div class="big_title" style="font-size: 20px;float:left;">
+						<span style="text-shadow: .3rem 0 0.3rem #00d8ff;">道路情况</span>
+					</div>
+					<div class="left1_top1_1 kuang1">
+						<div class="l1_top1 ">
+							<div class="l1_top1_1 " style="width: 100%;">
+								<div class="mr2_top1 kuang" style="height: 100%;">
+												<table class="table3" style="border:0px; width:100%; ">
+													<thead>
+														<tr style="height: 30px;">
+															<th ><h6 style="font-size:18px;color: #cdddf7;">警情信号</h6></th>
+															<th style="text-align:left;">
+																<div  class="breathe-zct"></div>
+																<h6 style="font-size: 13px;color:#cdddf7 ;padding-top: 5px;text-align:left;">&nbsp;&nbsp;正常</h6></th>
+															<th style="text-align:left">
+																<div class="breathe-yct"></div>
+																<h6 style="font-size: 13px;color:#cdddf7 ;padding-top: 5px;text-align:left;">&nbsp;&nbsp;告警</h6></th>
+															<!-- <th style="text-align:left"><div class="breathe-hct"></div>&nbsp;&nbsp;违法车辆告警</th> -->
+														</tr>
+													</thead>
+													<tbody style="border:0px;">
+								<!--<tr><td colspan="4"><p style="width:9.6rem;">暂无数据</p></td></tr>-->
+												 
+												   <tr style="border:0px;">
+													   <td style="border:0px;"><div id="dx" class="breathe-zc"></div></td>
+													   <!-- <td style="border:0px;"><div id="dx" class="breathe-zc"></div></td> -->
+													   
+													   <td style="border:0px;"><div id="cz" class="breathe-yc"></td>
+													   <td style="border:0px;"><div id="dmt" class="breathe-zc"></td>
+												   </tr>
+												   <tr style="border:0px;font-size: 15px;height: 31px;">
+													   <td style="border:0px;">普通车辆</td>
+													   <td style="border:0px;">特种车辆</td>
+													   <td style="border:0px;">非法车辆</td>
+												   </tr>
+													</tbody>
+												</table>
+											</div>
+							</div>
+
+							<div class="l1_top1_1 ">  
+								<!-- <div class="yibiaopan"> -->
+								    <!-- <div id="ychart1" style="width: 100%;height:100%;"></div> -->
+								<!-- </div> -->
+								<!-- <div id="chart_555" class="" style="width:100%;height: 100%;"></div> -->
+								
+							</div>
+						</div>
+						<div class="l1_bot1 ">
+							<div class="l1_top1_2" style="padding-right: 1.5%;padding-left: 1.5%;padding-bottom: 1%;width: 48%;">
+								<div class="l1_bot1_title">
+									<span style="font-size: 17px;">路况分析</span>
+									<img src="img/ksh33.png" />
+								</div>
+								<div class="l1_bot1_chart_box" >
+									<div id="departmentId" class="main_bottom_t_l_chart">
+									</div>
+								</div>
+							</div>
+							<div class="l1_top1_2 " style="padding-right: 2%;padding-bottom: 2%;width: 52%;">
+								<div class="l1_bot1_title">
+									<span style="font-size: 17px;">拥堵路段排行</span>
+									<img src="img/ksh33.png" />
+								</div>
+								<div class="l1_bot1_chart_box2" style="height: 83%;">
+									<table class="table1" width="100%" border="0" cellspacing="0" cellpadding="0">
+									  <tbody>
+									    <tr>
+									      <th scope="col">排名</th>
+									      <th scope="col">道路</th>
+									      <th scope="col">拥堵指数</th>
+									      <th scope="col">平均速度</th>
+										  
+									    </tr>
+											<tr>
+											   <td><span>1</span></td>
+											  <td>香山路</td>
+											  <td>11.461<br></td>
+											  <td>3.65km/h<br></td>
+											  
+											</tr>
+											<tr>
+												<td><span>2</span></td>
+											  <td>香山南路</td>
+											  <td>4.294<br></td>
+											  <td>10.73km/h<br></td>
+											  
+											</tr>
+											
+											<tr>
+												<td><span>3</span></td>
+											  <td>黑龙潭路</td>
+											  <td>4.076<br></td>
+											  <td>11.53km/h<br></td>
+											  
+											</tr>
+											<tr>
+												<td><span>4</span></td>
+											  <td>永引渠南路</td>
+											  <td>3.379<br></td>
+											  <td>11.46km/h<br></td>
+											  
+											</tr>
+											  <tr>
+												<td><span>5</span></td>
+												  <td>西三环中路辅路</td>
+												  <td>2.501<br></td>
+												  <td>15.82km/h<br></td>
+												  
+											</tr>
+									  </tbody>
+									</table>
+								</div>
+							</div>
+							
+						</div>
+					</div>
+				</div>
+				<div class="left1_bot1">
+					<div class="big_title" style="font-size: 20px;float:left;">
+						<span style="text-shadow: .3rem 0 0.3rem #00d8ff;">设备运维</span>
+					</div>
+					<div class="left1_bot1_1 kuang2" style="display: flex;flex-direction: column;">
+						<div class="l1_bot1_1 " style="height: 30%;width: 100%;display: flex;flex-direction: row;">
+							<div class="rgt2_top1_box1 " style="height: 100%;width:50%">
+								<div class="l1_bot1_title" style="height: 30px;">
+									<span style="font-size: 15px; padding-left: 2%;">监控状态</span>
+									<img src="img/ksh33.png" />
+								</div>
+								<div class="rgt2_chart_box1" style="height: 50px;">
+										<div class="" style="height: 100px;width: 100%;" id="char2"></div>
+								</div>
+							</div>
+							<div class="rgt2_top1_box1 " style="height: 100%;width:50%">
+								<div class="l1_bot1_title" style="height: 30px;">
+									<span style="font-size: 15px; padding-left: 2%;">违法抓拍</span>
+									<img src="img/ksh33.png" />
+								</div>
+								<div class="rgt2_chart2_box1 " style="height: calc(100%-30px);">
+									<div class="datashow-chart " id="chart-nowcar"></div>
+								</div>
+							</div>
+							
+						</div>
+						<div class="l1_bot1_1 " style="height: 70%;width: 100%;display: flex;flex-direction: column;">
+							<div  class="rgt2_top1_box2  "style="padding-top: 10px;height: 100%;width:100%">
+								<div class="l1_bot1_title">
+									<span style="font-size: 15px; padding-left: 2%;">监控分布</span>
+									<img src="img/line1.png" style="width: 20%;"/><img src="img/line2.png" style="width: 97%;padding-left: 17%;"/>
+								</div>
+								<div class="rgt2_chart_box1 " style="height: 150px;">
+									<div class="allnav" id="echart2"style="width: 100%;padding-left: 2px;padding-right: 2px;"></div>
+									<!-- <div class="kuang" style="height: 150px;width: 100%;" id="echar2"></div> -->
+								</div>
+							</div>
+							<!-- <div  class="rgt2_top1_box2  "style="padding-top: 10px;height: 60%;" >
+								<div class="l1_bot1_title">
+									<span style="font-size: 15px; padding-left: 2%;">设备种类</span>
+									<img src="img/ksh33.png" />
+								</div>
+								<div class="rgt2_chart_box1 " style="height: 150px;">
+									<div class="allnav" id="echart2"style="width: 100%;padding-left: 2px;padding-right: 2px;display: flex;flex-direction:column;height: 100%;">
+										<ul class="boxLis" style="height:10%; display: flex;flex-direction: row;width: 100%;float:left">
+										    <li class=" active" style="width: 120px;">无人机</li>
+										    <li class=""  style="width: 120px;">摄像头</li>
+										    <li class=""  style="width: 120px;">检测仪</li>
+										</ul>
+										<div class="content1 " style="height: 90%;">
+											<div class="equipment_pic">
+												<img class="first" src="img/uva.png" alt="">
+												<img class="third" src="img/camera.png" alt="">
+												<img class="fourth" src="img/detector.png" alt="">
+											</div>
+										</div>
+									</div>
+									
+								</div>
+								
+							</div> -->
+							
+							
+						</div>
+					</div>
+					
+				</div>
+			</div>
+				
+				
+
+			
+			<div class="mr1">
+				<div class="mr1_up">
+					<div class="mr1_top1">
+						<div class="big_title" style="font-size: 20px;text-align: center;">
+							<span style="text-shadow: .3rem 0 0.3rem #00d8ff;">&nbsp;</span>
+						</div>
+						<div class="mr1_top1_1 kuang1">
+							<div class="map1">
+								<div id="map_div"></div>
+							</div>
+						</div>
+						
+					</div>
+					<div class="mr1_top2">
+						<div class="big_title" style="font-size: 20px;float:right;">
+							<span style="text-shadow: .3rem 0 0.3rem #00d8ff;">车辆管理</span>
+						</div>
+						<div class="mr1_top2_1 kuang1">
+							<div class="mr1_left_box ">
+								<div class="mr1_l1_1">
+									<div class="ylfwbox kuang4" >
+										<p>外来车辆</p>
+										<ol><span>70</span>万辆<em></em><i class="text-d">↑4.01%</i></ol>
+										<div class="forb"></div>
+									</div>
+								</div>
+
+								<div class="mr1_l1_2" >
+									<div class="ylfwbox kuang4" >
+										<p>本地车辆</p>
+										<ol><span>50</span>万辆<em></em><i class="text-d">↑4.01%</i></ol>
+										<div class="forb"></div>
+									</div>
+								</div>
+								<div class="mr1_l1_2">
+									<div class="ylfwbox kuang4" >
+										<p>未处理警情数</p>
+										<ol><span>7</span>起<em></em><i class="text-s" style="">↓3.01%</i></ol>
+										<div class="forb"></div>
+									</div>
+								</div>
+								<div class="mr1_l1_2">
+									<div class="ylfwbox kuang4" >
+										<p>处理中警情数</p>
+										<ol><span>3</span>起<em></em><i class="text-d">↑4.01%</i></ol>
+										<div class="forb"></div>
+									</div>
+								</div>
+								<div class="mr1_l1_5">
+									<div class="ylfwbox kuang4" >
+										<p>已处理警情数</p>
+										<ol><span>20</span>起<em></em><i class="text-d">↑8.01%</i></ol>
+										<div class="forb"></div>
+									</div>
+								</div>
+							</div>
+							<div class="mr1_right_box ">
+								<div class="mr1_r1 " style="height: 50%;">
+									<div class="l1_bot1_title">
+										<span style="font-size: 17px;">车辆类型</span>
+										<img src="img/ksh33.png" />
+									</div>
+									<div class="l1_bot1_chart_box" style="height: 90%;">
+										<div class="l1_bot1_chart" id="echarts_car" style="width:100%;height: 100%;">
+										</div>
+									</div>
+								</div>
+								<div class="mr1_r1  " style="height: 50%;">
+									<div class="l1_bot1_title">
+										<span style="font-size: 17px;">非法车辆</span>
+										<img src="img/ksh33.png" />
+									</div>
+									
+									<div class="mr1_r1_chart_box " style="padding-bottom: 0px; display: flex;">
+										<div class="huati" style="width: 40%;">
+											<ul>
+												<li>报废车辆  <span class="text-s">↑21</span></li>
+												<li>套牌车辆   <span class="text-s">↑7</span></li>
+												<li>漏检车辆   <span class="text-d">↓16</span></li>
+											</ul>
+										</div>
+										
+										<div class="tagcloud " style="width: 60%;height: 100%;">
+											<a class="b01 co01" href="#">漏检</a>
+											<a class="b02 co02" href="#">套牌</a>
+											<a class="b03 co05" href="#">报废</a>
+										</div>
+<!-- 										<div class="mr1_r1_chart" id="main3">
+										</div> -->
+									</div>
+									
+									
+									
+								</div>
+							</div>
+						</div>
+						
+					</div>
+				</div>
+				<div class="mr1_bot">
+					<div class="big_title" style="font-size: 20px;float:right;">
+						<span style="text-shadow: .3rem 0 0.3rem #00d8ff;">实时警情</span>
+					</div>
+					<div class="mr1_bot_1 kuang3">
+						<div class="mr1_bot_l1 ">
+							<div class="l1_bot1_title" style="padding-left: 2%;">
+								<span style="font-size: 17px;">违法车辆信息</span>
+								<img src="img/line1.png" style="width: 20%;"/><img src="img/line2.png" style="width: 97%;padding-left: 17%;"/>
+							</div>
+	<div class="table_p">
+	<table>
+	   <thead>
+		<tr>
+	       <th>时间</th>
+	       <th>车牌号</th>
+	       <th> 车速(km/h)</th>
+		   <th>违法原因</th>
+		   <th>所处位置</th>
+	   </tr>
+	   </thead>
+	    <tbody class="message_scroll_bos">
+	    <tr><td></td><td></td><td></td></tr>
+	    <tr class="message_scrols" style="background: rgba(255,255,255,0.08);"><td>12:00</td><td>京A060ZY</td><td>84.2</td><td>闯红灯</td><td>腾飞路与云溪路交叉路口</td></tr>
+	    <tr class="message_scrols"><td>11:29</td><td>京A040AQ</td><td>84.2</td><td>超速</td><td>东贤北路与常安中路交叉路口</td></tr>
+	    <tr class="message_scrols" style="background: rgba(255,255,255,0.08);"><td>10:30</td><td>京B0509Z</td><td>92.1</td><td>逆行</td><td>锡钢中路与金城路交叉路口</td></tr>
+	    <tr class="message_scrols"><td>9:44</td><td>京G040AG</td><td>82.2</td><td>超速</td><td>景贤路与运河西路交叉路口</td></tr>
+		<tr class="message_scrols" style="background: rgba(255,255,255,0.08);"><td>9:40</td><td>京G053AG</td><td>120.3</td><td>闯红灯</td><td>人民中路与虹桥北路交叉路口</td></tr>
+		<tr class="message_scrols"><td>8:34</td><td>京A039AG</td><td>110.3</td><td>超速</td><td>锡钢中路与金城路交叉路口</td></tr>
+	    </tbody>
+	</table>
+	</div>
+
+	<script>
+		 function TimeControls(){
+			$(".message_scroll_bos").animate({marginTop:96},800,
+					function(){
+						$(".message_scroll_bo:s").css({marginTop:0});    //把顶部的边界清零
+						$(".message_scroll_bos .message_scrols:first").before($(".message_scroll_bos .message_scrols:last"));    //在第一个新闻后面插入最后一个新闻
+	
+					});
+		}
+		var Ts=setInterval(TimeControls,1300);    //开始定时
+		$(".message_scroll_bos").mouseenter(function(){
+			clearInterval(Ts);    //停止定时
+		})
+		.mouseleave(function(){
+			Ts=setInterval(TimeControls,1500);    //再次定时
+		})
+	</script>		
+							
+						</div>
+						<div class="mr1_bot_r1 ">
+							<div class="l1_bot1_title">
+								<span style="font-size: 17px;padding-left: 2%;" >特种车辆</span>
+								<img src="img/ksh33.png" />
+							</div>
+							<div class="right1_box_bott cage_cl">
+								<div class="right1_box_bott01"style="padding: 1%; overflow: hidden">
+									<div class="message_scroll_box">
+										<div class="message_scroll">
+											<div class="scroll_top">
+												<span class="scroll_title">特种车辆出现</span>
+												<span class="scroll_level scroll_level01">救护车</span>
+												<a class="localsize"></a>
+												<span class="scroll_timer">22-2-21/9:52</span>
+											</div>
+											<div class="msg_cage" >
+												<a class="localsize_title" style="color: #01D1F2;">车牌号:京A131AQ</a>
+											</div>
+											<div class="msg_cage">
+												<a class="localsize_msg" style="color: #01D1F2;">位置:腾飞路与云溪路交叉路口</a>
+											</div>
+										</div>
+									</div> 
+										<div class="message_scroll">
+											<div class="scroll_top">
+												<span class="scroll_title">特种车辆出现</span>
+												<span class="scroll_level scroll_level02">消防车</span>
+												<a class="localsize"></a>
+												<span class="scroll_timer">22-2-21/9:52</span>
+											</div>
+											<div class="msg_cage">
+												<a class="localsize_title" style="color: #01D1F2;">车牌号:京A140AQ</a>
+											</div>
+											<div class="msg_cage">
+												<a class="localsize_msg" style="color: #01D1F2;">位置:人民中路与虹桥北路交叉路口</a>
+											</div>
+										</div>
+										<div class="message_scroll">
+											<div class="scroll_top">
+												<span class="scroll_title">特种车辆出现</span>
+												<span class="scroll_level scroll_level03">警车</span>
+												<a class="localsize"></a>
+												<span class="scroll_timer">22-2-21/9:52</span>
+											</div>
+											<div class="msg_cage">
+												<a class="localsize_title" style="color: #01D1F2;">车牌号:京A073AQ</a>
+											</div>
+											<div class="msg_cage">
+												<a class="localsize_msg" style="color: #01D1F2;">位置:东贤北路与常安中路交叉路口</a>
+											</div>
+										</div>
+										<div class="message_scroll">
+											<div class="scroll_top">
+												<span class="scroll_title">特种车辆出现</span>
+												<span class="scroll_level scroll_level02">消防车</span>
+												<a class="localsize"></a>
+												<span class="scroll_timer">22-2-21/9:52</span>
+											</div>
+											<div class="msg_cage">
+												<a class="localsize_title" style="color: #01D1F2;">车牌号:京B382AQ</a>
+											</div>
+											<div class="msg_cage">
+												<a class="localsize_msg" style="color: #01D1F2;">位置:锡钢中路与金城路交叉路口</a>
+											</div>
+										</div>
+										<div class="message_scroll">
+											<div class="scroll_top">
+												<span class="scroll_title">特种车辆出现</span>
+												<span class="scroll_level scroll_level02">消防车</span>
+												<a class="localsize"></a>
+												<span class="scroll_timer">22-2-21/9:52</span>
+											</div>
+											<div class="msg_cage">
+												<a class="localsize_title" style="color: #01D1F2;">车牌号:京c382AQ</a>
+											</div>
+											<div class="msg_cage">
+												<a class="localsize_msg" style="color: #01D1F2;">位置:景贤路与运河西路交叉路口</a>
+											</div>
+										</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+			
+				
+					</div>	
+			</div>
+			
+			
+			
+			
+			</div>
+			
+			
+			
+
+			
+			
+			<script type="text/javascript">
+				$(function(){
+					var a=$('.visualSssf_left a')
+					for(var i=0;i<a.length;i++){
+						a[i].index=i;
+						a[i].onclick=function(){
+							for(var i=0;i<a.length;i++){
+								a[i].className=''
+								}
+							this.className='active'
+						}
+					}
+			
+					var sfzcllH=$('.sfzcll_box').height()
+					var sfzcllHtwo=sfzcllH-2
+					$('.sfzcll_box').css('line-height',sfzcllH+'px')
+					$('.sfzcll_smallBk>div').css('line-height',sfzcllHtwo+'px')
+			
+					//删除加载动画
+					$('#load').fadeOut(1000)
+					setTimeout(function(){    
+						$('#load').remove()
+					}
+					,1100);
+				})
+				
+				
+			//本月发生事件
+			var myChart3 = echarts.init(document.getElementById('main3'));
+			myChart3.setOption(option3);
+			
+			var myChart31 = echarts.init(document.getElementById('main31'));
+			myChart31.setOption(option31);
+			
+			var mySwiper1 = new Swiper('.visual_swiper1', {
+				autoplay: true,//可选选项，自动滑动
+				speed:800,//可选选项，滑动速度
+				autoplay: {
+				    delay: 5000,//1秒切换一次
+				  },
+			})
+			//收费站收费排行
+			var myChart4 = echarts.init(document.getElementById('main4'));
+			myChart4.setOption(option4);
+			var myChart41 = echarts.init(document.getElementById('main41'));
+			myChart41.setOption(option41);
+			var mySwiper2 = new Swiper('.visual_swiper2', {
+				autoplay: true,//可选选项，自动滑动
+				direction : 'vertical',//可选选项，滑动方向
+				speed:2000,//可选选项，滑动速度
+			})
+			
+			
+
+			</script>
+
+			<script>
+				var departmentChart = echarts.init(document.getElementById('departmentId'));
+				var dataArr = [
+				    {name: '拥堵', value: 300},
+				    {name: '畅通', value: 500},
+				    {name: '严重拥堵', value: 400},
+				    {name: '缓行', value: 350},
+				]
+				var data = dataArr
+				var option = {
+				    color: ['#F77474', '#47F6A2', '#FF5937', '#F3DB5D'],
+					// '#FF5937','#F3DB5D','#F77474','#28DCCF',
+				    tooltip : {
+				        trigger: 'item',
+				        formatter: "{a} <br/>{b} : {c} ({d}%)"
+				    },
+				   //  legend: {
+				   //      itemWidth: 15,// 标志图形的长度
+				   //      itemHeight: 15,// 标志图形的宽度
+				   //      orient: 'vertical',
+				   //      // left: 'right',
+				   //      top: '30%',
+				   //      bottom: '50%',
+				   //      x: '5%',
+				   //      textStyle: {
+				   //          color: '#fff',
+				   //          fontSize: 8,
+							
+				   //      },
+				   //      data: data,
+				   //  },
+				    series: [
+				        {
+				            name: '路况类型占比',
+				            type: 'pie',
+				            radius: ['50%', '70%'],
+				            center: ['53%', '55%'],
+				            labelLine: {
+				                normal: {
+				                    length: 12,
+				                    lineStyle: {
+				                        type: 'solid',
+				                        color: '#0EFCFF'
+				                    }
+				                }
+							
+				            },
+				            label: {
+				                normal: {
+				                    formatter: (params)=>{
+				                        return params.name
+				                    },
+				                    borderWidth: 0,
+				                    borderRadius: 4,
+				                    padding: [0,0],
+				                    height: 20,
+				                    fontSize: 10,
+				                    align: 'center',
+				                    color: '#0EFCFF',
+				                }
+				            },
+				            data: data
+				        },
+				        {
+				            color: '#0EFCFF',
+				            type: 'pie',
+				            radius: ['87', '88'],
+				            center: ['53%', '55%'],
+				            data: [100],
+				            label: {
+				                show: false
+				            }
+				        },
+				        {
+				            type: 'pie',
+				            radius: ['45', '46'],
+				            center: ['53%', '55%'],
+				            data: [100],
+				            label: {
+				                show: false
+				            }
+				        }
+				    ]
+				};
+				departmentChart.setOption(option)
+				
+				
+			
+
+			                    // // 中间滚动数据展示
+			                    // for(var j = 0; j < dataArr.length; j++) {
+			                    //     $(".main_list_title_num"+(j+1)).addClass("counter-value").text(dataArr[j].value)
+			                    //     $(".main_list_title"+(j+1)).text(dataArr[j].name)
+			                    // }
+										
+
+			</script>
+			
+			<script>
+				var myChartcarleixing = echarts.init(document.getElementById('echarts_car'));
+				var option44 = {
+				
+				    tooltip : {
+				        trigger: 'item',
+				        formatter: "{b}: <br/>  {c} ({d}%)"
+				    },
+				
+				    toolbox: {
+				        show : false,
+				        feature : {
+				            mark : {show: true},
+				            dataView : {show: true, readOnly: false},
+				            magicType : {
+				                show: true,
+				                type: ['pie', 'funnel']
+				            },
+				            restore : {show: true},
+				            saveAsImage : {show: true}
+				        }
+				    },
+				    calculable : true,
+				    series : [
+				
+				        {
+				            name:'车辆类型',
+				            type:'pie',
+				            color: ['#d0a3ff', '#29cd81', '#ff999a', '#02afff','#25f3e6','#f5c847'],
+				            radius : [10, 70],
+				            center : ['50%', '50%'],
+				            roseType : 'area',
+				            data:[
+				                {value:180, name:'警车'},
+				                {value:150, name:'消防车'},
+				                {value:100, name:'救护车'},
+				                {value:300, name:'公交车'},
+				                {value:420, name:'货车'},
+								{value:500, name:'其他'}
+				            ],
+							labelLine:{  
+								normal:{  
+									length:3
+								}  
+							}, 
+				        }
+				    ]
+				};
+				
+				
+				// 使用刚指定的配置项和数据显示图表。
+				myChartcarleixing.setOption(option44);
+				// window.addEventListener("resize",function(){
+				//     myChart.resize();
+				// });
+			</script>
+			
+			
+			
+			
+			<script>
+				// 基于准备好的dom，初始化echarts实例
+				var myChartyibiaopan = echarts.init(document.getElementById('chart_555'));
+				var option55 = {
+				    tooltip : {
+				        formatter: "{a} <br/>{b} : {c}"
+				    },
+				    // toolbox: {
+				    //     show : true,
+				    //     feature : {
+				    //         mark : {show: true},
+				    //         restore : {show: true},
+				    //         saveAsImage : {show: true}
+				    //     }
+				    // },
+				    series : [
+				        {
+				            name:'指标',
+				            type:'gauge',                
+				            min:0,
+				            max:1000,            
+				            splitNumber: 10,       // 分割段数，默认为5
+				            radius: '68%',
+				            center: ["50%", "60%"], // 仪表位置
+				            axisLine: {            // 坐标轴线
+				                lineStyle: {       // 属性lineStyle控制线条样式
+				                    color: [[0.2, '#228b22'],[0.8, '#48b'],[1, '#ff4500']], 
+				                    width: 2, //仪表盘外围圆宽度
+				                    shadowColor : '#fff', //默认透明
+				                    shadowBlur: 10
+				                }
+				            },
+				            axisTick: {            // 坐标轴小标记
+				                splitNumber: 5,   // 每份split细分多少段
+				                length :6,        // 属性length控制线长
+				                lineStyle: {       // 属性lineStyle控制线条样式
+				                    color: 'auto'
+				                }
+				            },
+				            axisLabel: {
+				                show:false
+				            },
+				            splitLine: {           // 分隔线
+				                show: true,        // 默认显示，属性show控制显示与否
+				                length :2,         // 属性length控制线长
+				                lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+				                    width:2,
+				                    color: '#fff',
+				                    shadowColor : '#fff', //默认透明
+				                    shadowBlur: 10
+				                }
+				            },
+				            pointer : {
+				                width : 2
+				            },
+				            title : {
+				                show : true,
+				                offsetCenter: [0, '100%'],       // x, y，单位px
+				                textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+				                    // fontWeight: 'bolder',
+				                    fontSize: 20,
+				                    color: '#fff',
+				                }
+				            },
+				            detail : {
+				                formatter:'{value}',
+				                offsetCenter: [0, '30%'],       // x, y，单位px
+				                textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+				                    fontWeight: 'bolder',
+				                    fontSize: 19,
+				                    color: '#fff'
+				                }
+				            },
+				            data:[{value: 120, name: '车速'}]
+				        }
+				    ]
+				};
+				
+				// 为echarts对象加载数据 
+				myChartyibiaopan.setOption(option55);
+				
+				// setInterval(function (){
+				//     option.series[0].data[0].value = (Math.random()*20).toFixed(2) - 0;
+				//     myChart.setOption(option,true);
+				// },2000);
+				data= [600,580,620,670,550,560,600,670,700,750,610,670,723,590,780,770,790,820,870,890,920,990];
+				index=0;
+				    setInterval(function(){//将自己的值赋予 option.series[ 0 ].data[ 0 ].value
+				        // option.series[0].data[0].value = data[index++%data.length];
+						option55.series[0].data[0].value=120;
+				        myChartyibiaopan.setOption(option55, true);
+				    }, 2000);
+			</script>
+			<script>
+				var t = null;
+			    t = setTimeout(time,1000);//開始运行
+			    function time()
+			    {
+			       clearTimeout(t);//清除定时器
+			       dt = new Date();
+					var y=dt.getFullYear();
+					var mt=dt.getMonth()+1;
+					var day=dt.getDate();
+			       var h=dt.getHours();//获取时
+			       var m=dt.getMinutes();//获取分
+			       var s=dt.getSeconds();//获取秒
+					var d = dt.getDay(); //获取当前星期几
+					var ampm = h < 12 ? 'am' : 'pm';
+			       document.getElementById("showTime").innerHTML =h+":"+m+":"+s;
+				   document.getElementById("showDate").innerHTML = y+"/"+mt+"/"+day+ '</span><span>' + getMyDay(day) + '</span>';
+			       t = setTimeout(time,1000); //设定定时器，循环运行     
+			    } 
+				 function getMyDay(d){
+					var week;
+					if(date.getDay()==0) week="周日"
+					if(date.getDay()==1) week="周一"
+					if(date.getDay()==2) week="周二"
+					if(date.getDay()==3) week="周三"
+					if(date.getDay()==4) week="周四"
+					if(date.getDay()==5) week="周五"
+					if(date.getDay()==6) week="周六"
+					return week;
+				 }
+			</script>
+			<script>
+			    $(function(){
+			        $('#div01').liMarquee({
+			            direction: 'down',
+			            scrollamount: 30
+			        });
+			    });
+			</script>
+			<script>
+				 function TimeControl(){
+					$(".message_scroll_box").animate({marginTop:76},800,
+							function(){
+								$(".message_scroll_box").css({marginTop:0});    //把顶部的边界清零
+								$(".message_scroll_box .message_scroll:first").before($(".message_scroll_box .message_scroll:last"));    //在第一个新闻后面插入最后一个新闻
+							});
+				}
+				var T=setInterval(TimeControl,2250);    //开始定时
+				$(".message_scroll_box").mouseenter(function(){
+					clearInterval(T);    //停止定时
+				})
+				.mouseleave(function(){
+					T=setInterval(TimeControl,2250);    //再次定时
+				})
+			</script>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<!-- <canvas id="canvas" style="position: absolute;top: 0;left: 0;"></canvas> -->
+		
+		<!-- <div id="particles-js"></div> -->
+		
+		
+		
+		<script>
+			$('document').ready(function () {
+				//设置渠道状态
+				qdzt();
+			})
+			
+			//设置渠道状态
+			function qdzt(){
+				//breathe-zc 绿灯；breathe-yc 红灯
+				$("#dx").removeClass("breathe-yc");
+				$("#dx").addClass("breathe-zc");
+		
+				$("#cz").removeClass("breathe-zc");
+				$("#cz").addClass("breathe-yc");
+		
+				$("#dmt").removeClass("breathe-yc");
+				$("#dmt").addClass("breathe-zc");
+			}
+		</script>
+		<script src="js/chart-nowcar.js"></script>
+
+
+		
+		<script>
+		
+		 // 基于准备好的dom，初始化echarts实例
+		var myCharttwo = echarts.init(document.getElementById('echart2'));
+		var option11 = {
+		  //  backgroundColor: '#00265f',
+		    tooltip: {
+		        trigger: 'axis',
+		        axisPointer: { type: 'shadow'}
+		    },
+		    grid: {
+		        left: '2%',
+				top:'10px',
+		        right: '3%',
+		        bottom: '12%',
+		       containLabel: true
+		    },
+		    xAxis: [{
+		        type: 'category',
+				data:['密云区','延庆区','朝阳区','丰台区','石景山区','海淀区','门头沟区','房山区','通州区','顺义区','昌平区','大兴区','怀柔区','平谷区','东城区','西城区'],
+		        axisLine: {
+		            show: true,
+		         lineStyle: {
+		                color: "rgba(255,255,255,.1)",
+		                width: 1,
+		                type: "solid"
+		            },
+		        },
+				
+		        axisTick: {
+		            show: false,
+		        },
+				axisLabel:  {
+		                interval: 0,
+		                rotate:0,
+		                show: true,
+		                splitNumber: 15,
+		                textStyle: {
+		 					color: "white",
+		                    fontSize: '8',
+		                },
+		            },
+		    }],
+		    yAxis: [{
+		        type: 'value',
+		        axisLabel: {
+		           //formatter: '{value} %'
+					show:true,
+					 textStyle: {
+		 					color: "white",
+		                    fontSize: '10',
+		                },
+		        },
+		        axisTick: {
+		            show: false,
+		        },
+		        axisLine: {
+		            show: true,
+		            lineStyle: {
+		                color: "rgba(255,255,255,.1	)",
+		                width: 1,
+		                type: "solid"
+		            },
+		        },
+		        splitLine: {
+		            lineStyle: {
+		               color: "rgba(255,255,255,.1)",
+		            }
+		        }
+		    }],
+		    series: [
+				{
+		        type: 'bar',
+		        data: [1500, 1200, 600, 200, 300, 300, 900,1500, 1200, 600,300, 300, 900,1500, 1200, 600],
+		        barWidth:'35%', //柱子宽度
+		       barGap: 8, //柱子之间间距
+		        itemStyle: {
+		            normal: {
+		                color:'#27d08a',
+		                opacity: 1,
+						barBorderRadius: 5,
+		            }
+		        }
+		    }
+				
+			]
+		};
+		// 使用刚指定的配置项和数据显示图表。
+		myCharttwo.setOption(option11);
+		</script>
+		
+		
+		<script type="text/javascript">
+		    /*3D标签云*/
+		    tagcloud({
+		        selector: ".tagcloud",  //元素选择器
+		        fontsize: 6,       //基本字体大小, 单位px
+		        radius: 33,         //滚动半径, 单位px 页面宽度和高度的五分之一
+		        mspeed: "slow",   //滚动最大速度, 取值: slow, normal(默认), fast
+		        ispeed: "slow",   //滚动初速度, 取值: slow, normal(默认), fast
+		        direction: 0,     //初始滚动方向, 取值角度(顺时针360): 0对应top, 90对应left, 135对应right-bottom(默认)...
+		        keep: false          //鼠标移出组件后是否继续随鼠标滚动, 取值: false, true(默认) 对应 减速至初速度滚动, 随鼠标滚动
+		    });
+		</script>
+		
+		
+		
+	</body>
+	<script type="text/javascript" src="js/bg.js"></script>
+	
+<!-- 	<script src="js/particles.min.js"></script>
+	<script src="js/app.js"></script> -->
+	<script>
+		$('.boxLis').on('mouseenter', 'li', function() {
+
+		var that = $(this);
+
+		that.addClass('active').siblings().removeClass('active');
+
+		$('.equipment_pic img').hide();
+
+		$('.equipment_pic img').eq(that.index()).show()
+
+
+		})
+	</script>
+	
+	
+</html>
+
+
+<script>
+Date.prototype.format = function (fmt) {
+	var o = {
+		"y+": this.getFullYear, //年
+		"M+": this.getMonth() + 1, //月份
+		"d+": this.getDate(), //日
+		"h+": this.getHours(), //小时
+		"m+": this.getMinutes(), //分
+		"s+": this.getSeconds() //秒
+	};
+	if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+	for (var k in o)
+		if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+	return fmt;
+}
+setInterval("document.getElementById('dateTime').innerHTML = (new Date()).format('hh:mm:ss<br>yyyy-MM-dd');", 1000);
+</script>
+
+..

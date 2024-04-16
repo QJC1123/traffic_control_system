@@ -1,0 +1,3978 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+
+		<title>地图</title>
+		<!-- <script src="https://unpkg.com/vue@next"></script> -->
+		<script src="js/v3.2.8/vue.global.prod.js" type="text/javascript" charset="utf-8"></script>
+		<!--设置是否为缩放模式 -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- 新 Bootstrap 核心 CSS 文件 --> 
+		<link rel="stylesheet" type="text/css" href="https://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.css">
+		<!-- jQuery文件。务必在bootstrap.min.js 之前引入 --> 
+		<script src="js/jquery.min.js"></script>
+		<!-- 最新的 Bootstrap 核心 JavaScript 文件 --> 
+		<script src="js/bootstrap.min.js"></script>
+		<!--echarts JS-->
+		<script src="js/echarts.min.js"></script>
+		<!-- 轮播swiper文件 -->
+		<link rel="stylesheet" type="text/css" href="css/swiper.min.css">
+		<script src="js/swiper.min.js"></script>
+		<!--界面样式-->
+		<link rel="stylesheet" type="text/css" href="css/visual.css">
+		<!-- 地图文件 -->
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=5ieMMexWmzB9jivTq6oCRX9j&callback"></script>
+		<script src="js/map.js"></script>
+		
+		<script src="js/ybiao1.js"></script>
+		<script src="js/highcharts.js"></script>
+		<!-- 轮播 -->
+		<link href="js/scroll/css/liMarquee.css" rel="stylesheet" type="text/css">
+		<script type="text/javascript" src="js/scroll/js/jquery.liMarquee.js"></script>
+		
+		<link href="css/Security_operation.css" rel="stylesheet" type="text/css" />
+		<script src="js/jquery.js"></script>
+		<link href="css/custom-ico-fonts.css" />
+		<link href="css/icomoon.css" />
+		<!-- script type="text/javascript" src="js/box5.js"></script> -->
+		
+		<script type="text/javascript" src="js/layer/layer.min.js"></script>
+		<script type="text/javascript" src="js/layer/laydate/laydate.js"></script>
+		
+		
+		<script type="text/JavaScript" src="js/beijing.js"></script>
+		
+	</head>
+	<style type="text/css">	
+	.box5_con_top{width: 420px; height: 320px; float: left;}
+	.box6_con_top{width: 420px; height: 320px; float: left;}
+	
+	
+	@media screen and (max-height: 670px) {
+	    .right-top {
+	        height: 47%;
+	    }
+	    .right-center {
+	        height: 23%;
+	    }
+	    .data-box>.data-number {
+	        height: 1.65rem;
+	        line-height: 1.65rem;
+	    }
+	    .data-box>.settings-box {
+	        height: 2rem;
+	    }
+	}
+	.title-box {
+	    width: 4.9rem;
+	    height: 0.42rem;
+	    background: url(../images/box_title.png) top left no-repeat;
+	    background-size: 100% 100%;
+	    margin: auto;
+	    display: flex;
+	    flex-flow: row nowrap;
+	    align-items: center;
+	    position: relative;
+	}
+	
+	.title-box>h6,
+	.title-box>p {
+	    font-size: 0.2rem;
+	    color: white;
+	    height: 0.42rem;
+	    line-height: 0.42rem;
+	    margin-left: 0.4rem;
+	}
+	
+	.title-box>p>span {
+	    cursor: pointer;
+	    color: rgba(255, 255, 255, .6);
+	}
+	
+	.title-box>p>span.active {
+	    color: rgba(255, 255, 255, 1);
+	}
+	
+	.line-img {
+	    width: 1px;
+	    height: 0.2rem;
+	    margin: 0 10px;
+	}
+	
+	.title-box>.line-img {
+	    position: absolute;
+	    right: 1.3rem;
+	}
+	
+	.title-box>button {
+	    font-size: 0.18rem;
+	    border: none;
+	    background: transparent;
+	    color: #cdddf7;
+	    height: 0.42rem;
+	    position: absolute;
+	    right: 0.6rem;
+	    display: flex;
+	    flex-flow: row nowrap;
+	    align-items: center;
+	    cursor: pointer;
+	}
+	
+	.title-box>button:hover {
+	    color: white;
+	}
+	
+	.title-box>button>img {
+	    width: 0.2rem;
+	    height: 0.2rem;
+	    margin-right: 5px;
+	}
+	
+	@media screen and (max-height: 670px) {
+	    .right-top {
+	        height: 47%;
+	    }
+	    .right-center {
+	        height: 23%;
+	    }
+	    .data-box>.data-number {
+	        height: 1.65rem;
+	        line-height: 1.65rem;
+	    }
+	    .data-box>.settings-box {
+	        height: 2rem;
+	    }
+	}
+	
+/* 	.time-box {
+	    width: 3.9rem;
+	    height: 0.4rem;
+	    position: absolute;
+	    top: 5px;
+	    right: 0;
+	    overflow: hidden;
+	    z-index: 10;
+	    display: none;
+	} */
+	
+	.time-div {
+	    float: left;
+	    width: 1.8rem;
+	    height: 0.4rem;
+	    position: relative;
+	}
+	
+	.time-div.end {
+	    float: right;
+	}
+	
+	.time-div>img {
+	    width: 0.2rem;
+	    height: 0.2rem;
+	    margin: auto;
+	    position: absolute;
+	    top: 0;
+	    bottom: 0;
+	    right: 0.1rem;
+	}
+	
+	.time-input {
+	    width: 1.8rem;
+	    height: 0.4rem;
+	    box-sizing: border-box;
+	    border: 1px solid #0E94EA;
+	    font-size: 0.16rem;
+	    background: rgba(14, 148, 234, 0.2);
+	    position: absolute;
+	    top: 0;
+	    left: 0;
+	    color: #cdddf7;
+	    padding-left: 10px;
+	}
+	
+	.t_btn2,.t_btn8,.t_btn7,.t_btn8,.t_btn9,.t_btn16{
+	    position: relative;
+	    z-index: 100;
+	    cursor: pointer;
+	}
+	
+
+
+	
+	</style>
+	<body>
+		<div class="wpbox " >
+			
+				
+			<!-- 顶部 -->
+			<div class="bnt">
+			  <div class="topbnt_left fl">
+			   <ul>
+				   <li ><a href="home.html">数据概览</a></li>
+				  <li ><a href="Juburode.html">局部路段</a></li>
+				  <li ><a href="vemap.html">应急指挥</a></li>
+			   </ul>
+			  </div>
+			  <h1 class="tith1 fl" style="text-shadow: 0 0 0.3rem #00d8ff;">智能指挥中心</h1>
+			  <div class=" fr topbnt_right  " style="display: flex;flex-direction: row;float:right; padding-left: 40px;">
+				   <div class="topbnt_left fl">
+				   <ul>
+					  <li class="active"><a href="history.html"style="padding-bottom: 20px;">历史数据</a></li>
+				   </ul>
+			  </div>
+				<div class="weather " style="width: 50%;height: 45px;float: left;padding-top: 20px;">
+					  <p id="dateTime" style="font-size: 16px;float: right;" ></p>
+				</div>
+			   </div>
+			</div>
+			
+			
+			
+
+			
+			<div class="kuang " style="height: 90%;width: 100%;display: flex;flex-direction: row;">
+				<div class="kuang" style="height: 100%;width: 33.3%;display: flex;flex-direction: column;">
+					<div class="" style="height: 40%;width: 100%;display: flex;flex-direction:column;">
+						<div class="order2 panel kuang" style="width: 100%;height: 40%;">
+						    <div class="inner " style="width: 100%;height: 100%;">
+						        <!-- 筛选 -->
+						        <div class="filter" style="width: 100%;height:30px;">
+						            <a href="javascript:;" data-key="day365" class="active" style="width:70px;height: 30px;font-size: 15px;">365天</a>
+						            <a href="javascript:;" data-key="day90" style="width: 70px;height: 30px;font-size: 15px;">90天</a>
+						            <a href="javascript:;" data-key="day30" style="width: 70px;height: 30px;font-size: 15px;">30天</a>
+						            <a href="javascript:;" data-key="day1" style="width: 70px;height: 30px;font-size: 15px;">24小时</a>
+						        </div>
+						        <!-- 数据 -->
+						        <div class="data" style="display: flex;flex-direction: row;text-align: center;">
+						            <div class="item">
+						                <h4 style="font-size:20px;">5.937</h4>
+						                <span style="font-size: 20px;">
+						                    <i class="icon-dot" style="color: #ed3f35;"></i>
+						                    交通指数
+						                </span>
+						            </div>
+						            <div class="item">
+						                <h4 style="font-size: 20px;">20,301,987</h4>
+						                <span style="font-size: 20px;">
+						                    <i class="icon-dot" style="color: #eacf19;"></i>
+						                    交通流量
+						                </span>
+						            </div>
+						        </div>
+						    </div>
+						</div>
+						<div class="kuang" style="height: 60%;width: 100%;">
+							<div class="sales panel " style="width: 100%;height: 100%;">
+							    <div class="inner" style="width: 100%;height: 100%;">
+							        <div class="caption" style="width: 100%;height: 10%;">
+							            <h3 style="font-size: 20px;">拥堵指数变化</h3>
+							            <a href="javascript:;" class="active" data-type="year">年</a>
+							            <a href="javascript:;" data-type="quarter">季</a>
+							            <a href="javascript:;" data-type="month">月</a>
+							            <a href="javascript:;" data-type="week">周</a>
+							        </div>
+							        <div class="chart" style="width: 100%;height: 90%;">
+							            <div class="label"></div>
+							            <div class="linetwo" style="width: 100%;height: 100%;"></div>
+							        </div>
+							    </div>
+							</div>
+						</div>
+						
+					</div>
+					<div class="" style="height: 33.3%;width: 100%;display: flex;flex-direction: row;">
+						<div class="" style="height: 120%;width: 100%;display: flex;flex-direction: column;">
+							<div class="l1_bot1_title" style="padding-left: 10px;height: 16%;width: 100%;">
+								<span style="font-size: 17px;">车流量</span>
+								<img src="img/ksh33.png" />
+							</div>
+							<div class="box6_con_top" id="box6" style="height: 220px;width: 100%;padding-left: 20px;"></div>
+							<script type="text/javascript" src="js/box6.js"></script>
+							<!-- <div class="" style="height: 90%;width: 100%;">
+								- <div id="chart_6" class="t_btn8" style="width:100%;height: 100%;cursor: pointer;"></div> 
+							</div> -->
+						</div>
+					</div>
+					<div class="" style="height: 30%;width: 100%;display: flex;flex-direction: row;">
+						<div class="" style="height: 100%;width: 50%;display: flex;flex-direction: column;">
+							<div class="l1_bot1_title" style="padding-left: 10px;height: 16%;width: 100%;">
+								<span style="font-size: 17px;">报警统计</span>
+								<img src="img/ksh33.png" />
+							</div>
+							<div class="" style="height: 90%;width: 100%;padding-left: 20px;">
+								<div class=""  style="width:100%;height: 100%;display: flex;flex-direction: column;">
+									<div class="" style="width: 100%;height: 80%;display: flex;flex-direction: row;">
+										<div id="chart_4" class="" style="width:80%;height: 100%;"></div>
+										<div class="chart_text" style="width:20%;height: 100%;">
+											<p style="padding-top: 8px;">环比</p>
+											<p style="font-size: 12px;padding-top: 3px;"><img src="img/down.png" alt="">2%</p>
+											<p style="padding-top: 8px;font-size: 10px;"><img src="img/up.png" alt="">4%</p>
+											<p style="padding-top: 11px;font-size: 10px;"><img src="img/down.png" alt="">5%</p>
+											<p style="padding-top: 11px;font-size: 10px;"><img src="img/down.png" alt="">3%</p>
+										</div>
+									</div>
+								    <div style="width: 100%;height: 20%;" >
+										<div style="width:80%;height: 100%;padding-left: 35px;font-size: 12px;" class="text_sum">
+											<div class="fl" style="width:30%">332</div>
+											<div class="fl" style="width:40%">统计</div>
+											<div class="fr" style="width:30%">505</div>
+										</div>
+
+								    </div>
+								</div>
+							</div>
+
+						</div>
+						<div class=""  style="height: 100%;width: 50%;">
+							<div class="" style="height: 10%;width: 100%;">
+								<div class="l1_bot1_title" style="padding-left: 10px;">
+									<span style="font-size: 17px;">早晚高峰信息</span>
+									<img src="img/ksh33.png" />
+								</div>
+							</div>
+							<div class="" style="height: 90%;width: 100%;">
+								<div id="con1" style="width: 100%;height: 85%;;overflow: hidden;margin-left: 3px;margin-right: 13px;"></div>
+							</div>
+						</div>
+						<!-- <div class="" style="height: 100%;width: 50%;">
+							<div class="" style="height: 10%;width: 100%;">
+								<div class="l1_bot1_title" style="padding-left: 10px;">
+									<span style="font-size: 17px;">设备状况</span>
+									<img src="img/ksh33.png" />
+								</div>
+							</div>
+							<div class="" style="height: 90%;width: 100%;">
+								<div id="chart_5" class="" style="width:100%;height:100%"></div>
+							</div>
+						</div> -->
+					</div>
+				</div>
+				
+				<div class="kuang" style="height: 100%;width: 33.3%;display: flex;flex-direction: column;">
+					<div class="kuang" style="height: 70%;width: 100%;display: flex;flex-direction: column;" >
+						
+							<div class="" style="height: 10%;width: 100%;">
+								<div class="l1_bot1_title" style="padding-left: 10px;">
+									<span style="font-size: 17px;">拥堵情况热力图</span>
+									<img src="img/line1.png" style="width: 20%;"/><img src="img/line2.png" style="width: 97%;padding-left: 17%;"/>
+								</div>
+							</div>
+							<div class="" style="height: 300px;width: 100%;">
+								<img src="img/heat.png" style="width: 470px;height: 470px;padding-left: 8px;" />
+								<!-- <div id="mychart_8" style="height: 460px;width: 100%;"></div> -->
+							</div>
+						
+						<!-- <div class="kuang" style="height: 47%;width: 100%;display: flex;flex-direction: column;">
+							<div class="" style="height: 10%;width: 100%;">
+								<div class="l1_bot1_title" style="padding-left: 10px;">
+									<span style="font-size: 17px;">车流量热力图<span>
+									<img src="img/ksh33.png" />
+								</div>
+							</div>
+							<div class="" style="height: 90%;width: 100%;">
+								<div id="chart_9" class="t_btn9" style="width:100%;height:100%;cursor: pointer;"></div>
+							</div>
+						</div> -->
+						
+					</div>
+					<div class="" style="height: 30%;width: 100%;display: flex;flex-direction: column;" >
+						<div class="" style="height: 10%;width: 100%;">
+							<div class="l1_bot1_title" style="padding-left: 2%;">
+								<span style="font-size: 17px;">拥堵路段排名</span>
+								<img src="img/line1.png" style="width: 20%;"/><img src="img/line2.png" style="width: 97%;padding-left: 17%;"/>
+							</div>
+							
+						</div>
+						<div class="" style="height: 90%;width: 100%;padding-top:20px">
+							<div class="table_p" style="height: 100%;width: 100%;">
+								<table>
+								   <thead>
+									<tr>
+								       <th>排名</th>
+								       <th>道路</th>
+								       <th>拥堵指数</th>
+									   <th>平均车速</th>
+									   <th>拥堵里程</th>
+								   </tr>
+								   </thead>
+								    <tbody class="message_scroll_bos">
+								    <tr><td></td><td></td><td></td></tr>
+								    <tr class="message_scrols" style="background: rgba(255,255,255,0.08);"><td>1</td><td>黑龙潭路</td><td>120.0</td><td>闯红灯</td><td>北河沿大街</td></tr>
+								    <tr class="message_scrols"><td>2</td><td>南河沿大街</td><td>100.0</td><td>香山南路</td><td>南河沿大街</td></tr>
+								    <tr class="message_scrols" style="background: rgba(255,255,255,0.08);"><td>3</td><td>永引渠南路</td><td>134.2</td><td>超速</td><td>王府井西街</td></tr>
+								    <tr class="message_scrols"><td>4</td><td>京A19H28</td><td>134.2</td><td>东长安街</td><td>东长安街</td></tr>
+									<tr class="message_scrols" style="background: rgba(255,255,255,0.08);"><td>5</td><td>京A92K88</td><td>134.2</td><td>超速</td><td>金鱼胡同</td></tr>
+									<tr class="message_scrols"><td>6</td><td>京A4G762</td><td>134.2</td><td>超速</td><td>东华门大街</td></tr>
+								    </tbody>
+								</table>
+							</div>
+							<!-- <div id="chart_7" class="t_btn2" style="width:100%;height:100%;cursor: pointer;"></div> -->
+						</div>
+						<!-- <div class="" style="height: 20%;width: 100%;">
+							<div class="l1_bot1_title" style="padding-left: 2%;">
+								<span style="font-size: 17px;">平均车速热力图</span>
+								<img src="img/line1.png" style="width: 20%;"/><img src="img/line2.png" style="width: 97%;padding-left: 17%;"/>
+							</div>
+						</div>
+						<div class="" style="height: 80%;width: 100%;">
+							<div id="chart_7" class="t_btn2" style="width:100%;height:100%;cursor: pointer;"></div>
+							
+					</div> -->
+				</div>
+				</div>
+				
+				
+				<div class="kuang" style="height: 100%;width: 33.3%;display: flex;flex-direction: column;">
+					<div class="kuang" style="height: 40%;width: 100%;display: flex;flex-direction: column;">
+						<div class="order panel kuang" style="width: 100%;height: 40%;">
+						    <div class="inner " style="width: 100%;height: 100%;">
+						        <!-- 筛选 -->
+						        <div class="filter" style="width: 100%;height:30px;">
+						            <a href="javascript:;" data-key="day365" class="active" style="width:70px;height: 30px;font-size: 15px;">365天</a>
+						            <a href="javascript:;" data-key="day90" style="width: 70px;height: 30px;font-size: 15px;">90天</a>
+						            <a href="javascript:;" data-key="day30" style="width: 70px;height: 30px;font-size: 15px;">30天</a>
+						            <a href="javascript:;" data-key="day1" style="width: 70px;height: 30px;font-size: 15px;">24小时</a>
+						        </div>
+						        <!-- 数据 -->
+						        <div class="data" style="display: flex;flex-direction: row;text-align: center;">
+						            <div class="item">
+						                <h4 style="font-size:20px;">20,301,987</h4>
+						                <span style="font-size: 20px;">
+						                    <i class="icon-dot" style="color: #ed3f35;"></i>
+						                    已处理警情数
+						                </span>
+						            </div>
+						            <div class="item">
+						                <h4 style="font-size: 20px;">99834</h4>
+						                <span style="font-size: 20px;">
+						                    <i class="icon-dot" style="color: #eacf19;"></i>
+						                    有效警情数
+						                </span>
+						            </div>
+						        </div>
+						    </div>
+						</div>
+						<div class="sales panel kuang" style="width: 100%;height: 60%;">
+						    <div class="inner " style="width: 100%;height: 100%;">
+						        <div class="caption" style="width: 100%;height: 10%;">
+						            <h3 style="font-size: 20px;">警情数统计</h3>
+						            <a href="javascript:;" class="active" data-type="year">年</a>
+						            <a href="javascript:;" data-type="quarter">季</a>
+						            <a href="javascript:;" data-type="month">月</a>
+						            <a href="javascript:;" data-type="week">周</a>
+						        </div>
+						        <div class="chart" style="width: 100%;height: 90%;">
+						            <!-- <div class="label">单位:万</div> -->
+						            <div class="line" style="width: 100%;height: 100%;"></div>
+						        </div>
+						    </div>
+						</div>
+						<!-- <div class="right-center kuang" style="height: 40%;width: 100%;">
+							<div class="title-box" style="height: 30%;width: 100%;" >
+								<p id="switchBtn" style=""><span class="active" data-dataType="income" style="font-size: 15px;">交通流量</span><img class="line-img" src="img/line-blue.png" alt=""><span data-dataType="expend" style="font-size: 15px;">交通指数</span></p> 							
+								<button id="dateBtn" style="height: 100%;width: 10%;">
+									
+									日期</button>
+							</div>
+							<div class="data-box" style="height: 40%;width: 30%;display:flex;flex-direction:column;float: right; padding-right: 20px;">
+								<div class="time-box" id="timeBox"  style="height:30%;width:100%">
+								    <div class="time-div" style="height: 100%;width: 50%;">
+								        <input class="time-input" type="text" value="" id="startTime" style="height: 100%;width: 70%;">
+								        <img src="img/selsct_time.png" alt="" style="height: 100%;width: 30%;">
+								    </div>
+								    <div class="time-div end"  style="height: 100%;width: 50%;">
+								        <input class="time-input" type="text" value="" id="endTime" style="height: 100%;width: 70%;">
+								        <img src="img/selsct_time.png" alt="" style="height: 100%;width: 30%;">
+								    </div>
+								</div>
+							</div>
+							<p class="data-number" id="totalProfit" style="width:100%;font-size: 23px;padding-left: 20px;">123,456.5元</p>
+						</div> -->
+						
+							
+
+					</div>
+					<div class="" style="height: 33.3%;width: 100%;display: flex;flex-direction: row;">
+						<div class="" style="height: 120%;width: 100%;display: flex;flex-direction: column;">
+							<div class="l1_bot1_title" style="padding-left: 10px;height: 16%;width: 100%;">
+								<span style="font-size: 17px;">人流量</span>
+								<img src="img/ksh33.png" />
+							</div>
+							<div class="box5_con_top" id="box5" style="height: 220px;width: 100%;padding-left: 20px;"></div>
+							<script type="text/javascript" src="js/box5.js"></script>
+						</div>
+						
+						<!--<div class="kuang" style="height: 100%;width: 150%;display: flex;flex-direction: column;">
+							<div class="" style="height: 10%;width: 100%;">
+								<div class="l1_bot1_title" style="padding-left: 10px;">
+									<span style="font-size: 17px;">天气因素分析</span>
+									<img src="img/ksh33.png" />
+								</div>
+							</div>
+							<div class="" style="height: 90%;width: 100%;">
+								<div id="chart_6" class="t_btn8" style="width:100%;height: 100%;cursor: pointer;"></div>
+							</div>
+						</div>-->
+						<!--<div class="kuang" style="height: 100%;width: 0%;display: flex;flex-direction: column;">
+							<div class="l1_bot1_title" style="padding-left: 10px;height: 16%;width: 100%;">
+								<span style="font-size: 17px;">区域设备分析</span>
+								<img src="img/ksh33.png" />
+							</div>
+							<div class="" style="height: 90%;width: 100%;">
+								<div id="chart_16" class="t_btn16" style="width:100%;height: 100%;cursor: pointer;"></div>
+							</div>-->
+							<!-- <div class="box6_con_top" id="box5" style="height: 90%;width: 100%;padding-left: 20px;"></div>
+							<script type="text/javascript" src="js/box6.js"></script> 
+						</div>-->
+							
+												
+					</div>					
+					<div class="" style="height: 30%;width: 100%;display: flex;flex-direction: column;">
+						<div class="" style="height: 10%;width: 100%;">
+							<div class="l1_bot1_title" style="padding-left: 2%;">
+								<span style="font-size: 17px;">警情日志</span>
+								<img src="img/line1.png" style="width: 20%;"/><img src="img/line2.png" style="width: 97%;padding-left: 17%;"/>
+							</div>
+			
+						</div>
+						<div class="" style="height: 90%;width: 100%;padding-top:20px">
+							<div class="table_p" style="height: 100%;width: 100%;">
+								<table>
+								   <thead style="text-align: center;vertical-align: middle;">
+									<tr style="text-align: center;vertical-align: middle;">
+								       <th>时间</th>
+								       <th>车牌号</th>
+								       <th> 车速(km/h)</th>
+									   <th>违法原因</th>
+									   <th>所处位置</th>
+								   </tr>
+								   </thead>
+								    <tbody class="message_scroll_bos" style="text-align: center;vertical-align: middle;">
+								    <tr><td></td><td></td><td></td></tr>
+								    <tr class="message_scrols" style="background: rgba(255,255,255,0.08);text-align: center;vertical-align: middle;"><td>12:00</td><td>京A12345</td><td>120.0</td><td>闯红灯</td><td>五四大街</td></tr>
+								    <tr class="message_scrols" style="text-align: center;vertical-align: middle;"><td>11:29</td><td>京A12345</td><td>100.0</td><td>超速</td><td>景山前街</td></tr>
+								    <tr class="message_scrols" style="background: rgba(255,255,255,0.08);text-align: center;vertical-align: middle;"><td>10:30</td><td>京A12345</td><td>134.2</td><td>超速</td><td>地安门内大街</td></tr>
+								    <tr class="message_scrols" style="text-align: center;vertical-align: middle;"><td>9:44</td><td>京A12345</td><td>134.2</td><td>超速</td><td>大红罗厂街</td></tr>
+									<tr class="message_scrols" style="background: rgba(255,255,255,0.08);text-align: center;vertical-align: middle;"><td>9:44</td><td>京A12345</td><td>134.2</td><td>超速</td><td>西四南大街</td></tr>
+									<tr class="message_scrols" style="text-align: center;vertical-align: middle;"><td>9:44</td><td>京A12345</td><td>134.2</td><td>超速</td><td>西单北大街</td></tr>
+								    </tbody>
+								</table>
+							</div>
+							<!-- <div id="chart_7" class="t_btn2" style="width:100%;height:100%;cursor: pointer;"></div> -->
+						</div>
+						<!-- <div class="" style="height: 100%;width: 50%;">
+							<div class="" style="height: 10%;width: 100%;">
+								<div class="l1_bot1_title" style="padding-left: 10px;">
+									<span style="font-size: 17px;">设备状况</span>
+									<img src="img/ksh33.png" />
+								</div>
+							</div>
+							<div class="" style="height: 90%;width: 100%;">
+								<div id="chart_5" class="" style="width:100%;height:100%"></div>
+							</div>
+						</div>
+						<div class="kuang" style="height: 100%;width: 50%;display: flex;flex-direction: column;">
+							<div class="" style="height: 10%;width: 100%;">
+								<div class="l1_bot1_title" style="padding-left: 10px;">
+									<span style="font-size: 17px;">红绿灯情况</span>
+									<img src="img/ksh33.png" />
+								</div>
+							</div>
+							<div class="" style="height: 90%;width: 100%;">
+								<div id="chart_3" class="t_btn7" style="width:100%;height: 100%;"></div>
+							</div>
+						</div> -->
+					</div>
+
+				</div>
+				
+			</div>
+			</div>
+	</body>
+</html>			
+<!-- <script type="text/javascript" src="js/box5.js"></script> -->
+
+<script>
+Date.prototype.format = function (fmt) {
+	var o = {
+		"y+": this.getFullYear, //年
+		"M+": this.getMonth() + 1, //月份
+		"d+": this.getDate(), //日
+		"h+": this.getHours(), //小时
+		"m+": this.getMinutes(), //分
+		"s+": this.getSeconds() //秒
+	};
+	if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+	for (var k in o)
+		if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+	return fmt;
+}
+setInterval("document.getElementById('dateTime').innerHTML = (new Date()).format('hh:mm:ss<br>yyyy-MM-dd');", 1000);
+</script>
+<script>
+//订单
+(function () {
+    var data = {
+        day365: { orders: '72000', amount: '84000' },
+        day90: { orders: '18000', amount: '21300' },
+        day30: { orders: '5200', amount: '7000' },
+        day1: { orders: '120', amount: '200' }
+    }
+    //点击事件
+    $('.order').on('click', '.filter a', function () {
+        //点击之后加类名
+        $(this).addClass('active').siblings().removeClass('active');
+        // 先获取点击a的 data-key自定义属性
+        var key = $(this).attr('data-key');
+        //获取自定义属性
+        // data{}==>data.shuxing data['shuxing]
+        key = data[key];//
+        $('.order .item h4:eq(0)').text(key.orders);
+        $('.order .item h4:eq(1)').text(key.amount);
+    });
+    //定时器
+    var index = 0;
+    var aclick = $('.order a');
+    setInterval(function () {
+        index++;
+        if (index > 3) {
+            index = 0;
+        }
+        //每san秒调用点击事件
+        aclick.eq(index).click();
+    }, 3000);
+})();
+</script>
+
+<script>
+(function () {
+    var data = {
+        day365: { orders2: '5.937', amount2: '530,200,000' },
+        day90: { orders2: '4.238', amount2: '132,500,000' },
+        day30: { orders2: '6.234', amount2: '45,663,000' },
+        day1: { orders2: '6.211', amount2: '14,300,000' }
+    }
+    //点击事件
+    $('.order2').on('click', '.filter a', function () {
+        //点击之后加类名
+        $(this).addClass('active').siblings().removeClass('active');
+        // 先获取点击a的 data-key自定义属性
+        var key = $(this).attr('data-key');
+        //获取自定义属性
+        // data{}==>data.shuxing data['shuxing]
+        key = data[key];//
+        $('.order2 .item h4:eq(0)').text(key.orders2);
+        $('.order2 .item h4:eq(1)').text(key.amount2);
+    });
+    //定时器
+    var index = 0;
+    var aclick = $('.order2 a');
+    setInterval(function () {
+        index++;
+        if (index > 3) {
+            index = 0;
+        }
+        //每san秒调用点击事件
+        aclick.eq(index).click();
+    }, 3000);
+})();
+</script>
+
+<script>
+//警报数
+(function () {
+    var option = {
+        //鼠标提示工具
+        tooltip: {
+            trigger: 'axis'
+        },
+        xAxis: {
+            // 类目类型                                  
+            type: 'category',
+            // x轴刻度文字                     
+			// data = {
+			//     year: [
+			//         ['2018年', '2019年', '2020年', '2021年', '2022年'],
+			       
+			//     ],
+			//     quarter: [
+			//         ['第一季度', '第二季度', '第一季度', '第一季度']
+			        
+			//     ],
+			//     month: [
+			//         ['1'月, '2月', '3月','1'月, '2月', '3月','1'月, '2月', '3月','1'月, '2月', '3月','1'月, '2月', '3月',],
+			        
+			//     ]
+			//     // week: [
+			//     //     ['周一','周二','周一','周二'],
+			        
+			//     // ]
+			// }
+			data:['密云区','延庆区','朝阳区','丰台区','石景山区','海淀区','门头沟区','房山区','通州区','顺义区','昌平区','大兴区','怀柔区','平谷区','东城区','西城区'],
+            // data: ['上城区', '下城区', '拱墅区', '西湖区', '滨江区', '萧山区', '余杭区','临平区','钱塘区','临安区'],
+            axisTick: {
+                show: false//去除刻度线
+            },
+            axisLabel: {
+                color: '#4c9bfd',//文本颜色
+				interval:0,
+				rotate:30,
+				
+            },
+            axisLine: {
+                show: false//去除轴线  
+            },
+            boundaryGap: false//去除轴内间距
+        },
+        yAxis: {
+            // 数据作为刻度文字                                  
+            type: 'value',
+            axisTick: {
+                show: false//去除刻度线
+            },
+            axisLabel: {
+                color: '#4c9bfd'//文本颜色
+            },
+            axisLine: {
+                show: false//去除轴线  
+            },
+            boundaryGap: false//去除轴内间距
+        },
+        //图例组件
+        legend: {
+            textStyle: {
+                color: '#4c9bfd' // 图例文字颜色
+
+            },
+            right: '10%'//距离右边10%
+        },
+        // 设置网格样式
+        grid: {
+            show: true,// 显示边框
+            top: '20%',
+            left: '3%',
+            right: '4%',
+            bottom: 0,
+			
+            borderColor: '#012f4a',// 边框颜色
+            containLabel: true // 包含刻度文字在内
+        },
+        series: [{
+            name: '已处理',
+            // 数据                                  
+            data: [24, 40, 101, 134, 90, 230, 210, 230, 120, 230, 210, 120,120, 230, 210, 120],
+            // 图表类型                                  
+            type: 'line',
+            // 圆滑连接                                  
+            smooth: true,
+            itemStyle: {
+                color: '#00f2f1'  // 线颜色
+            }
+        },
+        {
+            name: '未处理',
+            // 数据                                  
+            data: [40, 64, 191, 324, 290, 330, 310, 213, 180, 200, 180, 79,180, 200, 180, 79],
+            // 图表类型                                  
+            type: 'line',
+            // 圆滑连接                                  
+            smooth: true,
+            itemStyle: {
+                color: '#ed3f35'  // 线颜色
+            }
+        }]
+    };
+    var myechart = echarts.init($('.line')[0]);
+    myechart.setOption(option);
+
+    //点击效果
+    var data = {
+        year: [
+            [24, 40, 101, 134, 90, 230, 210, 230, 120, 230, 210, 120, 120, 230, 210, 120],
+            [40, 64, 191, 324, 290, 330, 310, 213, 180, 200, 180, 79, 180, 200, 180, 79]
+        ],
+        quarter: [
+            [23, 75, 12, 97, 21, 67, 98, 21, 43, 64, 76, 38, 43, 64, 76, 38],
+            [43, 31, 65, 23, 78, 21, 82, 64, 43, 60, 19, 34, 43, 60, 19, 34]
+        ],
+        month: [
+            [34, 87, 32, 76, 98, 12, 32, 87, 39, 36, 29, 36, 39, 36, 29, 36],
+            [56, 43, 98, 21, 56, 87, 43, 12, 43, 54, 12, 98, 43, 54, 12, 98]
+        ],
+        week: [
+            [43, 73, 62, 54, 91, 54, 84, 43, 86, 43, 54, 53, 86, 43, 54, 53],
+            [32, 54, 34, 87, 32, 45, 62, 68, 93, 54, 54, 24, 93, 54, 54, 24]
+        ]
+    }
+    $('.sales ').on('click', '.caption a', function () {
+        $(this).addClass('active').siblings('a').removeClass('active');
+        //option series   data
+        //获取自定义属性值
+        var key = $(this).attr('data-type');
+        //取出对应的值
+        key = data[key];
+        //将值设置到 图表中
+        option.series[0].data = key[0];
+        option.series[1].data = key[1];
+        //再次调用才能在页面显示
+        myechart.setOption(option);
+    });
+    //定时器
+    var index = 0;
+    var timer = setInterval(function () {
+        index++;
+        if (index > 4) {
+            index = 0;
+        };
+        $('.sales .caption a').eq(index).click();
+    }, 2000);
+})();
+</script>
+
+<script>
+$('#dateBtn').on('click', function () {
+    if ($('#timeBox').is(":hidden")) {
+        $('#timeBox').show();
+        document.getElementById('timeBox').focus();
+
+    } else {
+        $('#timeBox').hide();
+    }
+})
+
+$('#dateBtns').on('click', function () {
+    if ($('#timeBoxs').is(":hidden")) {
+        $('#timeBoxs').show();
+        document.getElementById('timeBoxs').focus();
+
+    } else {
+        $('#timeBoxs').hide();
+    }
+})
+
+$('#switchBtn').on('click', 'span', function () {
+    $(this).addClass('active').siblings().removeClass('active');
+    if ($(this).data('datatype') == 'income') {
+        $('#totalProfit').html('123');
+    } else if ($(this).data('datatype') == 'expend') {
+        $('#totalProfit').html('322');
+    }
+})
+
+$('#tabBtn').on('click', function () {
+    var _this = $(this);
+    if ($('.right-top').children('.chart-box').is(':hidden')) {
+        _this.children('span').html('图表');
+        $('.right-top').children('.chart-box').show().siblings('.data-box').hide();
+
+    } else {
+        _this.children('span').html('表格');
+        $('.right-top').children('.data-box').show().siblings('.chart-box').hide();
+        if (_this.data('state') == 1) {
+            $('.table1').eq(0).show().siblings('table').hide();
+        } else if (_this.data('state') == 2) {
+            $('.table1').eq(1).show().siblings('table').hide();
+        }
+    }
+})
+
+
+$('#tabBtns').on('click', function () {
+    var _this = $(this);
+    if (_this.siblings('.pop-chart').is(':hidden')) {
+        _this.children('span').html('图表');
+        _this.siblings('.pop-chart').show().siblings('.data-box').hide();
+
+    } else {
+        _this.children('span').html('表格');
+        _this.siblings('.data-box').show().siblings('.chart-box').hide();
+        if (_this.data('state') == 1) {
+            $('.table2').eq(0).show().siblings('table').hide();
+        } else if (_this.data('state') == 2) {
+            $('.table2').eq(1).show().siblings('table').hide();
+        }
+    }
+})
+
+
+
+
+//时间选择器
+var startV = '';
+var endV = '';
+laydate.skin('danlan');
+var startTime = {
+    elem: '#startTime',
+    format: 'YYYY-MM-DD',
+    min: '1997-01-01', //设定最小日期为当前日期
+    max: laydate.now(), //最大日期
+    istime: true,
+    istoday: true,
+    fixed: false,
+    choose: function (datas) {
+        startV = datas;
+        endTime.min = datas; //开始日选好后，重置结束日的最小日期
+    }
+};
+var endTime = {
+    elem: '#endTime',
+    format: 'YYYY-MM-DD',
+    min: laydate.now(),
+    max: laydate.now(),
+    istime: true,
+    istoday: true,
+    fixed: false,
+    choose: function (datas) {
+        //        startTime.max = datas; //结束日选好后，重置开始日的最大日期
+        endV = datas;
+    }
+};
+
+laydate(startTime);
+laydate(endTime);
+
+
+
+
+//点击时间选择器的时候更改样式
+$('#endTime').on('click', function () {
+    dateCss();
+})
+
+$('#end').on('click', function () {
+    dateCss();
+})
+
+
+//更改日期插件的样式
+function dateCss() {
+    var arr = $('#laydate_box').attr('style').split(';');
+    var cssStr =
+        'position:absolute;right:0;';
+    for (var i = 0; i < arr.length; i++) {
+        if (arr[i].indexOf('top') != -1) {
+            cssStr += arr[i];
+        }
+    }
+
+    $('#laydate_box').attr('style', cssStr);
+}
+</script>
+
+<script>
+
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('chart_4'));
+
+        /*中间显示的数据*/
+        /*中间显示的数据*/
+        var myData = ['超速', 'SOS', '偏移', '其他']
+        var databeast = {
+            1: [38, 25, 26, 32]
+        }
+        var databeauty = {
+            1: [11, 38, 23, 30]
+        }
+        var timeLineData = [1]
+
+        var option = {
+            baseOption: {
+                backgroundColor: 'transparent',
+                timeline: {
+                    show: false,
+                    top: 0,
+                    data: []
+                },
+                legend: {
+                    show:true,
+                    // align: 'center',
+                    left: '20%',
+                    top: 6,
+                    // data: ['行驶', '停车'],
+                    // itemWidth:16,
+                    // itemHeight:12,
+                    // // borderRadius: 0, // 统一设置四个角的圆角大小
+                    icon: 'rect',
+                    textStyle: {
+                        itemGap: 7, //图例每项之间的间隔
+                        color: [],
+                        fontStyle: 'normal',
+                        fontFamily: '微软雅黑',
+                        fontSize: 12,
+                    }
+                },
+                tooltip: {
+                    show: true,
+                    trigger: 'axis',
+                    formatter: '{b}<br/>{a}: {c}',
+                    axisPointer: {
+                        type: 'shadow'
+                    }
+                },
+
+                grid: [{
+                    show: false,
+                    left: '8%',
+                    top: 25,
+                    bottom: 2,
+                    containLabel: true,
+                    width: '30%'
+                }, {
+                    show: false,
+                    left: '57%',
+                    top: 25,
+                    bottom: 0,
+                    width: '0%'
+                }, {
+                    show: false,
+                    right: '8%',
+                    top: 25,
+                    bottom: 2,
+                    containLabel: true,
+                    width: '30%'
+                }],
+
+                xAxis: [{
+                    type: 'value',
+                    inverse: true,
+                    axisLine: {
+                        show: false
+                    },
+                    axisTick: {
+                        show: false
+                    },
+                    position: 'top',
+                    axisLabel: {
+                        show: false
+                    },
+                    splitLine: {
+                        show: false
+                    }
+                }, {
+                    gridIndex: 1,
+                    show: false
+                }, {
+                    gridIndex: 2,
+                    nameTextStyle: {
+                        color: '#50afff',
+                        fontSize: 12
+                    },
+                    axisLine: {
+                        show: false
+                    },
+                    axisTick: {
+                        show: false
+                    },
+                    position: 'top',
+                    axisLabel: {
+                        show: false
+                    },
+                    splitLine: {
+                        show: false
+                    }
+                }],
+                yAxis: [{
+                    type: 'category',
+                    inverse: true,
+                    position: 'right',
+                    axisLine: {
+                        show: false
+                    },
+                    axisTick: {
+                        show: false
+                    },
+                    axisLabel: {
+                        show: false
+                    },
+                    data: myData
+                }, {
+                    gridIndex: 1,
+                    type: 'category',
+                    inverse: true,
+                    position: 'left',
+                    axisLine: {
+                        show: false
+                    },
+                    axisTick: {
+                        show: false
+                    },
+                    axisLabel: {
+                        show: true,
+                        textStyle: {
+                            color: '#fff',
+                            fontSize: 12
+                        }
+
+                    },
+                    data: myData.map(function(value) {
+                        return {
+                            value: value,
+                            textStyle: {
+                                align: 'center'
+                            }
+                        }
+                    })
+                }, {
+                    gridIndex: 2,
+                    type: 'category',
+                    inverse: true,
+                    position: 'left',
+                    axisLine: {
+                        show: false
+                    },
+                    axisTick: {
+                        show: false
+                    },
+                    axisLabel: {
+                        show: false
+
+                    },
+                    data: myData
+                }],
+                series: [
+
+                ]
+
+            },
+            options: []
+        }
+
+        option.baseOption.timeline.data.push(timeLineData[0])
+        option.options.push({
+            tooltip: {
+                trigger: 'axis',
+                formatter: '{b}<br/>{c} {a}'
+            },
+            series: [{
+                name: '昨天',
+                type: 'bar',
+                barWidth: 12,
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'left',
+                        offset: [0, 0],
+                        textStyle: {
+                            color: '#fff',
+                            fontSize: 10
+                        }
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        color: '#efef00',
+                        // barBorderRadius: 50
+                    }
+                },
+
+                data: databeast[timeLineData[0]]
+            }, {
+                name: '今天',
+                type: 'bar',
+                barWidth: 12,
+                xAxisIndex: 2,
+                yAxisIndex: 2,
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'right',
+                        offset: [0, 0],
+                        textStyle: {
+                            color: '#fff',
+                            fontSize: 10
+                        }
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        color: '#25f3e6',
+                        // barBorderRadius: 50
+                    }
+                },
+                data: databeauty[timeLineData[0]]
+            }]
+        })
+        
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+        window.addEventListener("resize",function(){
+            myChart.resize();
+        });
+        
+</script>
+
+<script>
+// 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('chart_7'));
+
+//热力
+		var days_3=['密云区','延庆区','朝阳区','丰台区','石景山区','海淀区','门头沟区','房山区','通州区','顺义区','昌平区','大兴区','怀柔区','平谷区','东城区','西城区'],
+		var  hours_3 = ['0时', '1时', '2时', '3时', '4时', '5时', '6时', '7时', '8时', '9时', '10时', '11时', '12时','13时','14时','15时','16时','17时','18时','19时','20时','21时','22时','23时'];
+		var data1_3 = [];
+		var datav_3 = [
+		1,1,1,1,1,1,1,1,1,1,
+		2,2,2,2,2,2,2,2,2,2,
+		3,3,3,3,3,3,3,3,3,3,
+		3,3,3,3,3,3,3,3,3,3,
+		3,3,3,3,3,3,3,3,3,3,
+		3,3,3,3,3,3,3,3,3,3,
+		4,4,4,4,4,4,4,4,4,4,
+		6,6,6,6,6,6,6,6,6,6,
+		9,9,9,9,9,9,9,9,9,9,
+		9,9,9,9,9,9,9,9,9,9,
+		8,8,8,8,8,8,8,8,8,8,
+		8,8,8,8,8,8,8,8,8,8,
+		7,7,7,7,7,7,7,7,7,7,
+		7,7,7,7,7,7,7,7,7,7,
+		6,6,6,6,6,6,6,6,6,6,
+		5,5,5,5,5,5,5,5,5,5,
+		5,5,5,5,5,5,5,5,5,5,
+		7,7,7,7,7,7,7,7,7,7,
+		9,9,9,9,9,9,9,9,9,9,
+		9,9,9,9,9,9,9,9,9,9,
+		8,8,8,8,8,8,8,8,8,8,
+		5,5,5,5,5,5,5,5,5,5,
+		3,3,3,3,3,3,3,3,3,3,
+		2,2,2,2,2,2,2,2,2,2,
+		]
+        var data1_3 = [];
+        for (var z = 0; z < hours_3.length; z++) {
+
+            for (var i = 0; i < days_3.length; i++) {
+                data1_3.push([i, z, datav_3[i+z*days_3.length]]);
+            }
+        }
+        data1_3 = data1_3.map(function(item) {
+            return [item[1], item[0], item[2] || '-'];
+        });
+
+        option = {
+            // dataZoom: [
+            //
+            //     {
+            //         id: 'dataZoomY',
+            //         type: 'slider',
+            //         yAxisIndex: [0],
+            //         startValue:0,
+            //         endValue:100,
+            //         filterMode: 'empty',
+            //         // textStyle: {
+            //         //     color: '#fff',
+            //         // }
+            //     }
+            // ],
+            tooltip: {
+                position: 'top',
+                formatter: function(params) {
+                    var sum = 0;
+                    for(var x=0;x<datav_3.length;x++){
+                        sum = sum + datav_3[x]
+                    }
+                    // return '检验结论：' + days_3[params.value[1]] + '<br/>' + '数量：' + params.data[2];
+                    return '检验结论：' + days_3[params.value[1]] + '<br/>' + '数量：' + params.data[2]+ '<br>' + '占比：' + (params.data[2] / sum * 100).toFixed(2) + '%，总数:'+sum;;
+                }
+            },
+            animation: false,
+            grid: {
+				top:30,
+                left: '8%',
+                right: '8%',
+                bottom: 40,
+                containLabel: true
+            },
+            xAxis: {
+                type: 'category',
+                data: hours_3,
+                axisLine : {
+                    lineStyle : {
+                        color : '#fff'
+                    }
+                },
+                axisLabel: {
+                    // interval:0,
+                    // rotate:,
+                    textStyle: {
+                        color: '#fff',
+                        fontSize: 12,
+                    },
+                } ,
+                nameTextStyle:{
+                    color: '#fff',
+                    fontSize: 12,
+                },
+                splitArea: {
+                    show: true
+                },
+                // name: '检验类别'
+            },
+            yAxis: {
+                type: 'category',
+                data: days_3,
+                axisLine : {
+                    lineStyle : {
+                        color : '#fff'
+                    }
+                },
+                nameTextStyle:{
+                    color: '#fff',
+                    fontSize: 12,
+                },
+                axisLabel: {
+                    // interval:0,
+                    // rotate:40
+                    // ,
+                    textStyle: {
+                        color: '#fff',
+                        fontSize: 12,
+                    },
+                } ,
+                splitArea: {
+                    show: true
+                },
+                // name: '检验结论'
+            },
+            visualMap: {
+                min: 1,
+                max: 10,
+                calculable: true,
+                orient: 'horizontal',
+                left: 'center',
+				
+                bottom: '1%',
+                text: ['10','1'],// 文本，默认为数值文本
+                //color:['#20a0ff','#D2EDFF'],
+                calculable: false,
+                color: [
+                    '#dd413b', '#fec42c', '#80F1BE'
+                ],
+                textStyle: {
+                    fontSize: 12,
+                    color: '#fff',
+                }
+            },
+            series: [{
+                name: 'Punch Card',
+                type: 'heatmap',
+                data: data1_3,
+                label: {
+                    normal: {
+                        show: true
+                    }
+                },
+                itemStyle: {
+                    emphasis: {
+                        shadowBlur: 10,
+                        shadowColor: 'rgba(120, 0, 0, 0.5)'
+                    }
+                }
+            }]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+        window.addEventListener("resize", function () {
+            myChart.resize();
+        });
+</script>
+
+
+
+
+<script>
+// 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('chart_6'));
+		var xData_109 = ["2002","2003","2004","2005","2006","2007","2008","2009","2010","2011","2012","2013","2014","2015","2016","2017","2018","2019","2020","2021",];
+		
+        // var xData_109 = function() {
+        //     var data = ["2002","2003","2004","2005","2006","2007","2008","2009","2010","2011","2012","2013","2014","2015","2016","2017","2018","2019","2020","2021",];
+        //     return data;
+        // }();
+//1级
+        var _data_109_1 =[30, 55, 46, 40, 70, 94, 118, 181, 253, 318, 540, 517, 503, 459, 417, 155, 72, 37, 0, 0]
+        var _data_109_2 =[239, 230, 281, 382, 324, 341, 340, 784, 1157, 1995, 2003, 1711, 1365, 1252, 1323, 759, 394, 149, 13, 4]
+        var   _data_109_3 = [538, 604, 584, 363, 431, 658, 745, 672, 1297, 1051, 926, 986, 990, 692, 621, 368, 183, 42, 1, 0]
+        var    _data_109_4 = [12, 18, 19, 13, 3, 4, 16, 32, 25, 12, 24, 26, 15, 13, 5, 5, 1, 3, 0, 0]
+        var   _data_109_5 = [0, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 2, 0, 0, 0, 0, 0]
+        var   _data_109_6 = [2, 3, 0, 0, 6, 0, 0, 1, 7, 7, 7, 3, 4, 11, 9, 9, 11, 11, 1, 1]
+        var  _data_109_7 = [425, 621, 707, 537, 655, 874, 994, 829, 1374, 1654, 2157, 2257, 2180, 2846, 2593, 3274, 3368, 1805, 920, 453]
+        var   _data_109_8=  [22, 16, 16, 12, 26, 21, 28, 12, 12, 70, 53, 29, 44, 34, 32, 81, 36, 29, 0, 1]
+        var   _data_109_9= [51, 64, 69, 33, 49, 71, 69, 132, 233, 297, 454, 536, 973, 1473, 2420, 6322, 5369, 4075, 2712, 1980]
+        var    _data_109_10=  [1, 2, 2, 3, 0, 2, 6, 1, 2, 4, 5, 6, 9, 4, 3, 4, 0, 1, 0, 0]
+        var   _data_109_11=  [0, 0, 0, 0, 0, 0, 8, 0, 1, 2, 1, 3, 1, 1, 2, 0, 1, 0, 0, 0]
+        var   _data_109_12=[213, 54, 42, 29, 20, 62, 121, 97, 163, 304, 778, 409, 375, 283, 431, 739, 343, 121, 54, 6]
+        var  _data_109_13= [0, 0, 0, 1, 0, 0, 0, 0, 0, 4, 3, 3, 1, 0, 0, 0, 0, 0, 0, 0]
+        option109 = {
+            "tooltip": {
+                "trigger": "axis",
+                "axisPointer": {
+                    "type": "shadow",
+                    textStyle: {
+                        color: "#fff"
+                    }
+                },
+                formatter: function(params) {
+                    // console.log(params)
+                    var indexX =0;
+                    for(var x=0;x<xData_109.length;x++){
+                        if(params[0].name === xData_109[x]){
+                            indexX = x;
+                            break;
+                        }
+                    }
+                    var sum = _data_109_1[indexX] + _data_109_2[indexX] + _data_109_3[indexX] + _data_109_4[indexX] + _data_109_5[indexX] + _data_109_6[indexX] + _data_109_7[indexX] + _data_109_8[indexX] + _data_109_9[indexX] + _data_109_10[indexX] + _data_109_11[indexX] + _data_109_12[indexX] + _data_109_13[indexX];
+
+                    // var displayString = '制造年份：' + params[0].name
+                    for(var m =0;m<params.length;m++){
+                        var itemString = '<br/>'+ params[m].marker + params[m].seriesName +':数量：' + params[m].data+ '，' + '占比：' + (params[m].data / sum * 100).toFixed(2) + '%，总数:'+sum;
+                        displayString = displayString + itemString
+                    }
+                    return displayString
+                }
+            },
+            "grid": {
+                "borderWidth": 0,
+                left:65,
+                top:40,
+                bottom: 70,
+                textStyle: {
+                    color: "#fff"
+                }
+            },
+            // "legend": {
+            //     x: '4%',
+            //     top: '5%',
+            //     textStyle: {
+            //         color: '#fff',
+            //         fontSize: '16',
+            //     },
+            //     "data": ['1 级', '2 级', '3 级', '4 级', '5 级', '不合格', '合格', '监督运行', '其他', '停止运行', '修理后复检', '允许使用', '整改后使用']
+            // },
+
+
+            "calculable": true,
+            "xAxis": [{
+                "type": "category",
+                "axisLine": {
+                    lineStyle: {
+                        color: '#90979c'
+                    }
+                },
+                "splitLine": {
+                    "show": false
+                },
+                "axisTick": {
+                    "show": false
+                },
+                "splitArea": {
+                    "show": false
+                },
+                "axisLabel": {
+                    // "interval": 0,
+                    textStyle: {
+                        color: '#fff',
+                        fontSize: '12',
+                    },
+                },
+                "data": xData_109,
+            }],
+            "yAxis": [{
+                "type": "value",
+                "splitLine": {
+                    "show": false
+                },
+                "axisLine": {
+                    lineStyle: {
+                        color: '#90979c'
+                    }
+                },
+                "axisTick": {
+                    "show": false
+                },
+                "axisLabel": {
+                    "interval": 0,
+                    textStyle: {
+                        color: '#fff',
+                        fontSize: '12',
+                    },
+                },
+                "splitArea": {
+                    "show": false
+                },
+
+            }],
+            "dataZoom": [{
+                "show": true,
+                "height": 10,
+                "xAxisIndex": [
+                    0
+                ],
+                bottom: 30,
+                "start": 0,
+                "end": 100,
+                handleIcon: 'path://M306.1,413c0,2.2-1.8,4-4,4h-59.8c-2.2,0-4-1.8-4-4V200.8c0-2.2,1.8-4,4-4h59.8c2.2,0,4,1.8,4,4V413z',
+                handleSize: '110%',
+                handleStyle: {
+                    color: "#d3dee5",
+
+                },
+                textStyle: {
+                    color: "#fff"
+                },
+                borderColor: "#90979c"
+
+
+            }, {
+                bottom:10,
+                "type": "inside",
+                "show": true,
+                "height": 15,
+                "start": 1,
+                "end": 35
+            }],
+            "series": [
+                {
+                    "name": "晴",
+                    "type": "line",
+                    "stack": "",
+                    symbol: 'circle',
+                    "itemStyle": {
+                        "normal": {
+                            "color": "#567",
+                            "label": {
+                                "show": false,
+                                "textStyle": {
+                                    "color": "#fff"
+                                },
+                                "position": "insideTop",
+                                formatter: function(p) {
+                                    return p.value > 0 ? (p.value) : '';
+                                }
+                            }
+                        }
+                    },
+                    "data": _data_109_1
+                },
+                {
+                    "name": "小雨",
+                    "type": "line",
+                    "stack": "",
+                    symbol: 'circle',
+                    "barMaxWidth": 35,
+                    "barGap": "10%",
+                    "itemStyle": {
+                        "normal": {
+                            "color": "rgba(0,191,183,1)",
+                            "label": {
+                                "show": false,
+                                "textStyle": {
+                                    "color": "#fff"
+                                },
+                                "position": "insideTop",
+                                formatter: function(p) {
+                                    return p.value > 0 ? (p.value) : '';
+                                }
+                            }
+                        }
+                    },
+                    "data":_data_109_2
+                },
+                {
+                    "name": "中雨",
+                    "type": "line",
+                    "stack": "总量",
+                    symbol: 'circle',
+                    "itemStyle": {
+                        "normal": {
+                            "color": "rgba(255,193,193,1)",
+                            "label": {
+                                "show": false,
+                                "textStyle": {
+                                    "color": "#fff"
+                                },
+                                "position": "insideTop",
+                                formatter: function(p) {
+                                    return p.value > 0 ? (p.value) : '';
+                                }
+                            }
+                        }
+                    },
+                    "data": _data_109_3
+                },
+                {
+                    "name": "大雨",
+                    "type": "line",
+                    "stack": "总量",
+                    symbol: 'circle',
+                    "itemStyle": {
+                        "normal": {
+                            "color": "rgba(186,85,211,1)",
+                            "label": {
+                                "show": false,
+                                "textStyle": {
+                                    "color": "#fff"
+                                },
+                                "position": "insideTop",
+                                formatter: function(p) {
+                                    return p.value > 0 ? (p.value) : '';
+                                }
+                            }
+                        }
+                    },
+                    "data":  _data_109_4
+                },
+                {
+                    "name": "小雪",
+                    "type": "line",
+                    "stack": "总量",
+                    symbol: 'circle',
+                    "itemStyle": {
+                        "normal": {
+                            "color": "rgba(255,193,193,1)",
+                            "label": {
+                                "show": false,
+                                "textStyle": {
+                                    "color": "#fff"
+                                },
+                                "position": "insideTop",
+                                formatter: function(p) {
+                                    return p.value > 0 ? (p.value) : '';
+                                }
+                            }
+                        }
+                    },
+                    "data":_data_109_5
+                },
+                {
+                    "name": "大雪",
+                    "type": "line",
+                    "stack": "总量",
+                    // symbolSize: 10,
+                    symbol: 'circle',
+                    "itemStyle": {
+                        "normal": {
+                            "color": "rgba(252,230,48,1)",
+                            "barBorderRadius": 0,
+                            "label": {
+                                "show": false,
+                                "position": "top",
+                                formatter: function(p) {
+                                    return p.value > 0 ? (p.value) : '';
+                                }
+                            }
+                        }
+                    },
+                    "data": _data_109_6
+                },
+                {
+                    "name": "暴雪",
+                    "type": "line",
+                    "stack": "总量",
+                    symbol: 'circle',
+                    "barMaxWidth": 35,
+                    "barGap": "10%",
+                    "itemStyle": {
+                        "normal": {
+                            "color": "rgba(255,185,15,1)",
+                            "label": {
+                                "show": false,
+                                "textStyle": {
+                                    "color": "#fff"
+                                },
+                                "position": "insideTop",
+                                formatter: function(p) {
+                                    return p.value > 0 ? (p.value) : '';
+                                }
+                            }
+                        }
+                    },
+                    "data": _data_109_7
+                },
+                {
+                    "name": "霾",
+                    "type": "line",
+                    "stack": "总量",
+                    // symbolSize: 10,
+                    symbol: 'circle',
+                    "itemStyle": {
+                        "normal": {
+                            "color": "#F88",
+                            "barBorderRadius": 0,
+                            "label": {
+                                "show": false,
+                                "position": "top",
+                                formatter: function(p) {
+                                    return p.value > 0 ? (p.value) : '';
+                                }
+                            }
+                        }
+                    },
+                    "data":_data_109_8
+                },
+                {
+                    "name": "多云",
+                    "type": "line",
+                    "stack": "总量",
+                    symbol: 'circle',
+                    "barMaxWidth": 35,
+                    "barGap": "10%",
+                    "itemStyle": {
+                        "normal": {
+                            "color": "rgba(255,144,128,1)",
+                            "label": {
+                                "show": false,
+                                "textStyle": {
+                                    "color": "#fff"
+                                },
+                                "position": "insideTop",
+                                formatter: function(p) {
+                                    return p.value > 0 ? (p.value) : '';
+                                }
+                            }
+                        }
+                    },
+                    "data":_data_109_9
+                },
+                {
+                    "name": "沙尘暴",
+                    "type": "line",
+                    "stack": "总量",
+                    // symbolSize: 10,
+                    symbol: 'circle',
+                    "itemStyle": {
+                        "normal": {
+                            "color": "#900",
+                            "barBorderRadius": 0,
+                            "label": {
+                                "show": false,
+                                "position": "top",
+                                formatter: function(p) {
+                                    return p.value > 0 ? (p.value) : '';
+                                }
+                            }
+                        }
+                    },
+                    "data":_data_109_10
+                },
+                // {
+                //     "name": "修理后复检",
+                //     "type": "line",
+                //     "stack": "总量",
+                //     // symbolSize: 10,
+                //     symbol: 'circle',
+                //     "itemStyle": {
+                //         "normal": {
+                //             "color": "#190",
+                //             "barBorderRadius": 0,
+                //             "label": {
+                //                 "show": false,
+                //                 "position": "top",
+                //                 formatter: function(p) {
+                //                     return p.value > 0 ? (p.value) : '';
+                //                 }
+                //             }
+                //         }
+                //     },
+                //     "data":_data_109_11
+                // },
+                // {
+                //     "name": "允许使用",
+                //     "type": "line",
+                //     "stack": "总量",
+                //     symbol: 'circle',
+                //     "itemStyle": {
+                //         "normal": {
+                //             "color": "#099",
+                //             "label": {
+                //                 "show": false,
+                //                 "textStyle": {
+                //                     "color": "#fff"
+                //                 },
+                //                 "position": "insideTop",
+                //                 formatter: function(p) {
+                //                     return p.value > 0 ? (p.value) : '';
+                //                 }
+                //             }
+                //         }
+                //     },
+                //     "data": _data_109_12
+                // },
+
+                // {
+                //     "name": "整改后使用",
+                //     "type": "line",
+                //     "stack": "总量",
+                //     // symbolSize: 10,
+                //     symbol: 'circle',
+                //     "itemStyle": {
+                //         "normal": {
+                //             "color": "#777",
+                //             "barBorderRadius": 0,
+                //             "label": {
+                //                 "show": false,
+                //                 "position": "top",
+                //                 formatter: function(p) {
+                //                     return p.value > 0 ? (p.value) : '';
+                //                 }
+                //             }
+                //         }
+                //     },
+                //     "data": _data_109_13
+                // },
+
+            ]
+        }
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option109);
+        window.addEventListener("resize", function () {
+            myChart.resize();
+        });
+</script>
+
+<!-- <script>
+// 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('chart_3'));
+        myChart.clear();
+        //5.	压力容器总数据量的检验结论统计
+        var data = [  
+            {name: '上城区', value: 5031},
+            {name: '下城区', value: 20530},
+            {name: '拱墅区', value: 21337},
+            {name: '西湖区', value: 654},
+            {name:  '滨江区', value: 21},
+            {name: '萧山区', value: 149},
+            {name: '余杭区', value: 108718},
+            {name: '监督运行', value: 943},
+            {name: '临平区', value: 58347},
+            {name: '钱塘区', value: 87},
+            {name: '临安区', value: 26},
+        ];
+        var xData_106_ = [],
+            yData_106_ = [];
+        var min = 0;
+        data.map(function(a, b) {
+            xData_106_.push(a.name);
+            if (a.value === 0) {
+                yData_106_.push(a.value + min);
+            } else {
+                yData_106_.push(a.value);
+            }
+        });
+        option106 = {
+            // backgroundColor:"#111c4e",
+            color: ['#3398DB'],
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'line',
+                    lineStyle: {
+                        opacity: 0
+                    }
+                },
+                formatter: function(prams) {
+                    if (prams[0].data === min) {
+                        return "：0%"
+                    } else {
+                        // return "合格率：" + prams[0].data + "%"
+                        // return prams[0].name+"<br>数量：" + prams[0].data
+                        var sum = 0;
+                        for(var x=0;x<data.length;x++){
+                            sum = sum + data[x].value
+                        }
+                        // console.log(sum)
+                        return prams[0].name+"<br>数量：" + prams[0].data+ '<br>' + '占比：' + (prams[0].data / sum * 100).toFixed(2) + '%,总数:'+sum;
+                    }
+                }
+            },
+            legend: {
+                data: ['直接访问', '背景'],
+                show: false
+            },
+            grid: {
+                left: 0,
+                right: 18,
+                bottom: 10,
+                top: 25,
+                height: '85%',
+                containLabel: true,
+                z: 22
+            },
+            xAxis: [{
+                type: 'category',
+                gridIndex: 0,
+                data: xData_106_,
+                axisTick: {
+                    alignWithLabel: true
+                },
+                axisLine: {
+                    lineStyle: {
+                        color: '#0c3b71'
+                    }
+                },
+                axisLabel: {
+                    show: true,
+                    // color: 'rgb(170,170,170)',
+                    // fontSize:16,
+                    textStyle: {
+                        color: '#fff',
+                        fontSize: '8'
+                    },
+					interval:0,
+                    rotate:40 ,
+                }
+            }],
+            yAxis: [{
+                type: 'value',
+                gridIndex: 0,
+                splitLine: {
+                    show: false
+                },
+                axisTick: {
+                    show: false
+                },
+                min: min,
+                max: 120000,
+                axisLine: {
+                    lineStyle: {
+                        color: '#0c3b71'
+                    }
+                },
+                axisLabel: {
+                    // color: 'rgb(170,170,170)',
+                    formatter: '{value} ',
+                    textStyle: {
+                        color: '#fff',
+                        fontSize: '12'
+                    },
+                }
+            },
+                {
+                    type: 'value',
+                    gridIndex: 0,
+                    min: min,
+                    max: 120000,
+                    splitNumber: 8,
+                    splitLine: {
+                        show: false
+                    },
+                    axisLine: {
+                        show: false
+                    },
+                    axisTick: {
+                        show: false
+                    },
+                    axisLabel: {
+                        show: false
+                    },
+                    splitArea: {
+                        show: true,
+                        areaStyle: {
+                            color: ['rgba(250,250,250,0.0)', 'rgba(250,250,250,0.05)']
+                        }
+                    }
+                }
+            ],
+            series: [{
+                name: ' ',
+                type: 'bar',
+                barWidth: '30%',
+                xAxisIndex: 0,
+                yAxisIndex: 0,
+                label: {
+                    normal: {
+                        show: true,
+                        "position": "top",
+                        "textStyle": {
+                            "color": "#fff"
+                        },
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        barBorderRadius: 30,
+                        color: new echarts.graphic.LinearGradient(
+                            0, 0, 0, 1, [{
+                                offset: 0,
+                                color: '#00feff'
+                            },
+                                {
+                                    offset: 0.5,
+                                    color: '#027eff'
+                                },
+                                {
+                                    offset: 1,
+                                    color: '#0286ff'
+                                }
+                            ]
+                        )
+                    }
+                },
+                data: yData_106_,
+                zlevel: 11
+
+            },
+                {
+                    name: '背景',
+                    type: 'bar',
+                    barWidth: '50%',
+                    xAxisIndex: 0,
+                    yAxisIndex: 1,
+                    barGap: '-135%',
+                    data: [120000, 120000, 120000, 120000, 120000, 120000, 120000,120000, 120000, 120000, 120000, 120000, 120000],
+                    itemStyle: {
+                        normal: {
+                            color: 'rgba(255,255,255,0.1)'
+                        }
+                    },
+                    zlevel: 9
+                },
+
+            ]
+        };
+
+
+        myChart.setOption(option106);
+</script> -->
+
+<script>
+var myChart = echarts.init($("#con1")[0]);
+	option = {
+
+		tooltip : {
+			trigger: 'axis'
+		},
+		grid:{
+			x:3,
+			y:3,
+			x2:3,
+			y2:3
+		},
+		color:['#f40e0e','#1586ee'],
+//            toolbox: {
+//                show : false,
+//                feature : {
+//                    mark : {show: true},
+//                    dataView : {show: true, readOnly: false},
+//                    magicType : {show: true, type: ['line', 'bar', 'stack', 'tiled']},
+//                    restore : {show: true},
+//                    saveAsImage : {show: true}
+//                }
+//            },
+		calculable : true,
+		xAxis : [
+			{
+				type : 'category',
+				boundaryGap : false,
+				data : ['周一','周二','周三','周四','周五','周六','周日'],
+				shown:false,
+				splitLine:{show: false},
+			}
+		],
+		yAxis : [
+			{
+				type : 'value',
+				shown:false,
+				splitLine:{show: false},//去掉网格线
+				splitArea : {show : true}//保留网格区域
+			}
+		],
+		series : [
+			{
+				name:'拥堵',
+				type:'line',
+				smooth:true,
+				itemStyle: {normal: {areaStyle: {type: 'default'}}},
+				data:[10, 12, 21, 54, 260, 830, 710]
+			},
+
+			{
+				name:'畅通',
+				type:'line',
+				smooth:true,
+				itemStyle: {normal: {areaStyle: {type: 'default'}}},
+				data:[1320, 1132, 601, 234, 120, 90, 20]
+			}
+		]
+	};
+	myChart.setOption(option);
+	window.onresize = myChart.resize
+</script>
+
+<script>
+// 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('chart_5'));
+
+        var excelJson_111 = [
+            {a: '区', b: '1 级', c: 0},
+            {a: '区', b: '2 级', c: 314},
+            {a: '区', b: '3 级', c: 230},
+			{a: '区', b: '3 级', c: 230},
+			
+			{a: '区', b: '3 级', c: 230},
+			{a: '区', b: '3 级', c: 230},
+			{a: '区', b: '3 级', c: 230},
+			{a: '区', b: '3 级', c: 230},
+			{a: '区', b: '3 级', c: 230},
+			{a: '区', b: '3 级', c: 230},
+			{a: '区', b: '3 级', c: 230},
+			{a: '区', b: '3 级', c: 230},
+            {a: '安徽八一化工股份有限公司', b: '4 级', c: 32},
+            {a: '安徽八一化工股份有限公司', b: '5 级', c: 0},
+            {a: '安徽八一化工股份有限公司', b: '不合格', c: 0},
+            {a: '安徽八一化工股份有限公司', b: '合格', c: 172},
+            {a: '安徽八一化工股份有限公司', b: '其他', c: 384},
+            {a: '安徽八一化工股份有限公司', b: '允许使用', c: 0},
+            {a: '安徽八一化工股份有限公司', b: '整改后使用', c: 0},
+            {a: '安徽德邦化工有限公司', b: '1 级', c: 1},
+            {a: '安徽德邦化工有限公司', b: '2 级', c: 262},
+            {a: '安徽德邦化工有限公司', b: '3 级', c: 71},
+            {a: '安徽德邦化工有限公司', b: '4 级', c: 0},
+            {a: '安徽德邦化工有限公司', b: '5 级', c: 0},
+            {a: '安徽德邦化工有限公司', b: '不合格', c: 2},
+            {a: '安徽德邦化工有限公司', b: '合格', c: 589},
+            {a: '安徽德邦化工有限公司', b: '其他', c: 218},
+            {a: '安徽德邦化工有限公司', b: '允许使用', c: 1},
+            {a: '安徽德邦化工有限公司', b: '整改后使用', c: 0},
+            {a: '安徽国星生物化学有限公司(开发区）', b: '1 级', c: 82},
+            {a: '安徽国星生物化学有限公司(开发区）', b: '2 级', c: 62},
+            {a: '安徽国星生物化学有限公司(开发区）', b: '3 级', c: 3},
+            {a: '安徽国星生物化学有限公司(开发区）', b: '4 级', c: 0},
+            {a: '安徽国星生物化学有限公司(开发区）', b: '5 级', c: 0},
+            {a: '安徽国星生物化学有限公司(开发区）', b: '不合格', c: 0},
+            {a: '安徽国星生物化学有限公司(开发区）', b: '合格', c: 192},
+            {a: '安徽国星生物化学有限公司(开发区）', b: '其他', c: 112},
+            {a: '安徽国星生物化学有限公司(开发区）', b: '允许使用', c: 87},
+            {a: '安徽国星生物化学有限公司(开发区）', b: '整改后使用', c: 0},
+            {a: '安徽昊源化工集团有限公司', b: '1 级', c: 42},
+            {a: '安徽昊源化工集团有限公司', b: '2 级', c: 138},
+            {a: '安徽昊源化工集团有限公司', b: '3 级', c: 604},
+            {a: '安徽昊源化工集团有限公司', b: '4 级', c: 11},
+            {a: '安徽昊源化工集团有限公司', b: '5 级', c: 0},
+            {a: '安徽昊源化工集团有限公司', b: '不合格', c: 0},
+            {a: '安徽昊源化工集团有限公司', b: '合格', c: 87},
+            {a: '安徽昊源化工集团有限公司', b: '其他', c: 6},
+            {a: '安徽昊源化工集团有限公司', b: '允许使用', c: 0},
+            {a: '安徽昊源化工集团有限公司', b: '整改后使用', c: 0},
+            {a: '安徽华塑股份有限公司', b: '1 级', c: 0},
+            {a: '安徽华塑股份有限公司', b: '2 级', c: 0},
+            {a: '安徽华塑股份有限公司', b: '3 级', c: 0},
+            {a: '安徽华塑股份有限公司', b: '4 级', c: 0},
+            {a: '安徽华塑股份有限公司', b: '5 级', c: 0},
+            {a: '安徽华塑股份有限公司', b: '不合格', c: 0},
+            {a: '安徽华塑股份有限公司', b: '合格', c: 768},
+            {a: '安徽华塑股份有限公司', b: '其他', c: 564},
+            {a: '安徽华塑股份有限公司', b: '允许使用', c: 0},
+            {a: '安徽华塑股份有限公司', b: '整改后使用', c: 0},
+            {a: '安徽华星化工股份有限公司', b: '1 级', c: 12},
+            {a: '安徽华星化工股份有限公司', b: '2 级', c: 435},
+            {a: '安徽华星化工股份有限公司', b: '3 级', c: 215},
+            {a: '安徽华星化工股份有限公司', b: '4 级', c: 14},
+            {a: '安徽华星化工股份有限公司', b: '5 级', c: 0},
+            {a: '安徽华星化工股份有限公司', b: '不合格', c: 0},
+            {a: '安徽华星化工股份有限公司', b: '合格', c: 333},
+            {a: '安徽华星化工股份有限公司', b: '其他', c: 13},
+            {a: '安徽华星化工股份有限公司', b: '允许使用', c: 2},
+            {a: '安徽华星化工股份有限公司', b: '整改后使用', c: 0},
+            {a: '安徽淮化集团有限公司', b: '1 级', c: 7},
+            {a: '安徽淮化集团有限公司', b: '2 级', c: 273},
+            {a: '安徽淮化集团有限公司', b: '3 级', c: 174},
+            {a: '安徽淮化集团有限公司', b: '4 级', c: 4},
+            {a: '安徽淮化集团有限公司', b: '5 级', c: 0},
+            {a: '安徽淮化集团有限公司', b: '不合格', c: 3},
+            {a: '安徽淮化集团有限公司', b: '合格', c: 94},
+            {a: '安徽淮化集团有限公司', b: '其他', c: 37},
+            {a: '安徽淮化集团有限公司', b: '允许使用', c: 18},
+            {a: '安徽淮化集团有限公司', b: '整改后使用', c: 0},
+            {a: '安徽江淮汽车股份有限公司', b: '1 级', c: 1},
+            {a: '安徽江淮汽车股份有限公司', b: '2 级', c: 5},
+            {a: '安徽江淮汽车股份有限公司', b: '3 级', c: 112},
+            {a: '安徽江淮汽车股份有限公司', b: '4 级', c: 0},
+            {a: '安徽江淮汽车股份有限公司', b: '5 级', c: 0},
+            {a: '安徽江淮汽车股份有限公司', b: '不合格', c: 0},
+            {a: '安徽江淮汽车股份有限公司', b: '合格', c: 383},
+            {a: '安徽江淮汽车股份有限公司', b: '其他', c: 22},
+            {a: '安徽江淮汽车股份有限公司', b: '允许使用', c: 0},
+            {a: '安徽江淮汽车股份有限公司', b: '整改后使用', c: 0},
+            {a: '安徽江淮汽车股份有限公司乘用车公司', b: '1 级', c: 0},
+            {a: '安徽江淮汽车股份有限公司乘用车公司', b: '2 级', c: 0},
+            {a: '安徽江淮汽车股份有限公司乘用车公司', b: '3 级', c: 0},
+            {a: '安徽江淮汽车股份有限公司乘用车公司', b: '4 级', c: 0},
+            {a: '安徽江淮汽车股份有限公司乘用车公司', b: '5 级', c: 0},
+            {a: '安徽江淮汽车股份有限公司乘用车公司', b: '不合格', c: 0},
+            {a: '安徽江淮汽车股份有限公司乘用车公司', b: '合格', c: 576},
+            {a: '安徽江淮汽车股份有限公司乘用车公司', b: '其他', c: 3},
+            {a: '安徽江淮汽车股份有限公司乘用车公司', b: '允许使用', c: 0},
+            {a: '安徽江淮汽车股份有限公司乘用车公司', b: '整改后使用', c: 0},
+            {a: '安徽六国化工股份有限公司', b: '1 级', c: 0},
+            {a: '安徽六国化工股份有限公司', b: '2 级', c: 7},
+            {a: '安徽六国化工股份有限公司', b: '3 级', c: 105},
+            {a: '安徽六国化工股份有限公司', b: '4 级', c: 4},
+            {a: '安徽六国化工股份有限公司', b: '5 级', c: 0},
+            {a: '安徽六国化工股份有限公司', b: '不合格', c: 0},
+            {a: '安徽六国化工股份有限公司', b: '合格', c: 488},
+            {a: '安徽六国化工股份有限公司', b: '其他', c: 53},
+            {a: '安徽六国化工股份有限公司', b: '允许使用', c: 3},
+            {a: '安徽六国化工股份有限公司', b: '整改后使用', c: 0},
+            {a: '安徽三星化工有限责任公司', b: '1 级', c: 73},
+            {a: '安徽三星化工有限责任公司', b: '2 级', c: 211},
+            {a: '安徽三星化工有限责任公司', b: '3 级', c: 411},
+            {a: '安徽三星化工有限责任公司', b: '4 级', c: 31},
+            {a: '安徽三星化工有限责任公司', b: '5 级', c: 10},
+            {a: '安徽三星化工有限责任公司', b: '不合格', c: 16},
+            {a: '安徽三星化工有限责任公司', b: '合格', c: 187},
+            {a: '安徽三星化工有限责任公司', b: '其他', c: 3},
+            {a: '安徽三星化工有限责任公司', b: '允许使用', c: 0},
+            {a: '安徽三星化工有限责任公司', b: '整改后使用', c: 0},
+            {a: '安徽省天然气开发有限责任公司', b: '1 级', c: 0},
+            {a: '安徽省天然气开发有限责任公司', b: '2 级', c: 25},
+            {a: '安徽省天然气开发有限责任公司', b: '3 级', c: 12},
+            {a: '安徽省天然气开发有限责任公司', b: '4 级', c: 0},
+            {a: '安徽省天然气开发有限责任公司', b: '5 级', c: 0},
+            {a: '安徽省天然气开发有限责任公司', b: '不合格', c: 0},
+            {a: '安徽省天然气开发有限责任公司', b: '合格', c: 474},
+            {a: '安徽省天然气开发有限责任公司', b: '其他', c: 15},
+            {a: '安徽省天然气开发有限责任公司', b: '允许使用', c: 0},
+            {a: '安徽省天然气开发有限责任公司', b: '整改后使用', c: 0},
+            {a: '安庆市加兵汽车天燃气设备充装维修厂', b: '1 级', c: 0},
+            {a: '安庆市加兵汽车天燃气设备充装维修厂', b: '2 级', c: 0},
+            {a: '安庆市加兵汽车天燃气设备充装维修厂', b: '3 级', c: 0},
+            {a: '安庆市加兵汽车天燃气设备充装维修厂', b: '4 级', c: 0},
+            {a: '安庆市加兵汽车天燃气设备充装维修厂', b: '5 级', c: 0},
+            {a: '安庆市加兵汽车天燃气设备充装维修厂', b: '不合格', c: 0},
+            {a: '安庆市加兵汽车天燃气设备充装维修厂', b: '合格', c: 0},
+            {a: '安庆市加兵汽车天燃气设备充装维修厂', b: '其他', c: 799},
+            {a: '安庆市加兵汽车天燃气设备充装维修厂', b: '允许使用', c: 0},
+            {a: '安庆市加兵汽车天燃气设备充装维修厂', b: '整改后使用', c: 0},
+            {a: '肥西县利华交通运输有限公司', b: '1 级', c: 0},
+            {a: '肥西县利华交通运输有限公司', b: '2 级', c: 5},
+            {a: '肥西县利华交通运输有限公司', b: '3 级', c: 0},
+            {a: '肥西县利华交通运输有限公司', b: '4 级', c: 0},
+            {a: '肥西县利华交通运输有限公司', b: '5 级', c: 0},
+            {a: '肥西县利华交通运输有限公司', b: '不合格', c: 0},
+            {a: '肥西县利华交通运输有限公司', b: '合格', c: 284},
+            {a: '肥西县利华交通运输有限公司', b: '其他', c: 33},
+            {a: '肥西县利华交通运输有限公司', b: '允许使用', c: 350},
+            {a: '肥西县利华交通运输有限公司', b: '整改后使用', c: 3},
+            {a: '阜阳市洪涛汽车保洁有限公司', b: '1 级', c: 0},
+            {a: '阜阳市洪涛汽车保洁有限公司', b: '2 级', c: 0},
+            {a: '阜阳市洪涛汽车保洁有限公司', b: '3 级', c: 0},
+            {a: '阜阳市洪涛汽车保洁有限公司', b: '4 级', c: 0},
+            {a: '阜阳市洪涛汽车保洁有限公司', b: '5 级', c: 0},
+            {a: '阜阳市洪涛汽车保洁有限公司', b: '不合格', c: 0},
+            {a: '阜阳市洪涛汽车保洁有限公司', b: '合格', c: 0},
+            {a: '阜阳市洪涛汽车保洁有限公司', b: '其他', c: 1},
+            {a: '阜阳市洪涛汽车保洁有限公司', b: '允许使用', c: 0},
+            {a: '阜阳市洪涛汽车保洁有限公司', b: '整改后使用', c: 0},
+            {a: '阜阳市汇众机电技术有限公司', b: '1 级', c: 0},
+            {a: '阜阳市汇众机电技术有限公司', b: '2 级', c: 2},
+            {a: '阜阳市汇众机电技术有限公司', b: '3 级', c: 0},
+            {a: '阜阳市汇众机电技术有限公司', b: '4 级', c: 0},
+            {a: '阜阳市汇众机电技术有限公司', b: '5 级', c: 0},
+            {a: '阜阳市汇众机电技术有限公司', b: '不合格', c: 0},
+            {a: '阜阳市汇众机电技术有限公司', b: '合格', c: 0},
+            {a: '阜阳市汇众机电技术有限公司', b: '其他', c: 1},
+            {a: '阜阳市汇众机电技术有限公司', b: '允许使用', c: 0},
+            {a: '阜阳市汇众机电技术有限公司', b: '整改后使用', c: 0},
+            {a: '阜阳市嘉森车用天然气设备有限责任公司', b: '1 级', c: 0},
+            {a: '阜阳市嘉森车用天然气设备有限责任公司', b: '2 级', c: 0},
+            {a: '阜阳市嘉森车用天然气设备有限责任公司', b: '3 级', c: 0},
+            {a: '阜阳市嘉森车用天然气设备有限责任公司', b: '4 级', c: 0},
+            {a: '阜阳市嘉森车用天然气设备有限责任公司', b: '5 级', c: 0},
+            {a: '阜阳市嘉森车用天然气设备有限责任公司', b: '不合格', c: 0},
+            {a: '阜阳市嘉森车用天然气设备有限责任公司', b: '合格', c: 0},
+            {a: '阜阳市嘉森车用天然气设备有限责任公司', b: '其他', c: 774},
+            {a: '阜阳市嘉森车用天然气设备有限责任公司', b: '允许使用', c: 0},
+            {a: '阜阳市嘉森车用天然气设备有限责任公司', b: '整改后使用', c: 0},
+            {a: '个体', b: '1 级', c: 0},
+            {a: '个体', b: '2 级', c: 0},
+            {a: '个体', b: '3 级', c: 0},
+            {a: '个体', b: '4 级', c: 0},
+            {a: '个体', b: '5 级', c: 0},
+            {a: '个体', b: '不合格', c: 0},
+            {a: '个体', b: '合格', c: 3},
+            {a: '个体', b: '其他', c: 836},
+            {a: '个体', b: '允许使用', c: 0},
+            {a: '个体', b: '整改后使用', c: 0},
+            {a: '合肥燃气集团有限公司', b: '1 级', c: 4},
+            {a: '合肥燃气集团有限公司', b: '2 级', c: 54},
+            {a: '合肥燃气集团有限公司', b: '3 级', c: 6},
+            {a: '合肥燃气集团有限公司', b: '4 级', c: 0},
+            {a: '合肥燃气集团有限公司', b: '5 级', c: 0},
+            {a: '合肥燃气集团有限公司', b: '不合格', c: 0},
+            {a: '合肥燃气集团有限公司', b: '合格', c: 502},
+            {a: '合肥燃气集团有限公司', b: '其他', c: 22},
+            {a: '合肥燃气集团有限公司', b: '允许使用', c: 4},
+            {a: '合肥燃气集团有限公司', b: '整改后使用', c: 0},
+            {a: '合肥伊利乳业有限责任公司', b: '1 级', c: 0},
+            {a: '合肥伊利乳业有限责任公司', b: '2 级', c: 15},
+            {a: '合肥伊利乳业有限责任公司', b: '3 级', c: 27},
+            {a: '合肥伊利乳业有限责任公司', b: '4 级', c: 0},
+            {a: '合肥伊利乳业有限责任公司', b: '5 级', c: 0},
+            {a: '合肥伊利乳业有限责任公司', b: '不合格', c: 0},
+            {a: '合肥伊利乳业有限责任公司', b: '合格', c: 498},
+            {a: '合肥伊利乳业有限责任公司', b: '其他', c: 29},
+            {a: '合肥伊利乳业有限责任公司', b: '允许使用', c: 0},
+            {a: '合肥伊利乳业有限责任公司', b: '整改后使用', c: 0},
+            {a: '郎溪凯灵日化装备有限公司', b: '1 级', c: 0},
+            {a: '郎溪凯灵日化装备有限公司', b: '2 级', c: 0},
+            {a: '郎溪凯灵日化装备有限公司', b: '3 级', c: 0},
+            {a: '郎溪凯灵日化装备有限公司', b: '4 级', c: 0},
+            {a: '郎溪凯灵日化装备有限公司', b: '5 级', c: 0},
+            {a: '郎溪凯灵日化装备有限公司', b: '不合格', c: 0},
+            {a: '郎溪凯灵日化装备有限公司', b: '合格', c: 0},
+            {a: '郎溪凯灵日化装备有限公司', b: '其他', c: 655},
+            {a: '郎溪凯灵日化装备有限公司', b: '允许使用', c: 0},
+            {a: '郎溪凯灵日化装备有限公司', b: '整改后使用', c: 0},
+            {a: '马钢(合肥)钢铁有限责任公司动力厂', b: '1 级', c: 0},
+            {a: '马钢(合肥)钢铁有限责任公司动力厂', b: '2 级', c: 0},
+            {a: '马钢(合肥)钢铁有限责任公司动力厂', b: '3 级', c: 1},
+            {a: '马钢(合肥)钢铁有限责任公司动力厂', b: '4 级', c: 0},
+            {a: '马钢(合肥)钢铁有限责任公司动力厂', b: '5 级', c: 0},
+            {a: '马钢(合肥)钢铁有限责任公司动力厂', b: '不合格', c: 0},
+            {a: '马钢(合肥)钢铁有限责任公司动力厂', b: '合格', c: 977},
+            {a: '马钢(合肥)钢铁有限责任公司动力厂', b: '其他', c: 6},
+            {a: '马钢(合肥)钢铁有限责任公司动力厂', b: '允许使用', c: 0},
+            {a: '马钢(合肥)钢铁有限责任公司动力厂', b: '整改后使用', c: 0},
+            {a: '蒙城生隆机电技术有限公司安庆分公司', b: '1 级', c: 0},
+            {a: '蒙城生隆机电技术有限公司安庆分公司', b: '2 级', c: 0},
+            {a: '蒙城生隆机电技术有限公司安庆分公司', b: '3 级', c: 0},
+            {a: '蒙城生隆机电技术有限公司安庆分公司', b: '4 级', c: 0},
+            {a: '蒙城生隆机电技术有限公司安庆分公司', b: '5 级', c: 0},
+            {a: '蒙城生隆机电技术有限公司安庆分公司', b: '不合格', c: 0},
+            {a: '蒙城生隆机电技术有限公司安庆分公司', b: '合格', c: 0},
+            {a: '蒙城生隆机电技术有限公司安庆分公司', b: '其他', c: 671},
+            {a: '蒙城生隆机电技术有限公司安庆分公司', b: '允许使用', c: 0},
+            {a: '蒙城生隆机电技术有限公司安庆分公司', b: '整改后使用', c: 0},
+            {a: '蒙牛乳业(马鞍山)有限公司', b: '1 级', c: 24},
+            {a: '蒙牛乳业(马鞍山)有限公司', b: '2 级', c: 225},
+            {a: '蒙牛乳业(马鞍山)有限公司', b: '3 级', c: 0},
+            {a: '蒙牛乳业(马鞍山)有限公司', b: '4 级', c: 0},
+            {a: '蒙牛乳业(马鞍山)有限公司', b: '5 级', c: 0},
+            {a: '蒙牛乳业(马鞍山)有限公司', b: '不合格', c: 0},
+            {a: '蒙牛乳业(马鞍山)有限公司', b: '合格', c: 15},
+            {a: '蒙牛乳业(马鞍山)有限公司', b: '其他', c: 64},
+            {a: '蒙牛乳业(马鞍山)有限公司', b: '允许使用', c: 551},
+            {a: '蒙牛乳业(马鞍山)有限公司', b: '整改后使用', c: 0},
+            {a: '奇瑞汽车股份有限公司', b: '1 级', c: 0},
+            {a: '奇瑞汽车股份有限公司', b: '2 级', c: 703},
+            {a: '奇瑞汽车股份有限公司', b: '3 级', c: 137},
+            {a: '奇瑞汽车股份有限公司', b: '4 级', c: 0},
+            {a: '奇瑞汽车股份有限公司', b: '5 级', c: 0},
+            {a: '奇瑞汽车股份有限公司', b: '不合格', c: 0},
+            {a: '奇瑞汽车股份有限公司', b: '合格', c: 433},
+            {a: '奇瑞汽车股份有限公司', b: '其他', c: 2},
+            {a: '奇瑞汽车股份有限公司', b: '允许使用', c: 0},
+            {a: '奇瑞汽车股份有限公司', b: '整改后使用', c: 0},
+            {a: '铜陵市富鑫钢铁有限公司', b: '1 级', c: 0},
+            {a: '铜陵市富鑫钢铁有限公司', b: '2 级', c: 28},
+            {a: '铜陵市富鑫钢铁有限公司', b: '3 级', c: 93},
+            {a: '铜陵市富鑫钢铁有限公司', b: '4 级', c: 0},
+            {a: '铜陵市富鑫钢铁有限公司', b: '5 级', c: 0},
+            {a: '铜陵市富鑫钢铁有限公司', b: '不合格', c: 0},
+            {a: '铜陵市富鑫钢铁有限公司', b: '合格', c: 333},
+            {a: '铜陵市富鑫钢铁有限公司', b: '其他', c: 53},
+            {a: '铜陵市富鑫钢铁有限公司', b: '允许使用', c: 15},
+            {a: '铜陵市富鑫钢铁有限公司', b: '整改后使用', c: 0},
+            {a: '芜湖保城气瓶检验有限公司', b: '1 级', c: 0},
+            {a: '芜湖保城气瓶检验有限公司', b: '2 级', c: 0},
+            {a: '芜湖保城气瓶检验有限公司', b: '3 级', c: 0},
+            {a: '芜湖保城气瓶检验有限公司', b: '4 级', c: 0},
+            {a: '芜湖保城气瓶检验有限公司', b: '5 级', c: 0},
+            {a: '芜湖保城气瓶检验有限公司', b: '不合格', c: 0},
+            {a: '芜湖保城气瓶检验有限公司', b: '合格', c: 2},
+            {a: '芜湖保城气瓶检验有限公司', b: '其他', c: 894},
+            {a: '芜湖保城气瓶检验有限公司', b: '允许使用', c: 0},
+            {a: '芜湖保城气瓶检验有限公司', b: '整改后使用', c: 0},
+            {a: '液化空气（合肥）有限公司', b: '1 级', c: 0},
+            {a: '液化空气（合肥）有限公司', b: '2 级', c: 4},
+            {a: '液化空气（合肥）有限公司', b: '3 级', c: 0},
+            {a: '液化空气（合肥）有限公司', b: '4 级', c: 0},
+            {a: '液化空气（合肥）有限公司', b: '5 级', c: 0},
+            {a: '液化空气（合肥）有限公司', b: '不合格', c: 0},
+            {a: '液化空气（合肥）有限公司', b: '合格', c: 468},
+            {a: '液化空气（合肥）有限公司', b: '其他', c: 86},
+            {a: '液化空气（合肥）有限公司', b: '允许使用', c: 0},
+            {a: '液化空气（合肥）有限公司', b: '整改后使用', c: 0},
+            {a: '中国石化股份有限公司安庆分公司', b: '1 级', c: 41},
+            {a: '中国石化股份有限公司安庆分公司', b: '2 级', c: 167},
+            {a: '中国石化股份有限公司安庆分公司', b: '3 级', c: 50},
+            {a: '中国石化股份有限公司安庆分公司', b: '4 级', c: 3},
+            {a: '中国石化股份有限公司安庆分公司', b: '5 级', c: 0},
+            {a: '中国石化股份有限公司安庆分公司', b: '不合格', c: 0},
+            {a: '中国石化股份有限公司安庆分公司', b: '合格', c: 3},
+            {a: '中国石化股份有限公司安庆分公司', b: '其他', c: 266},
+            {a: '中国石化股份有限公司安庆分公司', b: '允许使用', c: 0},
+            {a: '中国石化股份有限公司安庆分公司', b: '整改后使用', c: 0},
+            {a: '中粮生物化学（安徽）股份有限公司', b: '1 级', c: 0},
+            {a: '中粮生物化学（安徽）股份有限公司', b: '2 级', c: 117},
+            {a: '中粮生物化学（安徽）股份有限公司', b: '3 级', c: 625},
+            {a: '中粮生物化学（安徽）股份有限公司', b: '4 级', c: 1},
+            {a: '中粮生物化学（安徽）股份有限公司', b: '5 级', c: 0},
+            {a: '中粮生物化学（安徽）股份有限公司', b: '不合格', c: 9},
+            {a: '中粮生物化学（安徽）股份有限公司', b: '合格', c: 279},
+            {a: '中粮生物化学（安徽）股份有限公司', b: '其他', c: 51},
+            {a: '中粮生物化学（安徽）股份有限公司', b: '允许使用', c: 0},
+            {a: '中粮生物化学（安徽）股份有限公司', b: '整改后使用', c: 0}
+        ]
+        var wei1 =[];
+        var wei2 =[];
+// 第一列
+        wei1.push(excelJson_111[0].a)
+        for(var i =1;i<excelJson_111.length;i++ ){
+            if(i>0&&excelJson_111[i].a!==wei1[wei1.length-1]){
+                wei1.push(excelJson_111[i].a)
+            }
+        }
+        console.log(wei1)
+//第二列
+        wei2.push(excelJson_111[0].b)
+        for(var i =1;i<excelJson_111.length;i++ ){
+            if(i>0&&excelJson_111[i].b!==wei2[0]){
+                wei2.push(excelJson_111[i].b)
+            }else{
+                break;
+            }
+        }
+        console.log(wei2)
+
+//第二列的每个一列的值
+        var value_2_1_111 =[]
+        for(var x=0;x<wei2.length;x++){
+
+            var value1 =[];
+            var wei2index = wei2[x];
+            for(var i =0;i<excelJson_111.length;i++ ){
+                if(excelJson_111[i].b=== wei2index){
+                    value1.push(excelJson_111[i].c)
+                }
+            }
+            // console.log(wei2index)
+            // console.log(value1)
+            var item = {
+                name : wei2index,
+                value : value1
+            }
+            value_2_1_111.push(item)
+        }
+        console.log(value_2_1_111)
+
+        var xData_111_ = wei1
+        var legendData_111 = wei2
+
+//第二列的每个一列的值 的图表配置
+        var seriesData_111 = []
+// 每一项的颜色配置
+        var colorData_111 = ["rgba(58,95,205,1)","rgba(0,191,183,1)","rgba(255,193,193,1)","rgba(186,85,211,1)","rgba(255,185,15,1)","rgba(252,230,48,1)","rgba(255,144,128,1)","rgba(255,106,106,1)"]
+        for(var i =0;i<value_2_1_111.length;i++ ){
+            var item = {
+                "name":  value_2_1_111[i].name,
+                "type": "bar",
+                //"stack": "总量",
+                "itemStyle": {
+                    "normal": {
+                        "color": colorData_111[i],
+                        "label": {
+                            "show": true,
+                            "textStyle": {
+                                "color": "#fff"
+                            },
+                            "position": "top",
+                            formatter: function(p) {
+                                return p.value > 0 ? (p.value) : '';
+                            }
+                        }
+                    }
+                },
+                "data":  value_2_1_111[i].value
+            }
+            seriesData_111.push(item)
+        }
+        console.log(seriesData_111)
+//
+        option111 = {
+            // backgroundColor: "#344b58",
+            "title": {
+                "text": "",
+                "subtext": '',
+                x: "4%",
+
+                textStyle: {
+                    color: '#fff',
+                    fontSize: '22'
+                },
+                subtextStyle: {
+                    color: '#90979c',
+                    fontSize: '16',
+
+                },
+            },
+            "tooltip": {
+                "trigger": "axis",
+                "axisPointer": {
+                    "type": "shadow",
+                    textStyle: {
+                        color: "#fff"
+                    },
+                },
+                formatter: function(params) {
+                    // console.log(params)
+                    var indexX =0;
+                    for(var x=0;x<xData_111_.length;x++){
+                        if(params[0].name === xData_111_[x]){
+                            indexX = x;
+                            break;
+                        }
+                    }
+                    console.log(indexX)
+                    //
+                    var sum = 0;
+                    for(var i =0;i<seriesData_111.length;i++ ){
+                        sum = sum + seriesData_111[i].data[indexX]
+                    }
+
+                    var displayString = '检验单位：' + params[0].name
+                    for(var m =0;m<params.length;m++){
+                        var itemString = '<br/>'+ params[m].marker + params[m].seriesName +':数量：' + params[m].data+ '，' + '占比：' + (params[m].data / sum * 100).toFixed(2) + '%，总数:'+sum;
+                        displayString = displayString + itemString
+                    }
+                    return displayString
+                }
+            },
+            "grid": {
+                left:40,
+                "borderWidth": 0,
+                "top": 30,
+				right:30,
+                "bottom": 60,
+                textStyle: {
+                    color: "#fff"
+                }
+            },
+            // "legend": {
+            //     x: '4%',
+            //     top: '5%',
+            //     textStyle: {
+            //         color: '#fff',
+            //         fontSize:16,
+            //     },
+            //     "data": legendData_111
+            // },
+
+
+            "calculable": true,
+            "xAxis": [{
+                "type": "category",
+                "position": {
+                    "bottom": 200,
+                },
+                "axisLine": {
+                    lineStyle: {
+                        color: '#90979c'
+                    }
+                },
+                "nameRotate": 90,
+                "splitLine": {
+                    "show": false
+                },
+                "axisTick": {
+                    "show": false
+                },
+                "splitArea": {
+                    "show": false
+                },
+                "axisLabel": {
+                    // "interval": 0,
+                    textStyle: {
+                        color: '#fff',
+                        fontSize: '12'
+                    },
+                },
+                "data": xData_111_,
+                "offset": 0,
+            }],
+            "yAxis": [{
+                "type": "value",
+                "splitLine": {
+                    "show": false
+                },
+                "axisLine": {
+                    lineStyle: {
+                        color: '#90979c'
+                    }
+                },
+                "axisTick": {
+                    "show": false
+                },
+                "axisLabel": {
+                    // "interval": 0,
+                    textStyle: {
+                        color: '#fff',
+                        fontSize: '12'
+                    },
+                },
+                "splitArea": {
+                    "show": false
+                },
+
+            }],
+            "dataZoom": [{
+                "show": true,
+                "height": 10,
+                "xAxisIndex": [
+                    0
+                ],
+                bottom: 30,
+                "start": 0,
+                "end": 0,
+                handleIcon: 'path://M306.1,413c0,2.2-1.8,4-4,4h-59.8c-2.2,0-4-1.8-4-4V200.8c0-2.2,1.8-4,4-4h59.8c2.2,0,4,1.8,4,4V413z',
+                handleSize: '104%',
+                handleStyle: {
+                    color: "#d3dee5",
+
+                },
+                textStyle: {
+                    color: "#fff"
+                },
+                borderColor: "#90979c"
+
+
+            }, {
+                "type": "inside",
+                "show": true,
+                "height": 15,
+                "start": 1,
+                "end": 35
+            }],
+            "series": seriesData_111
+        }
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option111);
+        window.addEventListener("resize", function () {
+            myChart.resize();
+        });
+</script>
+
+<script>
+var data = [
+        {
+            name: '广州市',
+            value: 120057.34
+            },
+        {
+            name: '韶关市',
+            value: 15477.48
+            },
+        {
+            name: '深圳市',
+            value: 131686.1
+            },
+        {
+            name: '珠海市',
+            value: 6992.6
+            },
+        {
+            name: '汕头市',
+            value: 44045.49
+            },
+        {
+            name: '佛山市',
+            value: 40689.64
+            },
+        {
+            name: '江门市',
+            value: 37659.78
+            },
+        {
+            name: '湛江市',
+            value: 45180.97
+            },
+        {
+            name: '茂名市',
+            value: 5204.26
+            },
+        {
+            name: '肇庆市',
+            value: 21900.9
+            },
+        {
+            name: '惠州市',
+            value: 4918.26
+            },
+        {
+            name: '梅州市',
+            value: 5881.84
+            },
+        {
+            name: '汕尾市',
+            value: 4178.01
+            },
+        {
+            name: '河源市',
+            value: 2227.92
+            },
+        {
+            name: '阳江市',
+            value: 2180.98
+            },
+        {
+            name: '清远市',
+            value: 9172.94
+            },
+        {
+            name: '东莞市',
+            value: 3368
+            },
+        {
+            name: '中山市',
+            value: 306.98
+            },
+        {
+            name: '潮州市',
+            value: 810.66
+            },
+        {
+            name: '揭阳市',
+            value: 542.2
+            },
+        {
+            name: '云浮市',
+            value: 256.38
+            }]
+
+    var myChart = echarts.init(document.getElementById('gdMap'));
+    var myCharts = echarts.init(document.getElementById('gdMaps'));
+    window.addEventListener('resize', function () {
+        myChart.resize();
+        myCharts.resize();
+    });
+    var yMax = 0;
+    for (var j = 0; j < data.length; j++) {
+        if (yMax < data[j].value) {
+            yMax = data[j].value;
+        }
+    }
+        myChart.hideLoading();
+        myCharts.hideLoading();
+        var option = {
+            animation: true,
+            tooltip: {
+                show: true
+            },
+            visualMap: {
+                min: 0,
+                max: yMax,
+                text: ['高', '低'],
+                orient: 'horizontal',
+                itemWidth: 15,
+                itemHeight: 200,
+                right: 0,
+                bottom: 30,
+                inRange: {
+                    color: ['#75ddff', '#0e94eb']
+                },
+                textStyle: {
+                    color: 'white'
+                }
+            },
+            series: [
+                {
+                    name: '数据名称',
+                    type: 'map',
+                    mapType: '广东',
+                    selectedMode: 'multiple',
+                    tooltip: {
+                        trigger: 'item',
+                        formatter: '{b}<br/>{c} (件)'
+                    },
+                    itemStyle: {
+                        normal: {
+                            borderWidth: 1,
+                            borderColor: '#0e94eb',
+                            label: {
+                                show: false
+                            }
+                        },
+                        emphasis: { // 也是选中样式
+                            borderWidth: 1,
+                            borderColor: '#fff',
+                            backgroundColor: 'red',
+                            label: {
+                                show: true,
+                                textStyle: {
+                                    color: '#fff'
+                                }
+                            }
+                        }
+                    },
+                    data: data,
+            }
+            ]
+        };
+
+        myChart.setOption(option);
+        myCharts.setOption(option);
+}
+</script>
+
+
+<script>
+// 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('chart_8'));
+
+//热力
+        var days_3=['密云区','延庆区','朝阳区','丰台区','石景山区','海淀区','门头沟区','房山区','通州区','顺义区','昌平区','大兴区','怀柔区','平谷区','东城区','西城区'];
+        var  hours_3 = ['0时', '1时', '2时', '3时', '4时', '5时', '6时', '7时', '8时', '9时', '10时', '11时', '12时','13时','14时','15时','16时','17时','18时','19时','20时','21时','22时','23时'];
+        var data1_3 = [];
+        var datav_3 = [
+		1,1,1,1,1,1,1,1,1,1,
+		2,2,2,2,2,2,2,2,2,2,
+		3,3,3,3,3,3,3,3,3,3,
+		3,3,3,3,3,3,3,3,3,3,
+		3,3,3,3,3,3,3,3,3,3,
+		3,3,3,3,3,3,3,3,3,3,
+		4,4,4,4,4,4,4,4,4,4,
+		6,6,6,6,6,6,6,6,6,6,
+		9,9,9,9,9,9,9,9,9,9,
+		9,9,9,9,9,9,9,9,9,9,
+		8,8,8,8,8,8,8,8,8,8,
+		8,8,8,8,8,8,8,8,8,8,
+		7,7,7,7,7,7,7,7,7,7,
+		7,7,7,7,7,7,7,7,7,7,
+		6,6,6,6,6,6,6,6,6,6,
+		5,5,5,5,5,5,5,5,5,5,
+		5,5,5,5,5,5,5,5,5,5,
+		7,7,7,7,7,7,7,7,7,7,
+		9,9,9,9,9,9,9,9,9,9,
+		9,9,9,9,9,9,9,9,9,9,
+		8,8,8,8,8,8,8,8,8,8,
+		5,5,5,5,5,5,5,5,5,5,
+		3,3,3,3,3,3,3,3,3,3,
+		2,2,2,2,2,2,2,2,2,2,
+		]
+        for (var z = 0; z < hours_3.length; z++) {
+
+            for (var i = 0; i < days_3.length; i++) {
+                data1_3.push([i, z, datav_3[i+z*days_3.length]]);
+            }
+        }
+        data1_3 = data1_3.map(function(item) {
+            return [item[1], item[0], item[2] || '-'];
+        });
+
+        option = {
+            // dataZoom: [
+            //
+            //     {
+            //         id: 'dataZoomY',
+            //         type: 'slider',
+            //         yAxisIndex: [0],
+            //         startValue:0,
+            //         endValue:100,
+            //         filterMode: 'empty',
+            //         // textStyle: {
+            //         //     color: '#fff',
+            //         // }
+            //     }
+            // ],
+            tooltip: {
+                position: 'top',
+                formatter: function(params) {
+                    var sum = 0;
+                    for(var x=0;x<datav_3.length;x++){
+                        sum = sum + datav_3[x]
+                    }
+                    // return '检验结论：' + days_3[params.value[1]] + '<br/>' + '数量：' + params.data[2];
+                    return '检验结论：' + days_3[params.value[1]] + '<br/>' + '数量：' + params.data[2]+ '<br>' + '占比：' + (params.data[2] / sum * 100).toFixed(2) + '%，总数:'+sum;;
+                }
+            },
+            animation: false,
+            grid: {
+				top:30,
+                left: '8%',
+                right: '8%',
+                bottom: 40,
+                containLabel: true
+            },
+            xAxis: {
+                type: 'category',
+                data: hours_3,
+                axisLine : {
+                    lineStyle : {
+                        color : '#fff'
+                    }
+                },
+                axisLabel: {
+                    // interval:0,
+                    // rotate:,
+                    textStyle: {
+                        color: '#fff',
+                        fontSize: 12,
+                    },
+                } ,
+                nameTextStyle:{
+                    color: '#fff',
+                    fontSize: 12,
+                },
+                splitArea: {
+                    show: true
+                },
+                // name: '检验类别'
+            },
+            yAxis: {
+                type: 'category',
+                data: days_3,
+                axisLine : {
+                    lineStyle : {
+                        color : '#fff'
+                    }
+                },
+                nameTextStyle:{
+                    color: '#fff',
+                    fontSize: 12,
+                },
+                axisLabel: {
+                    // interval:0,
+                    // rotate:40
+                    // ,
+                    textStyle: {
+                        color: '#fff',
+                        fontSize: 12,
+                    },
+                } ,
+                splitArea: {
+                    show: true
+                },
+                // name: '检验结论'
+            },
+            visualMap: {
+                min: 1,
+                max: 10,
+                calculable: true,
+                orient: 'horizontal',
+                left: 'center',
+				
+                bottom: '1%',
+                text: ['10','1'],// 文本，默认为数值文本
+                //color:['#20a0ff','#D2EDFF'],
+                calculable: false,
+                color: [
+                    '#dd413b', '#fec42c', '#80F1BE'
+                ],
+                textStyle: {
+                    fontSize: 12,
+                    color: '#fff',
+                }
+            },
+            series: [{
+                name: 'Punch Card',
+                type: 'heatmap',
+                data: data1_3,
+                label: {
+                    normal: {
+                        show: true
+                    }
+                },
+                itemStyle: {
+                    emphasis: {
+                        shadowBlur: 10,
+                        shadowColor: 'rgba(120, 0, 0, 0.5)'
+                    }
+                }
+            }]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+        window.addEventListener("resize", function () {
+            myChart.resize();
+        });
+</script>
+
+<script>
+// 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('chart_9'));
+
+//热力
+var days_3=['密云区','延庆区','朝阳区','丰台区','石景山区','海淀区','门头沟区','房山区','通州区','顺义区','昌平区','大兴区','怀柔区','平谷区','东城区','西城区'];
+// var days_3= ['上城区', '下城区', '拱墅区', '西湖区', '滨江区', '萧山区', '余杭区','临平区','钱塘区','临安区'];
+        var  hours_3 = ['0时', '1时', '2时', '3时', '4时', '5时', '6时', '7时', '8时', '9时', '10时', '11时', '12时','13时','14时','15时','16时','17时','18时','19时','20时','21时','22时','23时'];
+        var data1_3 = [];
+        var datav_3 = [
+		1,1,1,1,1,1,1,1,1,1,
+		2,2,2,2,2,2,2,2,2,2,
+		3,3,3,3,3,3,3,3,3,3,
+		3,3,3,3,3,3,3,3,3,3,
+		3,3,3,3,3,3,3,3,3,3,
+		3,3,3,3,3,3,3,3,3,3,
+		4,4,4,4,4,4,4,4,4,4,
+		6,6,6,6,6,6,6,6,6,6,
+		9,9,9,9,9,9,9,9,9,9,
+		9,9,9,9,9,9,9,9,9,9,
+		8,8,8,8,8,8,8,8,8,8,
+		8,8,8,8,8,8,8,8,8,8,
+		7,7,7,7,7,7,7,7,7,7,
+		7,7,7,7,7,7,7,7,7,7,
+		6,6,6,6,6,6,6,6,6,6,
+		5,5,5,5,5,5,5,5,5,5,
+		5,5,5,5,5,5,5,5,5,5,
+		7,7,7,7,7,7,7,7,7,7,
+		9,9,9,9,9,9,9,9,9,9,
+		9,9,9,9,9,9,9,9,9,9,
+		8,8,8,8,8,8,8,8,8,8,
+		5,5,5,5,5,5,5,5,5,5,
+		3,3,3,3,3,3,3,3,3,3,
+		2,2,2,2,2,2,2,2,2,2,
+		]
+        
+        var data1_3 = [];
+        for (var z = 0; z < hours_3.length; z++) {
+
+            for (var i = 0; i < days_3.length; i++) {
+                data1_3.push([i, z, datav_3[i+z*days_3.length]]);
+            }
+        }
+        data1_3 = data1_3.map(function(item) {
+            return [item[1], item[0], item[2] || '-'];
+        });
+
+        option = {
+            // dataZoom: [
+            //
+            //     {
+            //         id: 'dataZoomY',
+            //         type: 'slider',
+            //         yAxisIndex: [0],
+            //         startValue:0,
+            //         endValue:100,
+            //         filterMode: 'empty',
+            //         // textStyle: {
+            //         //     color: '#fff',
+            //         // }
+            //     }
+            // ],
+            tooltip: {
+                position: 'top',
+                formatter: function(params) {
+                    var sum = 0;
+                    for(var x=0;x<datav_3.length;x++){
+                        sum = sum + datav_3[x]
+                    }
+                    // return '检验结论：' + days_3[params.value[1]] + '<br/>' + '数量：' + params.data[2];
+                    return '检验结论：' + days_3[params.value[1]] + '<br/>' + '数量：' + params.data[2]+ '<br>' + '占比：' + (params.data[2] / sum * 100).toFixed(2) + '%，总数:'+sum;;
+                }
+            },
+            animation: false,
+            grid: {
+				top:30,
+                left: '8%',
+                right: '8%',
+                bottom: 40,
+                containLabel: true
+            },
+            xAxis: {
+                type: 'category',
+                data: hours_3,
+                axisLine : {
+                    lineStyle : {
+                        color : '#fff'
+                    }
+                },
+                axisLabel: {
+                    // interval:0,
+                    // rotate:,
+                    textStyle: {
+                        color: '#fff',
+                        fontSize: 12,
+                    },
+                } ,
+                nameTextStyle:{
+                    color: '#fff',
+                    fontSize: 12,
+                },
+                splitArea: {
+                    show: true
+                },
+                // name: '检验类别'
+            },
+            yAxis: {
+                type: 'category',
+                data: days_3,
+                axisLine : {
+                    lineStyle : {
+                        color : '#fff'
+                    }
+                },
+                nameTextStyle:{
+                    color: '#fff',
+                    fontSize: 12,
+                },
+                axisLabel: {
+                    // interval:0,
+                    // rotate:40
+                    // ,
+                    textStyle: {
+                        color: '#fff',
+                        fontSize: 12,
+                    },
+                } ,
+                splitArea: {
+                    show: true
+                },
+                // name: '检验结论'
+            },
+            visualMap: {
+                min: 1,
+                max: 10,
+                calculable: true,
+                orient: 'horizontal',
+                left: 'center',
+				
+                bottom: '1%',
+                text: ['10','1'],// 文本，默认为数值文本
+                //color:['#20a0ff','#D2EDFF'],
+                calculable: false,
+                color: [
+                    '#dd413b', '#fec42c', '#80F1BE'
+                ],
+                textStyle: {
+                    fontSize: 12,
+                    color: '#fff',
+                }
+            },
+            series: [{
+                name: 'Punch Card',
+                type: 'heatmap',
+                data: data1_3,
+                label: {
+                    normal: {
+                        show: true
+                    }
+                },
+                itemStyle: {
+                    emphasis: {
+                        shadowBlur: 10,
+                        shadowColor: 'rgba(120, 0, 0, 0.5)'
+                    }
+                }
+            }]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+        window.addEventListener("resize", function () {
+            myChart.resize();
+        });
+</script>
+
+
+<script>
+//警报数
+(function () {
+    var option = {
+        //鼠标提示工具
+        tooltip: {
+            trigger: 'axis'
+        },
+        xAxis: {
+            // 类目类型                                  
+            type: 'category',
+            // x轴刻度文字                     
+			// data = {
+			//     year: [
+			//         ['2018年', '2019年', '2020年', '2021年', '2022年'],
+			       
+			//     ],
+			//     quarter: [
+			//         ['第一季度', '第二季度', '第一季度', '第一季度']
+			        
+			//     ],
+			//     month: [
+			//         ['1'月, '2月', '3月','1'月, '2月', '3月','1'月, '2月', '3月','1'月, '2月', '3月','1'月, '2月', '3月',],
+			        
+			//     ]
+			//     // week: [
+			//     //     ['周一','周二','周一','周二'],
+			        
+			//     // ]
+			// }
+            data: ['密云区','延庆区','朝阳区','丰台区','石景山区','海淀区','门头沟区','房山区','通州区','顺义区','昌平区','大兴区','怀柔区','平谷区','东城区','西城区'],
+            axisTick: {
+                show: false//去除刻度线
+            },
+            axisLabel: {
+                color: '#4c9bfd',//文本颜色
+				interval:0,
+				rotate:30,
+				
+            },
+            axisLine: {
+                show: false//去除轴线  
+            },
+            boundaryGap: false//去除轴内间距
+        },
+        yAxis: {
+            // 数据作为刻度文字                                  
+            type: 'value',
+            axisTick: {
+                show: false//去除刻度线
+            },
+            axisLabel: {
+                color: '#4c9bfd'//文本颜色
+            },
+            axisLine: {
+                show: false//去除轴线  
+            },
+            boundaryGap: false,//去除轴内间距
+			max:1.6,
+			min:1.2,
+        },
+        //图例组件
+        legend: {
+            textStyle: {
+                color: '#4c9bfd' // 图例文字颜色
+
+            },
+            right: '10%'//距离右边10%
+        },
+        // 设置网格样式
+        grid: {
+            show: true,// 显示边框
+            top: '20%',
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            borderColor: '#012f4a',// 边框颜色
+            containLabel: true // 包含刻度文字在内
+        },
+        series: [{
+            name: '',
+            // 数据                                  
+            data: [1.296,1.275,1.244,1.237,1.198,1.198,1.198,1.593,1.291,1.129,1.244,1.237,1.198,1.198,1.296,1.275],
+            // 图表类型                                  
+            type: 'line',
+            // 圆滑连接                                  
+            smooth: true,
+            itemStyle: {
+                color: '#bef200'  // 线颜色
+            }
+        },
+        // {
+        //     name: '未处理',
+        //     // 数据                                  
+        //     data: [40, 64, 191, 324, 290, 330, 310, 213, 180, 200, 180, 79],
+        //     // 图表类型                                  
+        //     type: 'line',
+        //     // 圆滑连接                                  
+        //     smooth: true,
+        //     itemStyle: {
+        //         color: '#ed3f35'  // 线颜色
+        //     }
+        // }
+		]
+    };
+    var myechart = echarts.init($('.linetwo')[0]);
+    myechart.setOption(option);
+
+    //点击效果
+    var data = {
+        year: [
+            [1.296,1.275,1.244,1.237,1.198,1.198,1.198,1.593,1.291,1.129,1.244,1.237,1.198,1.198,1.296,1.275],
+            // [40, 64, 191, 324, 290, 330, 310, 213, 180, 200, 180, 79]
+        ],
+        quarter: [
+            [1.593,1.291,1.129,1.244,1.237,1.296,1.275,1.244,1.237,1.198,1.198,1.198,1.198,1.198,1.296,1.275],
+            // [43, 31, 65, 23, 78, 21, 82, 64, 43, 60, 19, 34]
+        ],
+        month: [
+            [1.296,1.275,1.244,1.237,1.198,1.198,1.198,1.593,1.291,1.129,1.244,1.237,1.198,1.198,1.296,1.275],
+            // [56, 43, 98, 21, 56, 87, 43, 12, 43, 54, 12, 98]
+        ],
+        week: [
+            [1.593,1.291,1.129,1.244,1.237,1.296,1.275,1.244,1.237,1.198,1.198,1.198,1.198,1.198,1.296,1.275],
+            // [32, 54, 34, 87, 32, 45, 62, 68, 93, 54, 54, 24]
+        ]
+    }
+    $('.sales ').on('click', '.caption a', function () {
+        $(this).addClass('active').siblings('a').removeClass('active');
+        //option series   data
+        //获取自定义属性值
+        var key = $(this).attr('data-type');
+        //取出对应的值
+        key = data[key];
+        //将值设置到 图表中
+        option.series[0].data = key[0];
+        // option.series[1].data = key[1];
+        //再次调用才能在页面显示
+        myechart.setOption(option);
+    });
+    //定时器
+    var index = 0;
+    var timer = setInterval(function () {
+        index++;
+        if (index > 4) {
+            index = 0;
+        };
+        $('.sales .caption a').eq(index).click();
+    }, 2000);
+})();
+</script>
+
+
+<script type="text/javascript">
+		        echarts.registerMap('beijing', beijingJson);
+		        var chart = echarts.init(document.getElementById('mychart_8'));
+		        
+		        
+		        chart.setOption({
+		        	// title:{
+		        	// 	// text: '北京市轮廓地图',
+	          //           top: '3%',
+	          //           left: 'center',
+	          //           textStyle: {
+	          //               fontSize: 20,
+	          //               fontWeight: 600,
+	          //               color: '#222'
+	          //           }
+		        	// },
+		        	tooltip: {
+		        		// 触发类型, 数据项图形触发
+		                trigger: 'item', 
+		                formatter: function (val) {
+		                	return val.data.name + 
+		                	 + val.data.value 
+		                	
+		                }
+		            },
+		            toolbox: {
+		                    show: true,
+		                    orient: 'vertical',
+		                    left: 'right',
+		                    top: 'center',
+		                    feature: {
+		                      dataView: { readOnly: false },
+		                      restore: {},
+		                      saveAsImage: {}
+		                    }
+		                  },
+					visualMap: {
+					        min: 0,
+					        max: 500,
+					        text: ['High', 'Low'],
+					        realtime: false,
+					        calculable: true,
+					        inRange: {
+					          color: ['lightskyblue', 'yellow', 'orangered']
+					        }
+					      },
+		            series: [{
+		                type: 'map',
+		                map: 'beijing',
+		                roam: true,//是否开启鼠标缩放和平移漫游
+		                geoIndex: 0,// 不可缺少，否则无tooltip 指示效果
+		                label: {
+		                    normal: {
+		                        show: true,//显示省份标签
+		                        textStyle:{color:"#fff"}//省份标签字体颜色
+		                    },
+		                    emphasis: {//对应的鼠标悬浮效果
+		                        show: true,
+		                        textStyle:{color:"#323232"}
+		                    }
+		                },
+		                itemStyle: {
+		                    normal: {
+		                        borderWidth: .5,//区域边框宽度
+		                        borderColor: '#0550c3',//区域边框颜色
+		                        areaColor:"#17a34f",//区域颜色
+
+		                    },
+
+		                    emphasis: {
+		                        borderWidth: .95,//鼠标滑过区域，区域边框宽度
+		                        borderColor: '#fff',//鼠标滑过区域，区域边框颜色
+		                        areaColor:"#ff6511",//鼠标滑过区域背景色
+		                    }
+		                },
+		                data: [
+		                    { 
+		                    	name: '延庆区', 
+								value:200,
+		                    	lng: 115.981186, 
+		                    	lat: 40.462706 
+		                    },
+		                    { 
+		                    	name: '怀柔区', 
+		                    	value:200,
+		                    	lng: 116.63853, 
+		                    	lat: 40.322563 
+		                    },
+		                    { 
+		                    	name: '密云区', 
+		                    	value:200,
+		                    	lng: 116.849551, 
+		                    	lat: 40.382999 
+		                    },
+		                    { 
+		                    	name: '昌平区', 
+		                    	value:100,
+		                    	lng: 116.237832, 
+		                    	lat: 40.226854 
+		                    },
+		                    { 
+		                    	name: '顺义区', 
+		                    	value:100,
+		                    	lng: 116.663242, 
+		                    	lat: 40.1362 
+		                    },
+		                    { 
+		                    	name: '平谷区', 
+		                    	value:100,
+		                    	lng: 117.128025, 
+		                    	lat: 40.147115 
+		                    },
+		                    { 
+		                    	name: '门头沟区', 
+		                    	 value:100,
+		                    	lng: 116.108179, 
+		                    	lat: 39.94648 
+		                    },
+		                    { 
+		                    	name: '海淀区',
+		                    	value:100,
+		                    	lng: 116.304872, 
+		                    	lat: 39.96553 
+		                    },
+		                    { 
+		                    	name: '石景山区', 
+		                    	value:300,
+		                    	lng: 116.229612, 
+		                    	lat: 39.912017 
+		                    },
+		                    { 
+		                    	name: '西城区', 
+		                    	value:300,
+		                    	lng: 116.372397, 
+		                    	lat: 39.918561 
+		                    },
+		                    { 
+		                    	name: '东城区', 
+		                    	value:300,
+		                    	lng: 116.42272, 
+		                    	lat: 39.934579
+		                    },
+		                    { 
+		                    	name: '朝阳区', 
+		                    	value:300,
+		                    	lng: 116.449767, 
+		                    	lat: 39.927254 
+		                    },
+		                    { 
+		                    	name: '通州区', 
+		                    	value:300,
+		                    	lng: 116.662928, 
+		                    	lat: 39.917001 
+		                    },
+		                    { 
+		                    	name: '大兴区', 
+		                    	value:300,
+		                    	lng: 116.348053, 
+		                    	lat: 39.732833 
+		                    },
+		                    { 
+		                    	name: '房山区', 
+		                    	value:400,
+		                    	lng: 116.149892, 
+		                    	lat: 39.755039 
+		                    },
+		                    { 
+		                    	name: '丰台区', 
+		                    	value:400,
+		                    	lng: 116.293105, 
+		                    	lat: 39.865042 
+		                    }
+		                  ]
+		      
+		            }],
+					
+		        });
+		</script>
+		
+		
+<script>
+// 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('chart_16'));
+
+//11.	制造年份检验结论
+        var xData_109 = function() {
+            var data = ["2002","2003","2004","2005","2006","2007","2008","2009","2010","2011","2012","2013","2014","2015","2016","2017","2018","2019","2020","2021",];
+            return data;
+        }();
+//1级
+        var _data_109_1 =[30, 55, 46, 40, 70, 94, 118, 181, 253, 318, 540, 517, 503, 459, 417, 155, 72, 37, 0, 0]
+//2级
+        var _data_109_2 =[239, 230, 281, 382, 324, 341, 340, 784, 1157, 1995, 2003, 1711, 1365, 1252, 1323, 759, 394, 149, 13, 4]
+        var   _data_109_3 = [538, 604, 584, 363, 431, 658, 745, 672, 1297, 1051, 926, 986, 990, 692, 621, 368, 183, 42, 1, 0]
+        var    _data_109_4 = [12, 18, 19, 13, 3, 4, 16, 32, 25, 12, 24, 26, 15, 13, 5, 5, 1, 3, 0, 0]
+        var   _data_109_5 = [0, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 2, 0, 0, 0, 0, 0]
+        var   _data_109_6 = [2, 3, 0, 0, 6, 0, 0, 1, 7, 7, 7, 3, 4, 11, 9, 9, 11, 11, 1, 1]
+        var  _data_109_7 = [425, 621, 707, 537, 655, 874, 994, 829, 1374, 1654, 2157, 2257, 2180, 2846, 2593, 3274, 3368, 1805, 920, 453]
+        var   _data_109_8=  [22, 16, 16, 12, 26, 21, 28, 12, 12, 70, 53, 29, 44, 34, 32, 81, 36, 29, 0, 1]
+        var   _data_109_9= [51, 64, 69, 33, 49, 71, 69, 132, 233, 297, 454, 536, 973, 1473, 2420, 6322, 5369, 4075, 2712, 1980]
+        var    _data_109_10=  [1, 2, 2, 3, 0, 2, 6, 1, 2, 4, 5, 6, 9, 4, 3, 4, 0, 1, 0, 0]
+        var   _data_109_11=  [0, 0, 0, 0, 0, 0, 8, 0, 1, 2, 1, 3, 1, 1, 2, 0, 1, 0, 0, 0]
+        var   _data_109_12=[213, 54, 42, 29, 20, 62, 121, 97, 163, 304, 778, 409, 375, 283, 431, 739, 343, 121, 54, 6]
+        var  _data_109_13= [0, 0, 0, 1, 0, 0, 0, 0, 0, 4, 3, 3, 1, 0, 0, 0, 0, 0, 0, 0]
+        option109 = {
+            // backgroundColor: "#344b58",
+            // "title": {
+            //     "text": "",
+            //     "subtext": '',
+            //     x: "4%",
+
+            //     textStyle: {
+            //         color: '#fff',
+            //         fontSize: '22'
+            //     },
+            //     subtextStyle: {
+            //         color: '#90979c',
+            //         fontSize: '16',
+
+            //     },
+            // },
+            "tooltip": {
+                "trigger": "axis",
+                "axisPointer": {
+                    "type": "shadow",
+                    textStyle: {
+                        color: "#fff"
+                    }
+                },
+                formatter: function(params) {
+                    // console.log(params)
+                    var indexX =0;
+                    for(var x=0;x<xData_109.length;x++){
+                        if(params[0].name === xData_109[x]){
+                            indexX = x;
+                            break;
+                        }
+                    }
+                    var sum = _data_109_1[indexX] + _data_109_2[indexX] + _data_109_3[indexX] + _data_109_4[indexX] + _data_109_5[indexX] + _data_109_6[indexX] + _data_109_7[indexX] + _data_109_8[indexX] + _data_109_9[indexX] + _data_109_10[indexX] + _data_109_11[indexX] + _data_109_12[indexX] + _data_109_13[indexX];
+
+                    // var displayString = '制造年份：' + params[0].name
+                    for(var m =0;m<params.length;m++){
+                        var itemString = '<br/>'+ params[m].marker + params[m].seriesName +':数量：' + params[m].data+ '，' + '占比：' + (params[m].data / sum * 100).toFixed(2) + '%，总数:'+sum;
+                        displayString = displayString + itemString
+                    }
+                    return displayString
+                }
+            },
+            "grid": {
+                "borderWidth": 0,
+                left:65,
+                top:40,
+                bottom: 70,
+                textStyle: {
+                    color: "#fff"
+                }
+            },
+            // "legend": {
+            //     x: '4%',
+            //     top: '5%',
+            //     textStyle: {
+            //         color: '#fff',
+            //         fontSize: '16',
+            //     },
+            //     "data": ['1 级', '2 级', '3 级', '4 级', '5 级', '不合格', '合格', '监督运行', '其他', '停止运行', '修理后复检', '允许使用', '整改后使用']
+            // },
+
+
+            "calculable": true,
+            "xAxis": [{
+                "type": "category",
+                "axisLine": {
+                    lineStyle: {
+                        color: '#90979c'
+                    }
+                },
+                "splitLine": {
+                    "show": false
+                },
+                "axisTick": {
+                    "show": false
+                },
+                "splitArea": {
+                    "show": false
+                },
+                "axisLabel": {
+                    // "interval": 0,
+                    textStyle: {
+                        color: '#fff',
+                        fontSize: '12',
+                    },
+                },
+                "data": xData_109,
+            }],
+            "yAxis": [{
+                "type": "value",
+                "splitLine": {
+                    "show": false
+                },
+                "axisLine": {
+                    lineStyle: {
+                        color: '#90979c'
+                    }
+                },
+                "axisTick": {
+                    "show": false
+                },
+                "axisLabel": {
+                    "interval": 0,
+                    textStyle: {
+                        color: '#fff',
+                        fontSize: '12',
+                    },
+                },
+                "splitArea": {
+                    "show": false
+                },
+
+            }],
+            "dataZoom": [{
+                "show": true,
+                "height": 10,
+                "xAxisIndex": [
+                    0
+                ],
+                bottom: 30,
+                "start": 0,
+                "end": 100,
+                handleIcon: 'path://M306.1,413c0,2.2-1.8,4-4,4h-59.8c-2.2,0-4-1.8-4-4V200.8c0-2.2,1.8-4,4-4h59.8c2.2,0,4,1.8,4,4V413z',
+                handleSize: '110%',
+                handleStyle: {
+                    color: "#d3dee5",
+
+                },
+                textStyle: {
+                    color: "#fff"
+                },
+                borderColor: "#90979c"
+
+
+            }, {
+                bottom:10,
+                "type": "inside",
+                "show": true,
+                "height": 15,
+                "start": 1,
+                "end": 35
+            }],
+            "series": [
+                {
+                    "name": "晴",
+                    "type": "line",
+                    "stack": "",
+                    symbol: 'circle',
+                    "itemStyle": {
+                        "normal": {
+                            "color": "#567",
+                            "label": {
+                                "show": false,
+                                "textStyle": {
+                                    "color": "#fff"
+                                },
+                                "position": "insideTop",
+                                formatter: function(p) {
+                                    return p.value > 0 ? (p.value) : '';
+                                }
+                            }
+                        }
+                    },
+                    "data": _data_109_1
+                },
+                {
+                    "name": "小雨",
+                    "type": "line",
+                    "stack": "",
+                    symbol: 'circle',
+                    "barMaxWidth": 35,
+                    "barGap": "10%",
+                    "itemStyle": {
+                        "normal": {
+                            "color": "rgba(0,191,183,1)",
+                            "label": {
+                                "show": false,
+                                "textStyle": {
+                                    "color": "#fff"
+                                },
+                                "position": "insideTop",
+                                formatter: function(p) {
+                                    return p.value > 0 ? (p.value) : '';
+                                }
+                            }
+                        }
+                    },
+                    "data":_data_109_2
+                },
+                {
+                    "name": "中雨",
+                    "type": "line",
+                    "stack": "总量",
+                    symbol: 'circle',
+                    "itemStyle": {
+                        "normal": {
+                            "color": "rgba(255,193,193,1)",
+                            "label": {
+                                "show": false,
+                                "textStyle": {
+                                    "color": "#fff"
+                                },
+                                "position": "insideTop",
+                                formatter: function(p) {
+                                    return p.value > 0 ? (p.value) : '';
+                                }
+                            }
+                        }
+                    },
+                    "data": _data_109_3
+                },
+                {
+                    "name": "大雨",
+                    "type": "line",
+                    "stack": "总量",
+                    symbol: 'circle',
+                    "itemStyle": {
+                        "normal": {
+                            "color": "rgba(186,85,211,1)",
+                            "label": {
+                                "show": false,
+                                "textStyle": {
+                                    "color": "#fff"
+                                },
+                                "position": "insideTop",
+                                formatter: function(p) {
+                                    return p.value > 0 ? (p.value) : '';
+                                }
+                            }
+                        }
+                    },
+                    "data":  _data_109_4
+                },
+                {
+                    "name": "小雪",
+                    "type": "line",
+                    "stack": "总量",
+                    symbol: 'circle',
+                    "itemStyle": {
+                        "normal": {
+                            "color": "rgba(255,193,193,1)",
+                            "label": {
+                                "show": false,
+                                "textStyle": {
+                                    "color": "#fff"
+                                },
+                                "position": "insideTop",
+                                formatter: function(p) {
+                                    return p.value > 0 ? (p.value) : '';
+                                }
+                            }
+                        }
+                    },
+                    "data":_data_109_5
+                },
+                {
+                    "name": "大雪",
+                    "type": "line",
+                    "stack": "总量",
+                    // symbolSize: 10,
+                    symbol: 'circle',
+                    "itemStyle": {
+                        "normal": {
+                            "color": "rgba(252,230,48,1)",
+                            "barBorderRadius": 0,
+                            "label": {
+                                "show": false,
+                                "position": "top",
+                                formatter: function(p) {
+                                    return p.value > 0 ? (p.value) : '';
+                                }
+                            }
+                        }
+                    },
+                    "data": _data_109_6
+                },
+                {
+                    "name": "暴雪",
+                    "type": "line",
+                    "stack": "总量",
+                    symbol: 'circle',
+                    "barMaxWidth": 35,
+                    "barGap": "10%",
+                    "itemStyle": {
+                        "normal": {
+                            "color": "rgba(255,185,15,1)",
+                            "label": {
+                                "show": false,
+                                "textStyle": {
+                                    "color": "#fff"
+                                },
+                                "position": "insideTop",
+                                formatter: function(p) {
+                                    return p.value > 0 ? (p.value) : '';
+                                }
+                            }
+                        }
+                    },
+                    "data": _data_109_7
+                },
+                {
+                    "name": "霾",
+                    "type": "line",
+                    "stack": "总量",
+                    // symbolSize: 10,
+                    symbol: 'circle',
+                    "itemStyle": {
+                        "normal": {
+                            "color": "#F88",
+                            "barBorderRadius": 0,
+                            "label": {
+                                "show": false,
+                                "position": "top",
+                                formatter: function(p) {
+                                    return p.value > 0 ? (p.value) : '';
+                                }
+                            }
+                        }
+                    },
+                    "data":_data_109_8
+                },
+                {
+                    "name": "多云",
+                    "type": "line",
+                    "stack": "总量",
+                    symbol: 'circle',
+                    "barMaxWidth": 35,
+                    "barGap": "10%",
+                    "itemStyle": {
+                        "normal": {
+                            "color": "rgba(255,144,128,1)",
+                            "label": {
+                                "show": false,
+                                "textStyle": {
+                                    "color": "#fff"
+                                },
+                                "position": "insideTop",
+                                formatter: function(p) {
+                                    return p.value > 0 ? (p.value) : '';
+                                }
+                            }
+                        }
+                    },
+                    "data":_data_109_9
+                },
+                {
+                    "name": "沙尘暴",
+                    "type": "line",
+                    "stack": "总量",
+                    // symbolSize: 10,
+                    symbol: 'circle',
+                    "itemStyle": {
+                        "normal": {
+                            "color": "#900",
+                            "barBorderRadius": 0,
+                            "label": {
+                                "show": false,
+                                "position": "top",
+                                formatter: function(p) {
+                                    return p.value > 0 ? (p.value) : '';
+                                }
+                            }
+                        }
+                    },
+                    "data":_data_109_10
+                },
+                // {
+                //     "name": "修理后复检",
+                //     "type": "line",
+                //     "stack": "总量",
+                //     // symbolSize: 10,
+                //     symbol: 'circle',
+                //     "itemStyle": {
+                //         "normal": {
+                //             "color": "#190",
+                //             "barBorderRadius": 0,
+                //             "label": {
+                //                 "show": false,
+                //                 "position": "top",
+                //                 formatter: function(p) {
+                //                     return p.value > 0 ? (p.value) : '';
+                //                 }
+                //             }
+                //         }
+                //     },
+                //     "data":_data_109_11
+                // },
+                // {
+                //     "name": "允许使用",
+                //     "type": "line",
+                //     "stack": "总量",
+                //     symbol: 'circle',
+                //     "itemStyle": {
+                //         "normal": {
+                //             "color": "#099",
+                //             "label": {
+                //                 "show": false,
+                //                 "textStyle": {
+                //                     "color": "#fff"
+                //                 },
+                //                 "position": "insideTop",
+                //                 formatter: function(p) {
+                //                     return p.value > 0 ? (p.value) : '';
+                //                 }
+                //             }
+                //         }
+                //     },
+                //     "data": _data_109_12
+                // },
+
+                // {
+                //     "name": "整改后使用",
+                //     "type": "line",
+                //     "stack": "总量",
+                //     // symbolSize: 10,
+                //     symbol: 'circle',
+                //     "itemStyle": {
+                //         "normal": {
+                //             "color": "#777",
+                //             "barBorderRadius": 0,
+                //             "label": {
+                //                 "show": false,
+                //                 "position": "top",
+                //                 formatter: function(p) {
+                //                     return p.value > 0 ? (p.value) : '';
+                //                 }
+                //             }
+                //         }
+                //     },
+                //     "data": _data_109_13
+                // },
+
+            ]
+        }
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option109);
+        window.addEventListener("resize", function () {
+            myChart.resize();
+        });
+</script>
+
+
+
+

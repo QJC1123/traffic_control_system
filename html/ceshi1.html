@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+      .web-media-player {
+        width: 500px;
+      }
+    </style>
+  </head>
+  <body>
+  <div class="web-media-player" id="WebMediaBox">
+
+  </div>
+  </body>
+  <!-- <script src="./dist/SkeyeWebPlayer.js"></script> -->
+  <script src="./static/vue.min.js"></script>
+  <script src="./static/vue-router.min.js"></script>
+  <script src="./static/element-ui/index.js"></script>
+  <script src="./static/axios.min.js"></script>
+  <script src="static/SkeyeWebPlayer/SkeyeWebPlayer.js"></script>
+  <script type="application/javascript">
+  let urls = [
+      'rtsp://192.168.0.111:5555/00000000031315178598/0',
+      'rtsp://192.168.0.111:5555/00000000031315178598/1',
+      'rtsp://192.168.0.111:5555/00000000031315178598/2',
+  ];
+  let WebMediaBox = document.getElementById('WebMediaBox');
+  
+  for (let i = 0; i < urls.length; i++) {
+      init(i);
+  }
+  function init(i) {
+      let div = document.createElement('div');
+      div.id = 'WebMediaPlayer_' + i;
+      WebMediaBox.appendChild(div);
+      new SkeyeWebPlayer(urls[i], div.id)
+  }
+  </script>
+</html>

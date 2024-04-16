@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>首页</title>
+		<!-- <script src="https://unpkg.com/vue@next"></script> -->
+		<script src="js/v3.2.8/vue.global.prod.js" type="text/javascript" charset="utf-8"></script>
+		<!--设置是否为缩放模式 -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- 新 Bootstrap 核心 CSS 文件 --> 
+		<link rel="stylesheet" type="text/css" href="https://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.css">
+		<!-- jQuery文件。务必在bootstrap.min.js 之前引入 --> 
+		<script src="js/jquery.min.js"></script>
+		<!-- 最新的 Bootstrap 核心 JavaScript 文件 --> 
+		<script src="js/bootstrap.min.js"></script>
+		<!--echarts JS-->
+		<script src="js/echarts.min.js"></script>
+		<!-- 轮播swiper文件 -->
+		<link rel="stylesheet" type="text/css" href="css/swiper.min.css">
+		<script src="js/swiper.min.js"></script>
+		<!--界面样式-->
+		<link rel="stylesheet" type="text/css" href="css/visual.css">
+		<script src="js/visual.js"></script>
+		<!-- 地图文件 -->
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=5ieMMexWmzB9jivTq6oCRX9j&callback"></script>
+		<script src="js/map.js"></script>
+		
+	</head>
+	
+	<body >
+		<div class="wpbox">
+			<!-- 顶部 -->
+			<div class="bnt">
+			  <div class="topbnt_left fl">
+			   <ul><li class="active"><a href="index.html">数据概览</a></li>
+			      <li><a href="carContrl.html">视频监控</a></li>
+			   </ul>
+			  </div>
+			  <h1 class="tith1 fl">智能指挥中心</h1>
+			  <div class=" fr topbnt_right">
+<!-- 			    <ul>
+			       <li><a href="https://gitee.com/iGaoWei/big-data-view">返回</a></li>
+			       <li><a href="https://gitee.com/iGaoWei/big-data-view">分析报告</a></li>
+			       <li><a href="https://gitee.com/iGaoWei/big-data-view">交通</a></li>
+			       <li><a href="https://gitee.com/iGaoWei/big-data-view">舆情</a></li>
+			    </ul>
+			   </ul> -->
+			  </div>
+			</div>
+			<!-- 左栏 -->
+			<div class="left1">
+				<div class="left1_box_01">
+					<div class="left1_box_title">
+						<span>违法车辆统计</span>
+						<img src="img/ksh33.png" />
+					</div>
+					<div class="left1_box_top box_top3">
+						<div>
+							<h4>今日违法车辆数</h4>
+							<p>20</p>
+							<div class="conTop_smil01">
+								<a class>一月</a>
+								<a class>总计
+									<span>80</span>
+								</a>
+							</div>
+							
+						</div>
+					</div>
+
+
+
+					
+					
+					
+					
+					
+<!-- 					<div class="current-num">
+						<table class="table3" style="border:opx;width: 100%;">
+							<thead>
+								<tr>
+									<th><h6 style="font-size:0.2rem;color: #cdddf7;">渠道状态</h6></th>
+									<th style="text-align:left;"><div  class="breathe-zct"></div>&nbsp;&nbsp;正常</th>
+									<th style="text-align:left"><div  class="breathe-yct"></div>&nbsp;&nbsp;异常</th>
+								</tr>
+							</thead>
+							<tbody style="border:opx ;">
+								<tr style="border:opx ;">
+									<td style="border:0px;"><div id="dx" class="breathe-zc"></div></td>
+									<td style="border:0px;"><div id="cz" class="breathe-zc"></td>
+									<td style="border:0px;"><div id="dmt" class="breathe-yc"></td>
+								</tr>
+								<tr style="border:0px;">
+									<td style="border:0px;">短信渠道</td>
+									<td style="border:0px;">短信渠道</td>
+									<td style="border:0px;">短信渠道</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					 -->
+					        
+
+				</div>
+				<div class="left1_box">
+					<div class="left1_box_title">
+						<span>车速统计</span>
+						<img src="img/ksh33.png" />
+					</div>
+					<div class="left1_box_chart" id="main2">
+						
+					</div>
+				</div>
+				<div class="left1_box">
+					<div class="left1_box_title">
+						<span>违法事件统计</span>
+						<img src="img/ksh33.png" />
+					</div>
+					<div class="left1_box_chart" id="main3">
+						
+					</div>
+				</div>
+		
+			</div>
+			
+			<!-- 中间 -->
+			<div class="mid1">
+				<div class="mid1_top">
+					<img class="mid1_top_1" src="img/ksh42.png" >
+					<img class="mid1_top_2" src="img/ksh43.png" >
+					<img class="mid1_top_3" src="img/ksh44.png" >
+					<img class="mid1_top_4" src="img/ksh45.png" >
+					
+					<div id="map_div"></div>
+				</div>
+				<div class="mid1_bot">
+					
+					<div class="table_p">
+					        <table>
+					   <thead>
+						<tr>
+					       <th>时间</th>
+					       <th>车牌号</th>
+					       <th> 车速(km/h)</th>
+						   <th>违法原因</th>
+						   <th>所处位置</th>
+					   </tr>
+					   </thead>
+					    <tbody>
+					    <tr><td></td><td></td><td></td></tr>
+					    <tr><td>12:00</td><td>京A12345</td><td>120.0</td><td>闯红灯</td><td>学林街路口</td></tr>
+					    <tr><td>11:29</td><td>京A12345</td><td>100.0</td><td>超速</td><td>学林街路口</td></tr>
+					    <tr><td>10:30</td><td>京A12345</td><td>134.2</td><td>超速</td><td>学林街路口</td></tr>
+					    <tr><td>9:44</td><td>京A12345</td><td>134.2</td><td>超速</td><td>学林街路口</td></tr>
+					    </tbody>
+					</table>
+					    </div>
+					
+				</div>
+			</div>
+			
+			<!-- 右边 -->
+			<div class="right1">
+				<div class="right1_box">
+					<div class="right1_box_title">
+						<span>特种车辆预警</span>
+						<img src="img/ksh33.png" />
+					</div>
+					<div class="right1_box_top box_top2">
+						<div>
+							<h3>今日预警数量（起）</h3>
+							<p>20</p>
+							<div class="conTop_smil">
+								<a class>一月</a>
+								<a class>总计
+									<span>40</span>
+								</a>
+							</div>
+						</div>
+						
+					</div>
+				</div>
+
+				<div class="right2_box">
+					<div class="right1_box_title">
+						<span>交通流量</span>
+						<img src="img/ksh33.png" />
+					</div>
+					<div class="right1_box_chart" id="main1">
+						
+					</div>
+				</div>
+				<div class="left1_box">
+					<div class="left1_box_title">
+						<span>特种车辆更新</span>
+						<img src="img/ksh33.png" />
+					</div>
+					<div class="right1_box_bott cage_cl">
+						<div class="right1_box_bott01"style="padding: 1%; overflow: hidden">
+							
+						</div>
+						
+					</div>
+					
+					<!-- <div class="dataAllBorder01 cage_cl" style="margin-top: 1.5% !important; height: 32%; position: relative;">
+					    <div class="dataAllBorder02" style="padding: 1.2%; overflow: hidden">
+					        <div class="message_scroll_box">
+					            <div class="message_scroll">
+					            <div class="scroll_top">
+					                <span class="scroll_title">数据流量警示</span>
+					                <span class="scroll_level scroll_level01">一级</span>
+					                <a class="localize"></a>
+					                <span class="scroll_timer">17-09-13/9:52</span>
+					            </div>
+					            <div class="msg_cage">
+					                <a class="localize_title">下载大量视频</a>
+					            </div>
+					            <div class="msg_cage">
+					                <a class="localize_msg">xxx视频网站</a>
+					            </div>
+					        </div>
+					            <div class="message_scroll">
+					                <div class="scroll_top">
+					                    <span class="scroll_title">数据流量警示</span>
+					                    <span class="scroll_level scroll_level03">三级</span>
+					                    <a class="localize"></a>
+					                    <span class="scroll_timer">17-09-13/9:52</span>
+					                </div>
+					                <div class="msg_cage">
+					                    <a class="localize_title">下载大量视频</a>
+					                </div>
+					                <div class="msg_cage">
+					                    <a class="localize_msg">xxx视频网站</a>
+					                </div>
+					            </div>
+					            <div class="message_scroll">
+					                <div class="scroll_top">
+					                    <span class="scroll_title">数据流量警示</span>
+					                    <span class="scroll_level scroll_level02">二级</span>
+					                    <a class="localize"></a>
+					                    <span class="scroll_timer">17-09-13/9:52</span>
+					                </div>
+					                <div class="msg_cage">
+					                    <a class="localize_title">下载大量视频</a>
+					                </div>
+					                <div class="msg_cage">
+					                    <a class="localize_msg">xxx视频网站</a>
+					                </div>
+					            </div>
+					            <div class="message_scroll">
+					                <div class="scroll_top">
+					                    <span class="scroll_title">数据流量警示</span>
+					                    <span class="scroll_level scroll_level01">一级</span>
+					                    <a class="localize"></a>
+					                    <span class="scroll_timer">17-09-13/9:52</span>
+					                </div>
+					                <div class="msg_cage">
+					                    <a class="localize_title">下载大量视频</a>
+					                </div>
+					                <div class="msg_cage">
+					                    <a class="localize_msg">xxx视频网站</a>
+					                </div>
+					            </div>
+					        </div>
+					
+					    </div> -->
+
+					
+					
+					
+					
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+				</div>	
+			</div>
+			
+			
+			
+			
+			
+			<script type="text/javascript">
+				$(function(){
+					var a=$('.visualSssf_left a')
+					for(var i=0;i<a.length;i++){
+						a[i].index=i;
+						a[i].onclick=function(){
+							for(var i=0;i<a.length;i++){
+								a[i].className=''
+								}
+							this.className='active'
+						}
+					}
+			
+					var sfzcllH=$('.sfzcll_box').height()
+					var sfzcllHtwo=sfzcllH-2
+					$('.sfzcll_box').css('line-height',sfzcllH+'px')
+					$('.sfzcll_smallBk>div').css('line-height',sfzcllHtwo+'px')
+			
+					//删除加载动画
+					$('#load').fadeOut(1000)
+					setTimeout(function(){    
+						$('#load').remove()
+					}
+					,1100);
+				})
+				
+				
+			
+			//交通流量
+			var myChart1 = echarts.init(document.getElementById('main1'));
+			myChart1.setOption(option1);
+			//交通工具流量
+			var myChart2 = echarts.init(document.getElementById('main2'));
+			myChart2.setOption(option2);
+			//本月发生事件
+			var myChart3 = echarts.init(document.getElementById('main3'));
+			myChart3.setOption(option3);
+			var myChart31 = echarts.init(document.getElementById('main31'));
+			myChart31.setOption(option31);
+			var mySwiper1 = new Swiper('.visual_swiper1', {
+				autoplay: true,//可选选项，自动滑动
+				speed:800,//可选选项，滑动速度
+				autoplay: {
+				    delay: 5000,//1秒切换一次
+				  },
+			})
+			//收费站收费排行
+			var myChart4 = echarts.init(document.getElementById('main4'));
+			myChart4.setOption(option4);
+			var myChart41 = echarts.init(document.getElementById('main41'));
+			myChart41.setOption(option41);
+			var mySwiper2 = new Swiper('.visual_swiper2', {
+				autoplay: true,//可选选项，自动滑动
+				direction : 'vertical',//可选选项，滑动方向
+				speed:2000,//可选选项，滑动速度
+			})
+
+			</script>
+
+			
+			
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+
+	</body>
+</html>

@@ -1,0 +1,6 @@
+
+.box5{width: 455px; height: 957px; padding: 0 25px 25px 25px; background: url(../images/bg_box5.png) no-repeat; float: right; }
+.box5_con{width: 455px; height: 957px; float: left;}
+.box5_con_top{width: 420px; height: 320px; float: left;}
+.box5_con_bot{width: 455px; height: 550px; float: left;}
+.box5_con_bot li{width: 390px; height: 60px; line-height: 60px; list-style: none; border-bottom: 1px dashed #dbdbdb; color: #F5F5F5; overflow: hidden;}
